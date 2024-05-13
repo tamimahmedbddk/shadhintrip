@@ -1,0 +1,81 @@
+{% extends 'base.html' %}
+{% load widget_tweaks %}
+{% load static%}
+{% block title %}
+ShadhinTrip: Tours And Packages, all in one.
+{% endblock %}
+{% block content %}
+
+<section class="mt-header layout-pt-lg layout-pb-lg">
+    <div class="container">
+      <div data-anim="slide-up" class="row justify-center">
+        <div class="col-xl-6 col-lg-7 col-md-9">
+          <div class="text-center mb-60 md:mb-30">
+            <h1 class="text-30">Register</h1>
+            <div class="text-18 fw-500 mt-20 md:mt-15">Let's create your account!</div>
+            <div class="mt-5">
+              Already have an account? <a href="{% url 'login' %}" class="text-accent-1">Log In!</a>
+            </div>
+          </div>
+
+          <div class="contactForm border-1 rounded-12 px-60 py-60 md:px-25 md:py-30">
+
+            <form method="post" id="registration-form">
+              {% csrf_token %}
+              <div class="row y-gap-30 pt-30">
+                <div class="col-lg-6">
+                  <div class="form-group">
+                    {{ form.first_name.errors }}
+                    {{ form.first_name.label_tag }}
+                    {% render_field form.first_name class="form-control" %}
+                  </div>
+                </div>
+                <div class="col-lg-6">
+                  <div class="form-group">
+                    {{ form.last_name.errors }}
+                    {{ form.last_name.label_tag }}
+                    {% render_field form.last_name class="form-control" %}
+                  </div>
+                </div>
+                <div class="col-lg-12">
+                  <div class="form-group">
+                    {{ form.email.errors }}
+                    {{ form.email.label_tag }}
+                    {% render_field form.email class="form-control" %}
+                  </div>
+                </div>
+
+                <div class="col-lg-6">
+                  <div class="form-group">
+                    {{ form.password1.errors }}
+                    {{ form.password1.label_tag }}
+                    {% render_field form.password1 class="form-control" %}
+                  </div>
+                </div>
+                <div class="col-lg-6">
+                  <div class="form-group">
+                    {{ form.password2.errors }}
+                    {{ form.password2.label_tag }}
+                    {% render_field form.password2 class="form-control" %}
+                  </div>
+                </div>
+
+                <button type="submit" class="button -md -dark-1 bg-accent-1 text-white col-12 mt-30">
+                  Register
+                  <i class="icon-arrow-top-right ml-10"></i>
+                </button>
+              </div>
+            </form>
+            
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+{% endblock content%}
+
+{% block additional_scripts %}
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="{% static 'assets/js/register.js' %}"></script>
+{% endblock additional_scripts %}

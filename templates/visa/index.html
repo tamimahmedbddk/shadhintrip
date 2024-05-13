@@ -1,0 +1,120 @@
+{% extends 'base.html' %}
+{% load static%}
+{% load price_filter %}
+{% load humanize %}
+{% block title %}
+ShadhinTrip: Tours And Packages, all in one.
+{% endblock %}
+{% block content %}
+
+
+{% include 'visa/visa-banner.html' with tours=tours %}
+
+  <section class="layout-pt-md">
+    <div data-anim-wrap class="container">
+      <div class="row y-gap-10 justify-between">
+        <h2 class="text-30 md:text-24 text-center">Which country will you be applying for? </h2>
+      </div>
+  
+      <div class="overflow-hidden pt-40 sm:pt-20 js-section-slider" data-anim-child="slide-up delay-0" data-slider-cols="xl-8 lg-5 md-4 sm-3 base-2" data-gap="36" data-pagination="js-dest-pagination">
+        <div class="swiper-wrapper">
+          {% for country in countries %}
+          <div class="swiper-slide country-filter" data-country-id="{{ country.id }}" onclick="applyFilter()">
+              <a href="#">
+                <div class="featureImage -type-1 text-center -hover-image-scale">
+                  <div class="featureImage__image mx-auto rounded-full -hover-image-scale__image">
+                    <img src="{{ country.image.url }}" alt="image" class="size-130 object-cover rounded-full">
+                  </div>
+                  <h3 class="featureImage__title text-16 fw-500 mt-20">{{ country.name }}</h3>
+                </div>
+              </a>
+            </div>
+          {% endfor %}
+        </div>
+      </div>
+  
+    </div>
+  </section>
+  
+  <section class="layout-pt-md layout-pb-md">
+    <div data-anim-wrap class="container">
+      <div class="row justify-between items-end y-gap-10">
+        <div class="col-auto">
+          <h2 class="text-30 md:text-24">ShadhinTrip Visa Packages</h2>
+        </div>
+        <div id="resultCount" class="text-center"></div>
+
+      </div>
+  
+      <div class="row y-gap-30 pt-40" id="visaPackages">
+        {% for visa_package in visa_packages %}
+          <div data-anim-child="slide-up delay-2" class="col-lg-3 col-sm-6 visa-package" data-country="{{ visa_package.country.id }}">
+            <a href="{% url 'visa_detail' slug=visa_package.slug %}" class="tourCard -type-1 py-10 px-10 border-1 rounded-12  -hover-shadow">
+              <div class="tourCard__header">
+                <div class="tourCard__image ratio ratio-28:20">
+                  <img src="{{visa_package.image.url}}" alt="image" class="img-ratio rounded-12">
+                </div>
+                <button class="tourCard__favorite">
+                  <i class="icon-heart"></i>
+                </button>
+              </div>
+              <div class="tourCard__content px-10 pt-10">
+                <div class="tourCard__location d-flex items-center text-13 text-light-2">
+                  <i class="icon-pin d-flex text-16 text-light-2 mr-5"></i>
+                  {{ visa_package.country }}
+                </div>
+                <h3 class="tourCard__title text-16 fw-500 mt-5">
+                  <span>{{ visa_package.title }}</span>
+                </h3>
+                <div class="d-flex justify-between items-center border-1-top text-13 text-dark-1 pt-10 mt-10">
+                  <div class="d-flex items-center">
+                    <i class="fas fa-passport text-16 mr-5"></i>
+                    {{ visa_package.visa_type.name }}
+                  </div>
+                  <div>From <span class="text-16 fw-500">BDT {{ visa_package.total_fee|format_price }}</span></div>
+                </div>
+              </div>
+            </a>
+          </div>
+        {% endfor %}
+      </div>
+    </div>
+  </section>
+  
+
+{% include 'visa/visa-assistance.html' with tours=tours %}
+
+{% endblock content%}
+
+{% block additional_scripts %}
+<script>
+  document.addEventListener("DOMContentLoaded", function() {
+    const countryFilters = document.querySelectorAll(".country-filter");
+    const visaPackages = document.querySelectorAll(".visa-package");
+    const resultCount = document.getElementById("resultCount");
+
+    countryFilters.forEach(filter => {
+      filter.addEventListener("click", function(event) {
+        event.preventDefault(); // Prevent the default behavior of scrolling to the top
+        const countryId = this.dataset.countryId;
+        let count = 0;
+        visaPackages.forEach(package => {
+          if (countryId === "" || package.dataset.country === countryId) {
+            package.style.display = "block";
+            count++;
+          } else {
+            package.style.display = "none";
+          }
+        });
+
+        // Update result count
+        resultCount.innerText = count + " item found for the selected country";
+
+        // Scroll to the filtered visa packages
+        const filteredPackages = document.getElementById("visaPackages");
+        filteredPackages.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      });
+    });
+  });
+</script>
+{% endblock additional_scripts %}

@@ -1,0 +1,207 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load humanize %}
+{% block title %}
+ShadhinTrip: Tours And Packages, all in one.
+{% endblock %}
+{% block content %}
+
+{% include 'blog/blog_banner.html' with tours=tours %}
+<section class="layout-pt-md layout-pb-xl">
+  <div class="container">
+    <div class="row y-gap-30 justify-between">
+      <div class="col-lg-8">
+        <div class="row y-gap-30" id="blog-posts-container">
+          {% for post in posts %}
+          <div class="col-12 pl-blog-list" data-category-name="{{ post.category.name }}" data-tags="{% for tag in post.tags.all %}{{ tag.name }}{% if not forloop.last %},{% endif %}{% endfor %}">
+            <div class="pl-blog-list__image">
+              
+              <a href="{% url 'blog_details' slug=post.slug %}">
+                <img src="{{ post.featured_image.url }}" alt="image">
+              </a>
+            </div>
+            <div class="pl-blog-list__content">
+              <div class="d-flex x-gap-10 text-14">
+                <div class="lh-13">{{ post.created_on }}</div>
+                <div class="lh-13">By ShadhinTrip</div>
+              </div>
+              <a href="{% url 'blog_details' slug=post.slug %}">
+                <h3 class="blogCard__title text-20 fw-500 lh-15 mt-10">{{ post.title }}</h3>
+              </a>
+              <p class="mt-10">
+                {{ post.content|truncatewords:50|safe }}
+              </p>
+              <a class="fw-500 mt-10" href="{% url 'blog_details' slug=post.slug %}">
+                <span class="mr-10">Read More</span>
+                <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <g clip-path="url(#clip0_142_28418)">
+                    <path d="M15.5553 0H5.77756C5.53189 0 5.3331 0.198792 5.3331 0.444458C5.3331 0.690125 5.53189 0.888917 5.77756 0.888917H14.4824L0.129975 15.2413C-0.0436504 15.415 -0.0436504 15.6962 0.129975 15.8698C0.216766 15.9566 0.330516 16 0.444225 16C0.557933 16 0.671641 15.9566 0.758475 15.8698L15.1109 1.51738V10.2223C15.1109 10.4679 15.3097 10.6667 15.5553 10.6667C15.801 10.6667 15.9998 10.4679 15.9998 10.2223V0.444458C15.9998 0.198792 15.801 0 15.5553 0Z" fill="#05073C" />
+                  </g>
+                  <defs>
+                    <clipPath id="clip0_142_28418">
+                      <rect width="16" height="16" fill="white" />
+                    </clipPath>
+                  </defs>
+                </svg>
+            </a>
+
+              
+            </div>
+          </div>
+          {% endfor %}
+        </div>
+        <!-- <button id="load-more-button" class="btn btn-primary mt-4">Load More</button> -->
+      </div>
+      <div class="col-lg-4">
+        <div class="sidebar -type-2">
+          <div class="sidebar__search">
+            <i>
+              <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M8.20459 1.44849C4.48555 1.44849 1.45605 4.47798 1.45605 8.19703C1.45605 11.9161 4.48555 14.9515 8.20459 14.9515C9.7931 14.9515 11.254 14.3948 12.4087 13.4705L15.2197 16.28C15.3616 16.416 15.5511 16.491 15.7476 16.489C15.944 16.487 16.1319 16.4082 16.271 16.2693C16.41 16.1304 16.4892 15.9427 16.4915 15.7462C16.4937 15.5497 16.419 15.3601 16.2832 15.2181L13.4722 12.407C14.3972 11.2506 14.9546 9.78738 14.9546 8.19703C14.9546 4.47798 11.9236 1.44849 8.20459 1.44849ZM8.20459 2.94851C11.113 2.94851 13.4531 5.28866 13.4531 8.19703C13.4531 11.1054 11.113 13.4514 8.20459 13.4514C5.29621 13.4514 2.95605 11.1054 2.95605 8.19703C2.95605 5.28866 5.29621 2.94851 8.20459 2.94851Z" fill="#05073C" />
+              </svg>
+            </i>
+            <input type="text" id="blog-search-input" placeholder="Search">
+          </div>
+                  
+          <div class="sidebar__item category">
+            <h4 class="text-18 fw-500 mb-20">Blog Categories</h4>
+            {% for category in categories %}
+              <div class="d-flex flex-column y-gap-5">
+                <a href="#" data-category="{{ category.name }}">{{ category.name }}</a>
+              </div>
+            {% endfor %}
+          </div>
+                  
+          <div class="sidebar__item recent-posts">
+            <h4 class="text-18 fw-500 mb-20">Recent Posts</h4>
+            <div class="d-flex y-gap-20 flex-column">
+              {% for recent_post in recent_posts %}
+                <a href="{% url 'blog_details' slug=recent_post.slug %}" class="d-flex align-center">
+                  <div class="size-70 overflow-hidden rounded-12">
+                    <img src="{{ recent_post.featured_image.url }}" alt="image" class="img-cover">
+                  </div>
+                  <div class="ml-20">
+                    <h5 class="text-15 lh-14 fw-500">{{ recent_post.title }}</h5>
+                    <div class="text-14 lh-1 mt-10">{{ recent_post.created_on }}</div>
+                  </div>
+                </a>
+              {% endfor %}
+            </div>
+          </div>
+                  
+          <div class="sidebar__item tags">
+            <h4 class="text-18 fw-500 mb-20">Tags</h4>
+            <div class="sidebar__tags d-flex y-gap-10 x-gap-10">
+              {% for tag in tags %}
+                <div><a href="#" data-tag="{{ tag.name }}">{{ tag.name }}</a></div>
+              {% endfor %}
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+{% endblock content %}
+
+
+
+{% block additional_scripts %}
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+    const blogSearchInput = document.getElementById("blog-search-input");
+    const blogPostsContainer = document.getElementById("blog-posts-container");
+    const loadMoreButton = document.getElementById("load-more-button");
+    const categoryLinks = document.querySelectorAll(".sidebar__item.category a");
+    const tagLinks = document.querySelectorAll(".sidebar__item.tags a");
+    
+    let allBlogPostItems = Array.from(blogPostsContainer.querySelectorAll(".pl-blog-list"));
+    
+    // Function to filter posts based on search term
+    function filterPostsBySearchTerm(searchTerm) {
+        allBlogPostItems.forEach(function(item) {
+            const title = item.querySelector(".blogCard__title").textContent.toLowerCase();
+            const content = item.querySelector("p").textContent.toLowerCase();
+            if (title.includes(searchTerm) || content.includes(searchTerm)) {
+                item.style.display = "flex"; // Display as flex
+            } else {
+                item.style.display = "none"; // Hide
+            }
+        });
+        scrollToElement(blogPostsContainer);
+    }
+    
+    // Function to filter posts based on category
+    function filterPostsByCategory(categoryName) {
+        allBlogPostItems.forEach(function(item) {
+            const category = item.dataset.categoryName.toLowerCase();
+            if (category === categoryName.toLowerCase() || categoryName === 'all') {
+                item.style.display = "flex"; // Display as flex
+            } else {
+                item.style.display = "none"; // Hide
+            }
+        });
+        scrollToElement(blogPostsContainer);
+    }
+    
+    // Function to filter posts based on tag
+    function filterPostsByTag(tagName) {
+        allBlogPostItems.forEach(function(item) {
+            const tags = item.dataset.tags.toLowerCase().split(",");
+            if (tags.includes(tagName.toLowerCase())) {
+                item.style.display = "flex"; // Display as flex
+            } else {
+                item.style.display = "none"; // Hide
+            }
+        });
+        scrollToElement(blogPostsContainer);
+    }
+    
+    // Event listener for search input
+    blogSearchInput.addEventListener("input", function() {
+        const searchTerm = blogSearchInput.value.toLowerCase().trim();
+        filterPostsBySearchTerm(searchTerm);
+    });
+    
+    // Event listeners for category links
+    categoryLinks.forEach(function(link) {
+        link.addEventListener("click", function(event) {
+            event.preventDefault();
+            const categoryName = link.getAttribute("data-category");
+            filterPostsByCategory(categoryName);
+        });
+    });
+    
+    // Event listeners for tag links
+    tagLinks.forEach(function(link) {
+        link.addEventListener("click", function(event) {
+            event.preventDefault();
+            const tagName = link.getAttribute("data-tag");
+            filterPostsByTag(tagName);
+        });
+    });
+
+    // "Load More" button functionality
+    loadMoreButton.addEventListener("click", function() {
+        const visiblePostsCount = allBlogPostItems.filter(post => post.style.display !== "none").length;
+        const hiddenPosts = allBlogPostItems.filter(post => post.style.display === "none");
+        hiddenPosts.slice(0, 5).forEach(function(post) {
+            post.style.display = "flex"; // Display as flex
+        });
+        // Hide the "Load More" button if all posts are displayed
+        if (visiblePostsCount === allBlogPostItems.length) {
+            loadMoreButton.style.display = "none";
+        }
+    });
+
+    // Function to scroll to element
+    function scrollToElement(element) {
+        const yOffset = -150; // Adjust this value as needed
+        const y = element.getBoundingClientRect().top + window.pageYOffset + yOffset;
+        window.scrollTo({ top: y, behavior: 'smooth' });
+    }
+});
+
+</script>
+{% endblock additional_scripts %}

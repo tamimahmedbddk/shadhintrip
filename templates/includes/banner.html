@@ -1,0 +1,29 @@
+{% load static %}
+<section data-anim="fade" class="hero -type-1">
+    <div class="hero__bg">
+      {% for background_image in background_images %}
+      <img src="{{background_image.image.url}}" alt="image">
+      {% endfor %}
+      <img src="{% static 'assets/img/hero/1/shape.svg' %}" alt="image">
+    </div>
+  
+    <div class="container">
+      <div class="row justify-center">
+        <div class="col-xl-8 col-lg-10">
+          <div class="hero__content">
+            <h1 class="hero__title">
+              Discover Your Next Adventure with ShadhinTrip!
+            </h1>
+  
+            <!-- <p class="hero__text">
+              Explore our diverse tour packages crafted for every traveler. From thrilling adventures to serene escapes, find your perfect getaway with us. Start planning your next adventure today!
+            </p> -->
+  
+            {% include 'includes/banner-search.html' with tours=tours %}
+
+
+          </div>
+        </div>
+      </div>
+    </div>
+</section>

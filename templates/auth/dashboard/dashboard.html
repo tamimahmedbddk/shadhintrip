@@ -1,0 +1,84 @@
+{% extends 'base.html' %}
+{% load static%}
+{% block title %}
+ShadhinTrip: Tours And Packages, all in one.
+{% endblock %}
+{% block header %}
+     
+{% endblock header %}
+{% block content %}
+
+<div class="dashboard -is-sidebar-visible js-dashboard">
+    <div class="dashboard__sidebar js-dashboard-sidebar">
+      <div class="dashboard__sidebar_header">
+        <a href="{% url 'index' %}" class="header__logo">
+            <img src="{% static 'assets/img/logo/logo-small.png' %}" alt="logo icon">
+          </a>
+      </div>
+
+
+      <div class="sidebar -dashboard">
+
+        <div class="sidebar__item">
+          <a href="{% url 'dashboard' %}">
+            <i class="icon-dashboard text-26"></i>
+            <span class="ml-10">Dashboard</span>
+          </a>
+        </div>
+    
+        <div class="sidebar__item">
+          <a href="{% url 'booking_history' %}">
+            <i class="icon-calendar text-26"></i>
+            <span class="ml-10">My Booking</span>
+          </a>
+        </div>
+    
+    
+        <div class="sidebar__item ">
+          <a href="{% url 'profile' %}">
+            <i class="icon-account text-26"></i>
+            <span class="ml-10">My Profile</span>
+          </a>
+        </div>
+    
+        <div class="sidebar__item ">
+          <a href="{% url 'logout' %}">
+            <i class="icon-logout text-26"></i>
+            <span class="ml-10">Logout</span>
+          </a>
+        </div>
+    
+      </div>
+      
+
+
+    </div>
+
+    <div class="dashboard__content">
+      <div class="dashboard__content_header">
+        <div class="d-flex items-center">
+          
+
+          
+        </div>
+
+        <div>
+          <div class="">
+            <button class="d-flex js-toggle-db-sidebar">
+              <i class="icon-main-menu text-20"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      {% block dashboard_content %} {% endblock dashboard_content %}
+      
+      
+    </div>
+  </div>
+
+
+{% endblock content%}
+{% block footer %}
+ 
+{% endblock footer %}

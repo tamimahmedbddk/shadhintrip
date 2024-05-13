@@ -1,0 +1,148 @@
+{% load static %}
+<footer class="footer -type-1">
+  <div class="footer__main">
+    <div class="footer__bg">
+      <img src="{% static 'assets/img/footer/1/bg.svg' %}" alt="image">
+    </div>
+
+    <div class="container">
+      <div class="footer__info">
+        <div class="row y-gap-20 justify-between">
+          <div class="col-auto">
+            <div class="row y-gap-20 items-center">
+              <div class="col-auto">
+                <i class="icon-headphone text-50"></i>
+              </div>
+
+              <div class="col-auto">
+                <div class="text-20 fw-500">
+                  Speak With Us
+                  <span class="text-accent-1">+880-1903-605500</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-auto">
+            <div class="footerSocials">
+              <div class="footerSocials__title">
+                Follow Us
+              </div>
+
+              <div class="footerSocials__icons">
+                <a href="https://facebook.com/shadhintripdotcom" class="icon-facebook" target="_blank"></a>
+                    <a href="#" class="icon-twitter"></a>
+                    <a href="#" class="icon-instagram"></a>
+                    <a href="#" class="icon-linkedin"></a>
+                <!-- {% for  social_link in social_links%}
+                <a href="{{ social_link.url }}" class="{{ social_link.icon_class }}" target="_blank"></a>
+                {% endfor %} -->
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="footer__content">
+        <div class="row y-gap-40 justify-between">
+          <div class="col-lg-4 col-md-6">
+            <h4 class="text-20 fw-500">Contact</h4>
+
+            <div class="y-gap-10 mt-20">
+              <p class="d-block">&#127968;  21/B,Garden Road,West Kawran Bazar,Dhaka-1215</p>
+              <p class="d-block">&#128231;  support@shadhintrip.com</p>
+              <p class="d-block">&#128222;  +880 1903-605500</p>
+            </div>
+          </div>
+
+          <div class="col-lg-auto col-6">
+            <h4 class="text-20 fw-500">Company</h4>
+
+            <div class="y-gap-10 mt-20">
+
+              <a class="d-block fw-500" href="{% url 'about-us' %}">
+                About Us
+              </a>
+
+              <a class="d-block fw-500" href="{% url 'privacy' %}">
+                Privacy Policy
+              </a>
+
+              <a class="d-block fw-500" href="{% url 'terms' %}">
+                Terms of Service
+              </a>
+
+              <a class="d-block fw-500" href="{% url 'cancellation_policy' %}">
+                Cancellation Policy
+              </a>
+
+              <a class="d-block fw-500" href="{% url 'refund_policy' %}">
+                Refund Policy
+              </a>
+
+             
+
+            </div>
+          </div>
+
+          <div class="col-lg-auto col-6">
+            <h4 class="text-20 fw-500">Services</h4>
+
+            <div class="y-gap-10 mt-20">
+
+              <a class="d-block fw-500" href="{% url 'tour' %}">
+                Tour Packages
+              </a>
+
+              <a class="d-block fw-500" href="{% url 'visa' %}">
+                Visa Services
+              </a>
+
+              <a class="d-block fw-500" href="#">
+                Flight Booking
+              </a>
+
+              <a class="d-block fw-500" href="#">
+                Hotel Reservation
+              </a>
+
+            </div>
+          </div>
+
+          <div class="col-lg-3 col-md-6">
+            <h4 class="text-20 fw-500">Newsletter</h4>
+            <p class="mt-20">Subscribe to the newsletter and stay up to date</p>
+
+            <div class="footer__newsletter">
+              <input type="Email" placeholder="Your email address">
+              <button>Send</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <div class="container">
+    <div class="footer__bottom">
+      <div class="row y-gap-5 justify-between items-center">
+        <div class="col-auto">
+          <div>© Copyright ShadhinTrip 2024</div>
+        </div>
+
+        <div class="col-auto">
+          <div class="footer__images d-flex items-center x-gap-10">
+            <img src="{% static 'assets/img/footer/cards/1.png' %}" alt="image">
+            <img src="{% static 'assets/img/footer/cards/2.png' %}" alt="image">
+            <img src="{% static 'assets/img/footer/cards/3.png' %}" alt="image">
+            <img src="{% static 'assets/img/footer/cards/4.png' %}" alt="image">
+            <img src="{% static 'assets/img/footer/cards/5.png' %}" alt="image">
+            <img src="{% static 'assets/img/footer/cards/6.png' %}" alt="image">
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>
+

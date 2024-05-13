@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}
+ShadhinTrip: Booking Summary
+{% endblock %}
+{% block content %}
+
+<section data-anim-wrap class="layout-pt-md layout-pb-lg mt-header booking-summary">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-6 m-auto">
+          <div class="bg-white rounded-12 shadow-shadhin py-30 px-30 md:py-20 md:px-20 mt-30">
+            <div class="d-flex flex-column items-center text-center">
+              <div class="size-60 rounded-full flex-center bg-accent-payment-success text-white">
+                <i class="icon-check text-26"></i>
+              </div>
+
+              <h2 class="text-20 md:text-24 fw-700 mt-20">Thank You {{request.user.first_name}}</h2>
+              <p>Your order has been placed successfully, but is awaiting payment confirmation. You can select your preferred payment method on the order history page.</p>
+            </div>
+            <div class="line mt-30 mb-30"></div>
+
+            <div class="mt-30">
+              <a href="{% url 'booking_history' %}" class="button -md -dark-1 bg-accent-1 text-white">Go to Order History</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+{% endblock content %}
+
+{% block additional_scripts %}
+
+{% endblock additional_scripts %}
