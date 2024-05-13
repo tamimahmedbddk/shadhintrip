@@ -1,0 +1,332 @@
+{% load static %}
+<div class="">
+    <div class="rounded-12 bg-white shadow-2 px-40 pt-40 pb-30 mt-60">
+      <div class="tabs -underline-2 js-tabs">
+        <div class="tabs__controls row x-gap-40 y-gap-10 lg:x-gap-20 js-tabs-controls">
+
+          <div class="col-auto">
+            <!-- <a href="{% url 'tour' %}" class="tabs__button text-20 lh-12 fw-500 pb-15 lg:pb-0 js-tabs-button is-tab-el-active" data-tab-target=".-tab-item-1"><i class="fas fa-tree text-26"></i> Tour</a> -->
+            <button class="tabs__button text-20 lh-12 fw-500 pb-15 lg:pb-0 js-tabs-button is-tab-el-active" data-tab-target=".-tab-item-1"><i class="fas fa-tree text-26"></i> Tour</button>
+          </div>
+
+          <div class="col-auto">
+            <a href="{% url 'visa' %}" class="tabs__button text-20 lh-12 fw-500 pb-15 lg:pb-0 js-tabs-button" data-tab-target=".-tab-item-2"><i class="fas fa-passport text-26"></i> Visa</a>
+            <!-- <button class="tabs__button text-20 lh-12 fw-500 pb-15 lg:pb-0 js-tabs-button" data-tab-target=".-tab-item-2"><i class="fas fa-passport text-26"></i> Visa</button> -->
+          </div>
+
+          <div class="col-auto">
+            <button class="tabs__button text-20 lh-12 fw-500 pb-15 lg:pb-0 js-tabs-button" data-tab-target=".-tab-item-3"><i class="fas fa-plane text-26"></i> Flight</button>
+          </div>
+
+          <div class="col-auto">
+            <button class="tabs__button text-20 lh-12 fw-500 pb-15 lg:pb-0 js-tabs-button " data-tab-target=".-tab-item-4"><i class="fas fa-hotel text-26"></i> Hotel</button>
+          </div>
+          
+        </div>
+
+
+
+
+        
+        <div class="tabs__content js-tabs-content">
+
+         <div class="tabs__pane -tab-item-1 is-tab-el-active">
+            <div class="contactForm row y-gap-30">
+              <div class="col-12">
+
+                <div class="searchForm -type-1">
+
+                  <div class="searchForm__form">
+                    <div class="searchFormItem js-select-control js-form-dd">
+                      
+                      <div class="searchFormItem__button" data-x-click="tour-country">
+                        <div class="searchFormItem__icon size-50 rounded-12 border-1 flex-center">
+                          <i class="text-20 icon-pin"></i>
+                        </div>
+                        <div class="searchFormItem__content">
+                          <h5>Where</h5>
+                          <div class="js-select-control-chosen">Search destinations</div>
+                        </div>
+                      </div>
+    
+                      <div class="searchFormItemDropdown -location" data-x="tour-country" data-x-toggle="is-active">
+                        <div class="searchFormItemDropdown__container">
+                          <div class="searchFormItemDropdown__list sroll-bar-1">
+    
+                            {% for tour in tours %}
+    
+                            <div class="searchFormItemDropdown__item search-country-image">
+                              <button class="js-select-control-button">
+                                <span class="js-select-control-choice">{{tour.country}}</span>
+                                <img src="{{tour.country.image.url}}" alt="logo icon">
+                              </button>
+                            </div>
+    
+                            {% endfor %}
+    
+                            
+    
+    
+    
+                          </div>
+                        </div>
+                      </div>
+    
+                    </div>
+
+                    <div class="searchFormItem js-select-control js-form-dd">
+                      
+                      <div class="searchFormItem__button" data-x-click="tour-type">
+                        <div class="searchFormItem__icon size-50 rounded-12 border-1 flex-center">
+                          <i class="text-20 icon-pin"></i>
+                        </div>
+                        <div class="searchFormItem__content">
+                          <h5>Tour Type</h5>
+                          <div class="js-select-control-chosen">Search Tour Type</div>
+                        </div>
+                      </div>
+    
+                      <div class="searchFormItemDropdown -visa-type" data-x="tour-type" data-x-toggle="is-active">
+                        <div class="searchFormItemDropdown__container">
+                          <div class="searchFormItemDropdown__list sroll-bar-1">
+    
+                            {% for tour in tours %}
+    
+                            <div class="searchFormItemDropdown__item search-country-image">
+                              <button class="js-select-control-button">
+                                <span class="js-select-control-choice">{{tour.category.name}}</span>
+                                <span>
+                                  <img src="{{tour.country.image.url}}" alt="logo icon">
+                                </span>
+                                
+                              </button>
+                            </div>
+    
+                            {% endfor %}
+    
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="searchFormItem js-select-control js-form-dd">
+                      
+                      <div class="searchFormItem__button" data-x-click="tour-package">
+                        <div class="searchFormItem__icon size-50 rounded-12 border-1 flex-center">
+                          <i class="text-20 icon-pin"></i>
+                        </div>
+                        <div class="searchFormItem__content">
+                          <h5>Tour Packages</h5>
+                          <div class="js-select-control-chosen">Search Tour Package</div>
+                        </div>
+                      </div>
+    
+                      <div class="searchFormItemDropdown -visa-package" data-x="tour-package" data-x-toggle="is-active">
+                        <div class="searchFormItemDropdown__container">
+                          <div class="searchFormItemDropdown__list sroll-bar-1">
+    
+                            {% for tour in tours %}
+    
+                            <div class="searchFormItemDropdown__item search-country-image">
+                              <button class="js-select-control-button">
+                                <span class="js-select-control-choice">{{tour.title}}</span>
+                                <span>
+                                  {% with tour.images.first as main_photo %}
+                                  <img src="{{ main_photo.image.url }}" alt="logo icon">
+                                  {% endwith %}
+                                </span>
+                                
+                              </button>
+                            </div>
+    
+                            {% endfor %}
+    
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+
+                  </div>
+    
+                  <div class="searchForm__button">
+                    <button class="button -dark-1 bg-accent-1 text-white">
+                      <i class="icon-search text-16 mr-10"></i>
+                      Search
+                    </button>
+                  </div>
+                </div>
+
+              </div>
+
+            </div>
+          </div>
+
+          <div class="tabs__pane -tab-item-2">
+            <div class="contactForm row y-gap-30">
+              <div class="col-12">
+
+                <div class="searchForm -type-1">
+
+                  <div class="searchForm__form">
+                    <div class="searchFormItem js-select-control js-form-dd">
+                      
+                      <div class="searchFormItem__button" data-x-click="visa-country">
+                        <div class="searchFormItem__icon size-50 rounded-12 border-1 flex-center">
+                          <i class="text-20 icon-pin"></i>
+                        </div>
+                        <div class="searchFormItem__content">
+                          <h5>Country</h5>
+                          <div class="js-select-control-chosen">Search destinations</div>
+                        </div>
+                      </div>
+    
+                      <div class="searchFormItemDropdown -location" data-x="visa-country" data-x-toggle="is-active">
+                        <div class="searchFormItemDropdown__container">
+                          <div class="searchFormItemDropdown__list sroll-bar-1">
+    
+                            {% for country in countries %}
+    
+                            <div class="searchFormItemDropdown__item search-country-image">
+                              <button class="js-select-control-button">
+                                <span class="js-select-control-choice">{{country.name}}</span>
+                                <img src="{% static 'assets/img/hero/1/in.png' %}" alt="logo icon">
+                              </button>
+                            </div>
+    
+                            {% endfor %}
+    
+                            
+    
+    
+    
+                          </div>
+                        </div>
+                      </div>
+    
+                    </div>
+
+                    <div class="searchFormItem js-select-control js-form-dd">
+                      
+                      <div class="searchFormItem__button" data-x-click="visa-type">
+                        <div class="searchFormItem__icon size-50 rounded-12 border-1 flex-center">
+                          <i class="text-20 icon-pin"></i>
+                        </div>
+                        <div class="searchFormItem__content">
+                          <h5>Visa Type</h5>
+                          <div class="js-select-control-chosen">Search Visa Type</div>
+                        </div>
+                      </div>
+    
+                      <div class="searchFormItemDropdown -visa-type" data-x="visa-type" data-x-toggle="is-active">
+                        <div class="searchFormItemDropdown__container">
+                          <div class="searchFormItemDropdown__list sroll-bar-1">
+    
+                            {% for visa_type in visa_types %}
+    
+                            <div class="searchFormItemDropdown__item search-country-image">
+                              <button class="js-select-control-button">
+                                <span class="js-select-control-choice">{{visa_type.name}}</span>
+                                <span>{{visa_type.country}}
+                                  <img src="{% static 'assets/img/hero/1/in.png' %}" alt="logo icon">
+                                </span>
+                                
+                              </button>
+                            </div>
+    
+                            {% endfor %}
+    
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="searchFormItem js-select-control js-form-dd">
+                      
+                      <div class="searchFormItem__button" data-x-click="visa-package">
+                        <div class="searchFormItem__icon size-50 rounded-12 border-1 flex-center">
+                          <i class="text-20 icon-pin"></i>
+                        </div>
+                        <div class="searchFormItem__content">
+                          <h5>Visa Packages</h5>
+                          <div class="js-select-control-chosen">Search Visa Package</div>
+                        </div>
+                      </div>
+    
+                      <div class="searchFormItemDropdown -visa-package" data-x="visa-package" data-x-toggle="is-active">
+                        <div class="searchFormItemDropdown__container">
+                          <div class="searchFormItemDropdown__list sroll-bar-1">
+    
+                            {% for visa_package in visa_packages %}
+    
+                            <div class="searchFormItemDropdown__item search-country-image">
+                              <button class="js-select-control-button">
+                                <span class="js-select-control-choice">{{visa_package.title}}</span>
+                                <span>{{visa_package.country}}
+                                  <img src="{% static 'assets/img/hero/1/in.png' %}" alt="logo icon">
+                                </span>
+                                
+                              </button>
+                            </div>
+    
+                            {% endfor %}
+    
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+
+                  </div>
+    
+                  <div class="searchForm__button">
+                    <button class="button -dark-1 bg-accent-1 text-white">
+                      Apply Now
+                    </button>
+                  </div>
+                </div>
+
+              </div>
+
+            </div>
+          </div>
+
+          <div class="tabs__pane -tab-item-3">
+            <div class="contactForm row y-gap-30">
+              <div class="col-12">
+                
+                <h1 class="text-30 text-center pt-20">
+                  <i class="fas fa-plane text-26"></i> Coming Soon......
+                </h1>
+
+              </div>
+
+            </div>
+          </div>
+
+          <div class="tabs__pane -tab-item-4">
+            <div class="contactForm row y-gap-30">
+              <div class="col-12">
+                
+                <h1 class="text-30 text-center pt-20">
+                  <i class="fas fa-hotel text-26"></i> Coming Soon......
+                </h1>
+
+              </div>
+
+            </div>
+          </div>
+        
+        </div>
+
+
+
+
+
+
+
+
+
+
+
+      </div>
+    </div>
+  </div>

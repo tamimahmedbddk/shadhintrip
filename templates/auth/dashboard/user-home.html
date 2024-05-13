@@ -1,0 +1,89 @@
+{% extends 'auth/dashboard/dashboard.html' %}
+{% load static%}
+{% block title %}
+ShadhinTrip: Tours And Packages, all in one.
+{% endblock %}
+
+{% block dashboard_content %}
+<div class="dashboard__content_content">
+
+    <h1 class="text-30">Dashboard</h1>
+    <p class="">Welcome to ShadhinTrip's User Dashboard! Your central command center for effortless travel management. Access your profile, review booking history, and unlock exclusive offers, all under one roof. Happy travels with ShadhinTrip!</p>
+
+    <div class="row y-gap-30 pt-60 md:pt-30">
+
+      <div class="col-xl-3 col-sm-6">
+        <div class="rounded-12 bg-white shadow-2 px-30 py-30 h-full">
+          <div class="row y-gap-20 items-center justify-between">
+            <div class="col-auto">
+              <div>Total Completed</div>
+              <div class="text-30 fw-700">৳10,800</div>
+
+              <div>
+                <span class="text-accent-1">40+</span> Today
+              </div>
+            </div>
+
+            <div class="col-auto">
+              <div class="size-80 flex-center bg-accent-1-05 rounded-full">
+                <i class="icon-wallet text-30 text-accent-1"></i>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-xl-3 col-sm-6">
+        <div class="rounded-12 bg-white shadow-2 px-30 py-30 h-full">
+          <div class="row y-gap-20 items-center justify-between">
+            <div class="col-auto">
+              <div>Total Pending</div>
+              <div class="text-30 fw-700">৳12,800</div>
+              <div>
+                <span class="text-accent-1">40+</span> Today
+              </div>
+             
+            </div>
+
+            <div class="col-auto">
+              <div class="size-80 flex-center bg-accent-1-05 rounded-full">
+                <i class="icon-payment text-30 text-accent-1"></i>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-xl-3 col-sm-6">
+        <div class="rounded-12 bg-white shadow-2 px-30 py-30 h-full">
+          <div class="row y-gap-20 items-center justify-between">
+            <div class="col-auto">
+              <div>Total Booking</div>
+
+              <div class="text-30 fw-700">৳54,800</div>
+              <div>
+                <span class="text-accent-1">40+</span> Today
+              </div>
+              
+              
+            </div>
+
+            <div class="col-auto">
+              <div class="size-80 flex-center bg-accent-1-05 rounded-full">
+                <i class="icon-booking text-30 text-accent-1"></i>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    
+
+    </div>
+
+    <div class="text-center pt-30">
+      © Copyright ShadhinTrip 2024
+    </div>
+
+  </div>
+{% endblock dashboard_content %}

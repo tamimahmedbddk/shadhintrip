@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+{% load static%}
+{% block title %}
+ShadhinTrip: Flights, Hotels, Visa, Packages, all in one.
+{% endblock %}
+{% block content %}
+
+{% include 'includes/banner.html' %}
+
+<!-- {% include 'includes/visa-offers.html' with tours=tours %} -->
+{% include 'includes/popular-visa-package.html' with tours=tours %}
+{% include 'includes/Keep-on-visa-Planning.html' with tours=tours %}
+{% include 'includes/domestic-tours.html' with tours=tours %}
+{% include 'includes/international-tours.html' with tours=tours %}
+<!-- {% include 'includes/7-Reasons-to-Plan-a-Trip.html' with tours=tours %} -->
+{% include 'includes/Why-choose-shadhintrip.html' with tours=tours %}
+{% include 'includes/blog.html' with tours=tours %}
+
+{% endblock content%}

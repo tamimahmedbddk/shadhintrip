@@ -1,0 +1,222 @@
+{% extends 'base.html' %}
+{% load static%}
+{% load price_filter %}
+{% block title %}
+ShadhinTrip: Tours And Packages, all in one.
+{% endblock %}
+{% block content %}
+  <section data-anim="fade" class="hero -type-1 -min">
+    <div class="hero__bg">
+      <img src="{{ visa_details.image.url }}" alt="image">
+      <img src="{% static 'assets/img/hero/1/shape.svg' %}" alt="image">
+    </div>
+  
+    <div class="container">
+      <div class="row justify-center">
+        <div class="col-xl-8 col-lg-10">
+          <div class="hero__content mt-30 layout-pb-md layout-pt-md"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="layout-pt-md js-pin-container layout-pb-md">
+    <div class="container">
+      <div class="row y-gap-30 justify-between">
+
+        <div class="col-lg-8">
+          <h4 class="text-30 text-center mb-20">{{ visa_details.title }}</h4>
+          <div>
+            <h2 class="text-20">Overview</h2>
+            <p class="mt-20">{{ visa_details.overview|safe }}</p>
+          </div>
+
+          <div>
+            <h2 class="text-20 mt-20">Description</h2>
+            <p class="mt-20">{{ visa_details.description|safe }}</p>
+          </div>
+
+          <div>
+            <h2 class="text-20 mt-20">Documents Required</h2>
+            <div class="tabs -underline-2 pt-30 js-tabs">
+                <div class="tabs__controls row x-gap-40 y-gap-10 lg:x-gap-20 js-tabs-controls">
+                    {% for required_document in visa_details.required_documents.all %}
+                    <div class="col-auto">
+                        <button class="tabs__button fw-500 px-5 pb-5 lg:pb-0 js-tabs-button{% if forloop.first %} is-tab-el-active{% endif %}" data-tab-target=".tab-item-{{ required_document.id }}">{{ required_document.document_for }}</button>
+                    </div>
+                    {% endfor %}
+                </div>
+        
+                <div class="tabs__content pt-20 py-40 js-tabs-content">
+                    {% for required_document in visa_details.required_documents.all %}
+                    <div class="tabs__pane tab-item-{{ required_document.id }}{% if forloop.first %} is-tab-el-active{% endif %}">
+                        <p>{{ required_document.description|safe }}</p>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+        <div class="line mt-10"></div>
+
+          <div>
+            <h2 class="text-20 mt-20">Cancellation Policy</h2>
+            <p class="mt-20">{{ visa_details.description|safe }}</p>
+          </div>
+
+
+        </div>
+
+
+
+        <div class="col-lg-4">
+          <div class="d-flex justify-end js-pin-content">
+              <div class="tourSingleSidebar">
+                  <div class="d-flex items-center">
+                      <div>
+                          <img src="{{ visa_details.country.image.url }}" alt="logo icon">
+                      </div>
+                      <div class="text-20 fw-500 ml-10">{{ visa_details.country }}</div>
+                  </div>
+                  <div class="line mt-10"></div>
+                  <p class="text-20 fw-500 mb-20">Visa Details</p>
+                  <div class="">
+                    <div class="d-flex items-center justify-between">
+                        <div class="text-14">Visa Type</div>
+                        <div class="d-flex items-center">
+                            <div class="flex-center ml-10 mr-10">
+                                <div class="text-14 size-20">{{ visa_details.visa_type.name }}</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {% if visa_details.our_processing_time %}
+                <div class="mt-10">
+                  <div class="d-flex items-center justify-between">
+                      <div class="text-14">Application Processing Time</div>
+                      <div class="d-flex items-center">
+                          <div class="flex-center ml-10 mr-10">
+                            
+                              <div class="text-14 size-20">{{ visa_details.our_processing_time }} Days</div>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+              {% endif %}
+              {% if visa_details.visa_processing_time %}
+                <div class="mt-10">
+                  <div class="d-flex items-center justify-between">
+                      <div class="text-14">Estimated Visa Approval Time</div>
+                      <div class="d-flex items-center">
+                          <div class="flex-center ml-10 mr-10">
+                            
+                              <div class="text-14 size-20">{{ visa_details.visa_processing_time }} Days</div>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+              {% endif %}
+              <div class="line mt-10"></div>
+              <p class="text-20 fw-500 pb-20">Price Summary</p>
+                  <div class="pb-20">
+                      <div class="d-flex items-center justify-between">
+                          <div class="text-14">Visa Fee</div>
+                          <div class="d-flex items-center js-counter">
+                              <div class="flex-center ml-10 mr-10">
+                                  <div id="visaFee" class="text-14 size-20 js-count">BDT {{ visa_details.visa_fee|format_price }}</div>
+                              </div>
+                          </div>
+                      </div>
+                  </div>
+                  <div class="pb-20">
+                      <div class="d-flex items-center justify-between">
+                          <div class="text-14">Processing Fee</div>
+                          <div class="d-flex items-center js-counter">
+                              <div class="flex-center ml-10 mr-10">
+                                  <div id="processingFee" class="text-14 size-20 js-count">BDT {{ visa_details.processing_fee|format_price }}</div>
+                              </div>
+                          </div>
+                      </div>
+                  </div>
+                  
+                  <div>
+                      <div class="d-flex items-center justify-between">
+                          <div class="text-14">No. of People</div>
+                          <div class="d-flex items-center js-counter">
+                              <button class="button size-30 border-1 rounded-full js-down">
+                                  <i class="icon-minus text-10"></i>
+                              </button>
+                              <div class="flex-center ml-10 mr-10">
+                                  <div id="numTravelers" class="text-14 size-20 js-count">1</div>
+                              </div>
+                              <button class="button size-30 border-1 rounded-full js-up">
+                                  <i class="icon-plus text-10"></i>
+                              </button>
+                          </div>
+                      </div>
+                  </div>
+                  <div class="line mt-20 mb-20"></div>
+                  <div class="d-flex items-center justify-between">
+                      <div class="text-18 fw-500">Total:</div>
+                      <div id="totalPrice" class="text-18 fw-500">BDT {{ visa_details.total_fee }}</div>
+                  </div>
+                  <a href="{% url 'get_visa_booking_summary' slug=visa_details.slug%}" class="button -md -dark-1 col-12 bg-accent-1 text-white mt-20">
+                      Apply Now
+                      <i class="icon-arrow-top-right ml-10"></i>
+                  </a>
+              </div>
+          </div>
+      </div>
+      
+      
+      
+
+      </div>
+    </div>
+  </section>
+
+  {% include 'visa/visa-assistance.html' with tours=tours %}
+  
+
+  
+  
+{% endblock content%}
+
+{% block additional_scripts %}
+
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+      let numTravelers = 1;
+      const visaPrice = parseFloat("{{ visa_details.visa_fee }}");
+      const processingFeePerPerson = parseFloat("{{ visa_details.processing_fee }}");
+
+      function updateTotalPrice() {
+          const visaFee = visaPrice * numTravelers;
+          const processingFee = processingFeePerPerson * numTravelers;
+          const totalPrice = visaFee + processingFee;
+          document.getElementById('visaFee').textContent = `BDT ${visaFee.toFixed(2)}`;
+          document.getElementById('processingFee').textContent = `BDT ${processingFee.toFixed(2)}`;
+          document.getElementById('totalPrice').textContent = `BDT ${totalPrice.toFixed(2)}`;
+      }
+
+      document.querySelector('.js-up').addEventListener('click', function() {
+          numTravelers++;
+          document.querySelector('#numTravelers').textContent = numTravelers;
+          updateTotalPrice();
+      });
+
+      document.querySelector('.js-down').addEventListener('click', function() {
+          if (numTravelers > 1) {
+              numTravelers--;
+              document.querySelector('#numTravelers').textContent = numTravelers;
+              updateTotalPrice();
+          }
+      });
+
+      updateTotalPrice();
+  });
+</script>
+
+
+
+{% endblock additional_scripts %}

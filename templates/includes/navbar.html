@@ -1,0 +1,236 @@
+{% load static %}
+
+<header class="header -type-1 js-header">
+  <div data-anim="fade delay-3" class="header__container container">
+    <div class="headerMobile__left">
+      <button class="header__menuBtn js-menu-button">
+        <i class="icon-main-menu"></i>
+      </button>
+    </div>
+
+    <div class="header__logo">
+      <a href="{% url 'index' %}" class="header__logo">
+        <img src="{% static 'assets/img/logo/logo-small.png' %}" alt="logo icon">
+      </a>
+
+      <div class="xl:d-none ml-30">
+        <div class="desktopNav">
+          <div class="desktopNav__item">
+            <a href="{% url 'index' %}">
+              HOME 
+            </a>
+          </div>
+
+          <div class="desktopNav__item">
+            <a href="{% url 'tour' %}">
+              TOUR <i class="icon-chevron-down"></i>
+            </a>
+
+            <div class="desktopNavMega">
+              <div class="desktopNavMega__container">
+                <div class="desktopNavMega__lists">
+                  
+                  <div class="desktopNavMega-list">
+                    <div class="desktopNavMega-list__item">
+                      <div class="desktopNavMega-list__title">Group Events</div>
+
+                      <div class="desktopNavMega-list__list">
+
+                        <div class="desktopNavMega-list__link">
+                          <a href="#">Domestic</a>
+                        </div>
+                        <div class="desktopNavMega-list__link">
+                          <a href="#">International</a>
+                        </div>
+
+                       
+
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="desktopNavMega-list">
+                    <div class="desktopNavMega-list__item">
+                      <div class="desktopNavMega-list__title">Tour Packages</div>
+
+                      <div class="desktopNavMega-list__list">
+
+                        <div class="desktopNavMega-list__link">
+                          <a href="#">Domestic</a>
+                        </div>
+
+                        <div class="desktopNavMega-list__link">
+                          <a href="#">International</a>
+                        </div>
+
+                      </div>
+                    </div>
+                  </div>
+
+                  
+                </div>
+
+                <div class="desktopNavMega__info">
+                  <div class="specialCardGrid row y-gap-30">
+
+                    <div class="col-12">
+                      <div class="specialCard">
+                        <div class="specialCard__image">
+                          <img src="{% static 'assets/img/hero/1/bg2.jpeg' %}" alt="image">
+                        </div>
+
+                        <div class="specialCard__content">
+                          <div class="specialCard__subtitle">Enjoy Upto</div>
+                          <h3 class="specialCard__title">60 % OFF</h3>
+                          <div class="specialCard__text">on Your Booking</div>
+                        </div>
+                      </div>
+                    </div>
+
+                    
+
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="desktopNav__item">
+            <a href="{% url 'visa' %}">
+              VISA
+            </a>
+          </div>
+          <div class="desktopNav__item">
+            <a href="#">
+              FLIGHT
+            </a>
+          </div>
+          
+          <div class="desktopNav__item">
+            <a href="#">
+              HOTEL
+            </a>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <div class="headerMobile__right">
+
+      <button class="d-flex ml-20">
+        
+        {% if user.is_authenticated %}
+      <a href="{% url 'dashboard' %}" class="button -sm -outline-dark-1 rounded-200 text-dark-1">
+        Dashboard
+      </a>
+      {% else %}
+      <a href="{% url 'login' %}" class="button -sm -outline-dark-1 rounded-200 text-dark-1">
+        Log In
+      </a>
+      
+    {% endif %}
+      </button>
+    </div>
+
+    <div class="header__right xl:d-none">
+
+      <a href="{% url 'faq' %}">
+        FAQ
+      </a>
+
+     
+      <a href="{% url 'blog_home' %}" class="ml-30">
+        TRAVEL GUIDE
+      </a>
+
+    {% if user.is_authenticated %}
+      <a href="{% url 'dashboard' %}" class="button -sm -outline-dark-1 rounded-200 text-dark-1 ml-30">
+        DASHBOARD
+      </a>
+      {% else %}
+      <a href="{% url 'login' %}" class="button -sm -outline-dark-1 rounded-200 text-dark-1 ml-30">
+        LOG IN
+      </a>
+      
+    {% endif %}
+    </div>
+  </div>
+</header>
+
+<div class="menu js-menu">
+  <div class="menu__overlay js-menu-button"></div>
+
+  <div class="menu__container">
+    <div class="menu__header">
+      <h4>Menu</h4>
+
+      <button class="js-menu-button"><i class="icon-cross text-10"></i></button>
+    </div>
+
+    <div class="menu__content">
+      <ul class="menuNav js-navList">
+
+        <li class="menuNav__item">
+          <a href="{% url 'index' %}" class="fw-500">Home</a>
+        </li>
+        <li class="menuNav__item">
+          <a href="{% url 'tour' %}" class="fw-500">Tour</a>
+        </li>
+        <li class="menuNav__item">
+          <a href="{% url 'visa' %}" class="fw-500">Visa</a>
+        </li>
+        <li class="menuNav__item">
+          <a href="#" class="fw-500">Flight</a>
+        </li>
+        <li class="menuNav__item">
+          <a href="#" class="fw-500">Hotel</a>
+        </li>
+
+        <li class="menuNav__item">
+          <a href="{% url 'faq' %}" class="fw-500">Faq</a>
+        </li>
+        <li class="menuNav__item">
+          <a href="{% url 'blog_home' %}" class="fw-500">Blog</a>
+        </li>
+      </ul>
+    </div>
+
+
+    <div class="menu__footer">
+      <i class="icon-headphone text-50"></i>
+
+      <div class="text-20 lh-12 fw-500 mt-20">
+        <div>Speak to our expert at</div>
+        <div class="text-accent-1">0188-7121534</div>
+      </div>
+
+      <div class="d-flex items-center x-gap-10 pt-30">
+
+        <div>
+          <a class="d-block">
+            <i class="icon-facebook"></i>
+          </a>
+        </div>
+
+        <div>
+          <a class="d-block">
+            <i class="icon-twitter"></i>
+          </a>
+        </div>
+
+        <div>
+          <a class="d-block">
+            <i class="icon-instagram"></i>
+          </a>
+        </div>
+
+        <div>
+          <a class="d-block">
+            <i class="icon-linkedin"></i>
+          </a>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>

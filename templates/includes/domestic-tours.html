@@ -1,0 +1,96 @@
+{% load static %}
+{% load price_filter %}
+<section class="layout-pt-md layout-pb-md">
+    <div data-anim-wrap class="container">
+      <!-- <div class="items-center pb-10">
+        <h2 class="text-30 md:text-24 text-center">Popular Tour Packages</h2>
+      </div> -->
+      <div data-anim-child="slide-up" class="row justify-between items-end y-gap-10">
+        <div class="col-auto">
+          <h2 class="text-30 md:text-24">Most Popular Tour Packages</h2>
+        </div>
+
+        <div class="col-auto">
+          <a href="{% url 'tour' %}" class="buttonArrow d-flex items-center ">
+            <span>See all</span>
+            <i class="icon-arrow-top-right text-16 ml-10"></i>
+          </a>
+
+        </div>
+      </div>
+
+      <div data-anim-child="slide-up delay-2" class="relative pt-40 sm:pt-20">
+        <div class="overflow-hidden js-section-slider" data-gap="30" data-slider-cols="xl-4 lg-3 md-2 sm-1 base-1" data-nav-prev="js-slider1-prev" data-nav-next="js-slider1-next">
+          <div class="swiper-wrapper">
+          {% for tour in Popular_Tour_Packages %}
+            <div class="swiper-slide">
+
+              <a href="{% url 'tour_detail' slug=tour.slug %}" class="tourCard -type-1 d-block bg-white">
+                  {% with tour.images.first as main_photo %}
+                <div class="tourCard__header">
+                  <div class="tourCard__image ratio ratio-28:20">
+                    <img src="{{ main_photo.image.url }}" alt="image" class="img-ratio rounded-12">
+                  </div>
+
+                  <button class="tourCard__favorite">
+                    <i class="icon-heart"></i>
+                  </button>
+                </div>
+                  {% endwith %}
+
+                <div class="tourCard__content pt-10">
+                  <div class="tourCard__location d-flex items-center text-13 text-light-2">
+                    <i class="icon-pin d-flex text-16 text-light-2 mr-5"></i>
+                    {{ tour.city }}
+                  </div>
+
+                  <h3 class="tourCard__title text-16 fw-500 mt-5">
+                    <span>{{ tour.title }}</span>
+                  </h3>
+
+                  <div class="tourCard__rating mt-5">
+                    <div class="d-flex items-center">
+                      <div class="d-flex x-gap-5 pr-10">
+
+                        {% for service in tour.services.all %}
+                        <div class="col-auto">
+                          <div class="service-icon-active mt-5">
+                            {{ service.icon_class|safe }}
+                          </div>
+                          
+                        </div>
+                        {% endfor %}
+
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="d-flex justify-between items-center border-1-top text-13 text-dark-1 pt-10 mt-10">
+                    <div class="d-flex items-center">
+                      <i class="icon-clock text-16 mr-5"></i>
+                      {{ tour.duration_days }} Nights  {{ tour.duration_nights }} Days
+                    </div>
+
+                    <div>From <span class="text-16 fw-500">BDT {{ tour.price|format_price }}</span></div>
+                  </div>
+                </div>
+              </a>
+
+            </div>
+            {% endfor %}
+
+          </div>
+        </div>
+
+        <div class="navAbsolute">
+          <button class="navAbsolute__button bg-white js-slider1-prev">
+            <i class="icon-arrow-left text-14"></i>
+          </button>
+
+          <button class="navAbsolute__button bg-white js-slider1-next">
+            <i class="icon-arrow-right text-14"></i>
+          </button>
+        </div>
+      </div>
+    </div>
+  </section>

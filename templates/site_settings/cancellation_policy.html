@@ -1,0 +1,34 @@
+{% extends 'base.html' %}
+{% load static%}
+{% load price_filter %}
+{% block title %}
+ShadhinTrip: Tours And Packages, all in one.
+{% endblock %}
+{% block content %}
+  <section data-anim="fade" class="hero -type-1 -min">
+    <div class="hero__bg">
+      <img src="{% static 'assets/img/hero/1/nepal.jpeg' %}" alt="image">
+      <img src="{% static 'assets/img/hero/1/shape.svg' %}" alt="image">
+    </div>
+  </section>
+
+  <section class="layout-pt-md js-pin-container layout-pb-md">
+    <div class="container">
+      <div class="row y-gap-30 justify-between">
+        <h2 class="text-20">Cancellation Policy</h2>
+        <div class="col-lg-10">
+          <div>
+            {% for site_setting in site_settings%}
+            <p class="mt-20">{{ site_setting.cancellation_policy|safe }}</p>
+            {% endfor %}
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  
+{% endblock content%}
+
+{% block additional_scripts %}
+
+{% endblock additional_scripts %}

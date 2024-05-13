@@ -1,0 +1,189 @@
+{% extends 'auth/dashboard/dashboard.html' %}
+{% load static%}
+{% load price_filter %}
+{% block title %}
+ShadhinTrip: Tours And Packages, all in one.
+{% endblock %}
+
+{% block dashboard_content %}
+
+<div class="dashboard__content_content">
+
+    <h1 class="text-30">My Booking</h1>
+    <p class="">Welcome to "My Booking" section of ShadhinTrip!
+
+      In this section, you can easily manage all your travel bookings in one place. View details of your past and upcoming trips, including flight reservations, hotel stays, and any other travel arrangements you've made through ShadhinTrip. Keep track of important information such as booking dates, confirmation numbers, and itinerary details. Whether you need to review a past trip or prepare for an upcoming adventure, everything you need is conveniently accessible right here.</p>
+
+    <div class="rounded-12 bg-white shadow-2 px-40 pt-40 pb-30 md:px-20 md:pt-20 md:mb-20 mt-60">
+      <div class="tabs -underline-2 js-tabs">
+        <div class="tabs__controls row x-gap-40 y-gap-10 lg:x-gap-20 js-tabs-controls">
+
+          <div class="col-auto">
+            <button class="tabs__button text-20 lh-12 fw-500 pb-15 lg:pb-0 js-tabs-button is-tab-el-active" data-tab-target=".-tab-item-1">Visa</button>
+          </div>
+
+          <div class="col-auto">
+            <button class="tabs__button text-20 lh-12 fw-500 pb-15 lg:pb-0 js-tabs-button" data-tab-target=".-tab-item-2">Tours</button>
+          </div>
+
+
+        </div>
+
+        <div class="tabs__content js-tabs-content">
+
+          <div class="tabs__pane -tab-item-1 is-tab-el-active">
+            <div class="overflowAuto">
+              <table class="tableTest mb-30">
+                <thead class="bg-light-1 rounded-12">
+                  <tr>
+                    <th>ID</th>
+                    <th>Title</th>
+                    <th>Date</th>
+                    <th>Applicants</th>
+                    <th>Amount</th>
+                    <th>Status</th>
+                    <!-- <th>Action</th> -->
+                  </tr>
+                </thead>
+
+                <tbody>
+            {% for visa_booking in bookings%}
+                  <tr>
+                    <td>#00{{visa_booking.id}}</td>
+
+                    <td class="min-w-300">
+                      <div class="d-flex items-center order-image">
+                        <img src="{{visa_booking.visa_package.image.url}}" alt="image">
+                        <div class="ml-20">{{visa_booking.visa_package.title}}</div>
+                      </div>
+                    </td>
+
+                    <td>{{visa_booking.booking_date|date:"F j, Y"}}</td>
+
+                    <td>{{visa_booking.quantity}}</td>
+
+                    <td>{{visa_booking.total_price|format_price}}৳</td>
+
+                    <td>
+                      <div class="circle text-purple-1">{{visa_booking.status}}</div>
+                    </td>
+
+                    <!-- <td>
+                      <div class="d-flex items-center">
+                        Pay Now
+                      </div>
+                    </td> -->
+                  </tr>
+                  {% endfor %}
+
+                </tbody>
+              </table>
+            </div>
+
+
+            <div class="pagination justify-center">
+              <button class="pagination__button button -accent-1 mr-15 -prev">
+                <i class="icon-arrow-left text-15"></i>
+              </button>
+
+              <div class="pagination__count">
+                <a href="#">1</a>
+                <a href="#" class="is-active">2</a>
+                <a href="#">3</a>
+                <a href="#">4</a>
+                <a href="#">5</a>
+                <div>...</div>
+                <a href="#">20</a>
+              </div>
+
+              <button class="pagination__button button -accent-1 ml-15 -next">
+                <i class="icon-arrow-right text-15"></i>
+              </button>
+            </div>
+
+            <div class="text-14 text-center mt-20">Showing results 1-30 of 1,415</div>
+
+          </div>
+
+          <div class="tabs__pane -tab-item-2">
+            <div class="overflowAuto">
+              <table class="tableTest mb-30">
+                <thead class="bg-light-1 rounded-12">
+                  <tr>
+                    <th>ID</th>
+                    <th>Title</th>
+                    <th>Date</th>
+                    <th>Travellers</th>
+                    <th>Amount</th>
+                    <th>Status</th>
+                  </tr>
+                </thead>
+
+                <tbody>
+            {% for tour_booking in tour_bookings%}
+                  <tr>
+                    <td>#00{{tour_booking.id}}</td>
+
+                    <td class="min-w-300">
+                      <div class="d-flex items-center order-image">
+                        {% with tour_booking.tour.images.first as main_photo %}
+                        <img src="{{ main_photo.image.url }}" alt="image">
+                        {% endwith %}
+                        <div class="ml-20">{{tour_booking.tour.title}}</div>
+                      </div>
+                    </td>
+
+                    <td>{{tour_booking.booking_date|date:"F j, Y"}}</td>
+
+                    <td>{{tour_booking.quantity}}</td>
+
+                    <td>{{tour_booking.total_price|format_price}}</td>
+
+                    <td>
+                      <div class="circle text-purple-1">{{tour_booking.status}}</div>
+                    </td>
+
+                  </tr>
+                  {% endfor %}
+
+                </tbody>
+              </table>
+            </div>
+
+
+            <div class="pagination justify-center">
+              <button class="pagination__button button -accent-1 mr-15 -prev">
+                <i class="icon-arrow-left text-15"></i>
+              </button>
+
+              <div class="pagination__count">
+                <a href="#">1</a>
+                <a href="#" class="is-active">2</a>
+                <a href="#">3</a>
+                <a href="#">4</a>
+                <a href="#">5</a>
+                <div>...</div>
+                <a href="#">20</a>
+              </div>
+
+              <button class="pagination__button button -accent-1 ml-15 -next">
+                <i class="icon-arrow-right text-15"></i>
+              </button>
+            </div>
+
+            <div class="text-14 text-center mt-20">Showing results 1-30 of 1,415</div>
+
+          </div>
+
+
+        </div>
+      </div>
+    </div>
+
+    <div class="text-center pt-30">
+      © Copyright Viatours 2023
+    </div>
+
+  </div>
+
+{% endblock dashboard_content %}

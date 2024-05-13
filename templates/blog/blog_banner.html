@@ -1,0 +1,25 @@
+{% load static %}
+<section data-anim="fade" class="hero -type-1 -min-2">
+    <div class="hero__bg">
+      {% for background_image in background_images %}
+      <img src="{{ background_image.image.url }}" alt="image">
+      {% endfor %}
+      <img src="{% static 'assets/img/hero/1/shape.svg' %}" alt="image">
+    </div>
+  
+    <div class="container">
+      <div class="row justify-center">
+        <div class="col-xl-12">
+          <div class="hero__content">
+            <h1 class="hero__title">
+              Your guide to everywhere
+            </h1>
+  
+            <p class="hero__text">
+              Find inspiration, guides, and stories for wherever you're going. Select a destination.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
