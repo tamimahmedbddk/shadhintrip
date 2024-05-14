@@ -5,18 +5,21 @@
         <div class="row justify-between">
           <div class="col-xl-7 col-lg-8">
             <h2 class="text-24 lh-13">
-              Need Visa Assistance? ShadhinTrip Is Here to Help!
+              Simplify Your Journey with ShadhinTrip!
             </h2>
 
             <p class="mt-10">
-              At Shadhin Trip, we specialize in visa assistance designed to simplify your travel plans. Our dedicated team offers expert guidance and support every step of the way, ensuring a hassle-free experience. Trust us to handle the details while you focus on the excitement of your upcoming adventure.
+              At ShadhinTrip, we understand that planning a trip can be overwhelming. That's why we're here to take the stress out of your travel arrangements. From booking your flights to finding the perfect hotel, arranging visas to curating personalized tour packages, our experienced team is dedicated to making your journey unforgettable. With ShadhinTrip, you can trust that every aspect of your travel experience will be handled with care and expertise. Contact us now to start planning your next adventure!
             </p>
 
             <div class="col-6">
-              <a href="{% url 'contact_us'%}" class="button -md -accent-1 bg-dark-1 text-white mt-10">
-                Get Started
+              <form method="post" action="{% url 'contact_us' %}">
+                {% csrf_token %}
+              <button href="{% url 'contact_us'%}" class="button -md -accent-1 bg-dark-1 text-white mt-10">
+                Contact Us
                 <i class="icon-arrow-top-right ml-10"></i>
-              </a>
+              </button>
+            </form>
             </div>
           </div>
         </div>
