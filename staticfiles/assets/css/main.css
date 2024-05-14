@@ -1228,25 +1228,23 @@ button:focus {
   text-decoration: underline;
 }
 
-/* Updated styles for better color combination and design */
 .contactForm select,
 .contactForm input:not([type="range"]),
 .contactForm textarea {
-  font-size: 16px;
-  line-height: 1.6;
+  font-size: 15px;
+  line-height: 1.4;
   height: 55px;
   border: 1px solid #E7E6E6;
   border-radius: 12px;
   padding: 15px;
   transition: all 0.3s cubic-bezier(0.165, 0.84, 0.44, 1);
-  background-color: #ffffff; /* White background */
 }
 
 .contactForm select:focus,
 .contactForm input:not([type="range"]):focus,
 .contactForm textarea:focus {
-  outline: 1px solid #0751e6; /* Shadhintrip blue */
-  border: 1px solid #0751e6;
+  outline: 1px solid #05073C;
+  border: 1px solid #05073C;
 }
 
 .contactForm textarea {
@@ -1276,7 +1274,7 @@ button:focus {
   position: absolute;
   top: 20px;
   left: 15px;
-  color: #6c757d; /* Gray text color */
+  color: black;
   z-index: 10;
   pointer-events: none;
   transition: all 0.15s ease-out;
@@ -1289,17 +1287,40 @@ button:focus {
   left: -7px;
   right: -7px;
   bottom: 0;
-  background-color: #ffffff; /* White background */
+  background-color: white;
   z-index: -1;
 }
 
-.contactForm .form-input textarea:focus + label,
-.contactForm .form-input input:focus + label {
+.contactForm .form-input input:focus + label,
+.contactForm .form-input textarea:focus + label {
   transform: translateY(-29px);
 }
 
-/* End of updated styles */
+/* Additional CSS for input fields */
+.contactForm .form-input input[type="text"],
+.contactForm .form-input input[type="email"],
+.contactForm .form-input input[type="date"],
+.contactForm .form-input textarea {
+  font-size: 15px;
+  line-height: 1.4;
+  height: 55px;
+  border: 1px solid #E7E6E6;
+  border-radius: 12px;
+  padding: 15px;
+  transition: all 0.3s cubic-bezier(0.165, 0.84, 0.44, 1);
+}
 
+.contactForm .form-input input[type="text"]:focus,
+.contactForm .form-input input[type="email"]:focus,
+.contactForm .form-input input[type="date"]:focus,
+.contactForm .form-input textarea:focus {
+  outline: 1px solid #05073C;
+  border: 1px solid #05073C;
+}
+
+.contactForm .form-input textarea {
+  height: auto;
+}
 
 input.text-white::-moz-placeholder {
   color: white;
@@ -1568,9 +1589,6 @@ input.text-white::placeholder {
   padding: 15px 0;
 }
 
-
-
-/* ==== */
 
 h1, h2, h3, h4, h5, h6 {
   line-height: 1.5;
@@ -2355,7 +2373,7 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .header .desktopNav__item a:hover {
-  color: white;
+  color: #4dd456;
 }
 
 .header .desktopNavMega {
@@ -3186,6 +3204,15 @@ h1, h2, h3, h4, h5, h6 {
   padding-top: 60px;
   padding-bottom: 60px;
 }
+.footer.-type-1 .footer__content a:hover {
+  color: white;
+  background: #4dd456;
+  border-radius: 30px;
+  border: none;
+  text-align: center;
+  padding: 5px 10px;
+}
+
 
 @media (max-width: 767px) {
   .footer.-type-1 .footer__content {
@@ -3264,7 +3291,7 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .footer.-type-1 .footerSocials__icons > *:hover {
-  background-color: var(--color-accent-1) !important;
+  background-color: #4dd456 !important;
   color: white !important;
 }
 
@@ -3296,7 +3323,7 @@ h1, h2, h3, h4, h5, h6 {
 
 .hero.-type-1 {
   position: relative;
-  padding-top: 220px;
+  padding-top: 120px;
   padding-bottom: 220px;
   margin-top: 88px;
   z-index: 5;
@@ -4544,7 +4571,18 @@ h1, h2, h3, h4, h5, h6 {
     border-radius: 0 0 12px 12px !important;
   }
 }
+.searchForm.-type-1 .searchForm__button a {
+  height: 100%;
+  padding: 0 30px;
+}
 
+@media (max-width: 767px) {
+  .searchForm.-type-1 .searchForm__button a {
+    height: 60px;
+    width: 100%;
+    border-radius: 0 0 12px 12px !important;
+  }
+}
 .searchForm.-type-1 .searchFormItem {
   position: relative;
 }
@@ -7026,7 +7064,7 @@ h1, h2, h3, h4, h5, h6 {
   top: 0;
   right: 0;
   bottom: 0;
-  width: 470px;
+  /* width: 470px; */
   max-width: 100%;
   z-index: 1000;
   pointer-events: none;
@@ -10573,6 +10611,9 @@ h1, h2, h3, h4, h5, h6 {
 .bg-accent-1 {
   background-color: #0751e6 !important;
 }
+.bg-accent-payment-success {
+  background-color: #4dd456 !important;
+}
 
 .bg-accent-1-dark {
   background-color: var(--color-accent-1-dark) !important;
@@ -11091,7 +11132,7 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .border-dashed-1 {
-  border: 1px dashed var(--color-primary, #EB662B);
+  border: 1px dashed var(--color-primary, #4dd456);
 }
 
 .border-accent-1 {
@@ -11189,7 +11230,9 @@ h1, h2, h3, h4, h5, h6 {
 .shadow-2 {
   box-shadow: 0px 0px 20px 0px rgba(56, 71, 109, 0.03);
 }
-
+.shadow-shadhin {
+  box-shadow: 0px 0px 20px 0px #4dd45661;
+}
 .hover-shadow-1 {
   transition: .2s;
 }
@@ -13621,12 +13664,13 @@ table.table-4.-border-bottom tbody > tr {
 }
 
 .toTopButton svg {
-  fill: var(--color-accent-1);
+  fill: #4dd456;
   transition: 0.2s;
 }
 
 .toTopButton:hover {
-  background-color: var(--color-accent-1);
+  color: white;
+  background-color: #4dd456;
 }
 
 .toTopButton:hover svg {
@@ -14000,4 +14044,149 @@ button.gm-ui-hover-effect::after {
   background-color: #0751e6;
   color: white;
   transform: rotate(15deg) translateX(5px) translateY(-5px); /* Adjust values as needed */
+}
+
+
+
+
+/* Booking Details Styles */
+/* .booking-summary {
+  background: linear-gradient(to bottom right, #b6ffbd, #1512de);
+} */
+
+.tourSingleSidebar {
+  background-color: rgba(255, 255, 255, 0.9);
+  padding: 30px;
+  border-radius: 12px;
+  box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.1);
+}
+.tourSingleSidebar img {
+  margin: auto;
+  width: 120px;
+  height: 120px;
+  object-fit: cover;
+  border-radius: 50%;
+  border: 3px solid #fff;
+  box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.1);
+}
+
+.tourSingleSidebar h2 {
+  color: #333;
+}
+
+.tourSingleSidebar .line {
+  border-top: 1px solid #ccc;
+  margin: 20px 0;
+}
+
+.tourSingleSidebar .button {
+  border: none;
+  padding: 10px 20px;
+  cursor: pointer;
+  background-color: #FF1493;
+  color: #fff;
+  border-radius: 30px;
+  transition: background-color 0.3s ease;
+}
+
+.tourSingleSidebar .button:hover {
+  background-color: #FF69B4;
+}
+
+.tourSingleSidebar .button:focus {
+  outline: none;
+}
+
+.order-image img{
+  max-width: 30% !important;
+  height: auto !important;
+}
+
+
+.is-invalid {
+  border-color: #dc3545;
+}
+
+.error-message {
+  font-size: 0.875em;
+  color: #dc3545;
+  margin-top: 0.25rem;
+}
+
+
+
+
+/* Add this CSS to your main stylesheet or create a new stylesheet */
+.newsletter-section {
+  text-align: center;
+  margin-top: 50px;
+}
+
+.newsletter-title {
+  font-size: 24px;
+  margin-bottom: 20px;
+}
+
+.newsletter-form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.newsletter-form input[type="email"] {
+  width: 300px;
+  padding: 10px;
+  margin-bottom: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.newsletter-submit-btn {
+  padding: 10px 20px;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.newsletter-submit-btn:hover {
+  background-color: #0056b3;
+}
+
+
+
+/* Add this CSS to your main stylesheet or create a new stylesheet */
+.subscription-success {
+  padding: 50px 0;
+  text-align: center;
+}
+
+.success-message h2 {
+  font-size: 24px;
+  margin-bottom: 20px;
+}
+
+.success-message p {
+  font-size: 18px;
+  margin-bottom: 30px;
+}
+
+.back-home {
+  margin-top: 20px;
+}
+
+.back-home-link {
+  padding: 10px 20px;
+  background-color: #007bff;
+  color: #fff;
+  text-decoration: none;
+  border-radius: 5px;
+  transition: background-color 0.3s ease;
+}
+
+.back-home-link:hover {
+  background-color: #0056b3;
+  color: white;
 }
