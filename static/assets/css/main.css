@@ -3204,6 +3204,15 @@ h1, h2, h3, h4, h5, h6 {
   padding-top: 60px;
   padding-bottom: 60px;
 }
+.footer.-type-1 .footer__content a:hover {
+  color: white;
+  background: #4dd456;
+  border-radius: 30px;
+  border: none;
+  text-align: center;
+  padding: 5px 10px;
+}
+
 
 @media (max-width: 767px) {
   .footer.-type-1 .footer__content {
@@ -3282,7 +3291,7 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .footer.-type-1 .footerSocials__icons > *:hover {
-  background-color: var(--color-accent-1) !important;
+  background-color: #4dd456 !important;
   color: white !important;
 }
 
@@ -13655,12 +13664,13 @@ table.table-4.-border-bottom tbody > tr {
 }
 
 .toTopButton svg {
-  fill: var(--color-accent-1);
+  fill: #4dd456;
   transition: 0.2s;
 }
 
 .toTopButton:hover {
-  background-color: var(--color-accent-1);
+  color: white;
+  background-color: #4dd456;
 }
 
 .toTopButton:hover svg {
