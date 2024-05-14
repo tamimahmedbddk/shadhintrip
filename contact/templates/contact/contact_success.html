@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}
+ShadhinTrip: Subscription Success
+{% endblock %}
+
+{% block content %}
+<section data-anim="fade" class="hero -type-1 -min">
+    <div class="hero__bg">
+        <img src="{% static 'assets/img/hero/1/nepal.jpeg' %}" alt="image">
+        <img src="{% static 'assets/img/hero/1/shape.svg' %}" alt="image">
+    </div>
+</section>
+<section class="subscription-success">
+    <div class="container">
+        <div class="success-message">
+            <h2>Thank you for contacting us!</h2>
+            <p>We have received your message and will get back to you as soon as possible.</p>
+        </div>
+        <div class="back-home">
+            <a href="{% url 'index' %}" class="back-home-link">Back to Home</a>
+        </div>
+    </div>
+</section>
+{% endblock content %}
