@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     'users',
     'visa',
     'bookings',
+    'newsletter',
 
     # tootls
     'ckeditor',
