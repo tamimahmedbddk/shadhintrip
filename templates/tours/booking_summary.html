@@ -6,15 +6,19 @@ ShadhinTrip: Booking Summary
 {% endblock %}
 {% block content %}
 
+<section data-anim="fade" class="hero -type-10 pt-0">
+  <div class="hero__bg">
+    <img src="{% static 'assets/img/cta/nepal.jpeg' %}" alt="image">
+  </div>
+</section>
 
-
-<section data-anim-wrap class="layout-pt-md layout-pb-lg mt-header booking-summary">
+<section data-anim-wrap class="layout-pb-lg mt-header booking-summary">
   <div class="container">
     <form id="bookingForm" class="traveler-form" method="post" action="{% url 'booking_success' slug=tour_details.slug%}">
       {% csrf_token %}
     <div class="row">
       <div data-anim-child="fade" class="col-lg-8">
-        <div class="bg-white rounded-12 shadow-2 py-30 px-30 md:py-20 md:px-20 mt-30">
+        <div class="bg-white rounded-12 shadow-shadhin py-30 px-30 md:py-20 md:px-20 mt-30">
           <h2>Traveller Information</h2>
           <div class="row y-gap-30 pt-30">
             <div class="row y-gap-30 contactForm">
