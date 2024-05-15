@@ -1,159 +1,181 @@
 {% load static %}
 
-<header class="header -type-7 js-header">
+<header class="header -type-8 js-header">
   <div data-anim="fade delay-3" class="header__container container">
     <div class="headerMobile__left">
       <button class="header__menuBtn js-menu-button">
-        <i class="icon-main-menu"></i>
+        <i class="icon-main-menu text-white"></i>
       </button>
     </div>
 
-    <div class="header__logo">
-      <a href="{% url 'index' %}" class="header__logo">
-        <img src="{% static 'assets/img/logo/logo-small.png' %}" alt="logo icon">
-      </a>
+    <div class="header__left">
+      <div class="header__logo">
+        <a href="{% url 'index' %}" class="header__logo">
+          <img src="{% static 'assets/img/logo/logo-small.png' %}" alt="logo icon">
+        </a>
 
-      <div class="xl:d-none ml-30">
-        <div class="desktopNav">
-          <div class="desktopNav__item">
-            <a href="{% url 'index' %}">
-              HOME 
-            </a>
-          </div>
+        <div class="xl:d-none ml-30">
+          <div class="desktopNav -light">
+            <div class="desktopNav__item">
+              <a href="{% url 'index' %}">
+                Home 
+              </a>
+            </div>
 
-          <div class="desktopNav__item">
-            <a href="{% url 'tour' %}">
-              TOUR <i class="icon-chevron-down"></i>
-            </a>
+            <div class="desktopNav__item">
+              <a href="{% url 'tour' %}">
+                Tour <i class="icon-chevron-down"></i>
+              </a>
 
-            <div class="desktopNavMega">
-              <div class="desktopNavMega__container">
-                <div class="desktopNavMega__lists">
-                  
-                  <div class="desktopNavMega-list">
-                    <div class="desktopNavMega-list__item">
-                      <div class="desktopNavMega-list__title">Group Events</div>
-
-                      <div class="desktopNavMega-list__list">
-
-                        <div class="desktopNavMega-list__link">
-                          <a href="#">Domestic</a>
+              <div class="desktopNavMega">
+                <div class="desktopNavMega__container">
+                  <div class="desktopNavMega__lists">
+                    <div class="desktopNavMega-list">
+                      <div class="desktopNavMega-list__item">
+                        <div class="desktopNavMega-list__title">Group Events</div>
+                        <div class="desktopNavMega-list__list">
+                          <div class="desktopNavMega-list__link">
+                            <a href="#">Domestic</a>
+                          </div>
+                          <div class="desktopNavMega-list__link">
+                            <a href="#">International</a>
+                          </div>
                         </div>
-                        <div class="desktopNavMega-list__link">
-                          <a href="#">International</a>
+                      </div>
+                    </div>
+                    <div class="desktopNavMega-list">
+                      <div class="desktopNavMega-list__item">
+                        <div class="desktopNavMega-list__title">Tour Packages</div>
+
+                        <div class="desktopNavMega-list__list">
+
+                          <div class="desktopNavMega-list__link">
+                            <a href="#">Domestic</a>
+                          </div>
+                          <div class="desktopNavMega-list__link">
+                            <a href="#">International</a>
+                          </div>
+
                         </div>
-
-                       
-
                       </div>
                     </div>
                   </div>
+                  <div class="desktopNavMega__info">
+                    <div class="specialCardGrid row y-gap-30">
 
-                  <div class="desktopNavMega-list">
-                    <div class="desktopNavMega-list__item">
-                      <div class="desktopNavMega-list__title">Tour Packages</div>
+                      <div class="col-12">
+                        <div class="specialCard">
+                          <div class="specialCard__image">
+                            <img src="{% static 'assets/img/cta/nepal.jpeg' %}" alt="image">
+                          </div>
 
-                      <div class="desktopNavMega-list__list">
-
-                        <div class="desktopNavMega-list__link">
-                          <a href="#">Domestic</a>
-                        </div>
-
-                        <div class="desktopNavMega-list__link">
-                          <a href="#">International</a>
-                        </div>
-
-                      </div>
-                    </div>
-                  </div>
-
-                  
-                </div>
-
-                <div class="desktopNavMega__info">
-                  <div class="specialCardGrid row y-gap-30">
-
-                    <div class="col-12">
-                      <div class="specialCard">
-                        <div class="specialCard__image">
-                          <img src="{% static 'assets/img/cta/nepal.jpeg' %}" alt="image">
-                        </div>
-
-                        <div class="specialCard__content">
-                          <div class="specialCard__subtitle">Enjoy Upto</div>
-                          <h3 class="specialCard__title">60 % OFF</h3>
-                          <div class="specialCard__text">on Your Booking</div>
+                          <div class="specialCard__content">
+                            <div class="specialCard__subtitle">Enjoy Upto</div>
+                            <h3 class="specialCard__title">60 % OFF</h3>
+                            <div class="specialCard__text">on Your Booking</div>
+                          </div>
                         </div>
                       </div>
+
+                      <div class="col-12">
+                        <div class="specialCard">
+                          <div class="specialCard__image">
+                            <img src="{% static 'assets/img/cta/nepal.jpeg' %}" alt="image">
+                          </div>
+
+                          <div class="specialCard__content">
+                            <div class="specialCard__subtitle">80% Discount</div>
+                            <h3 class="specialCard__title">Are You Ready<br> To Turkey Tour</h3>
+                            <div class="specialCard__text"></div>
+                          </div>
+                        </div>
+                      </div>
+
                     </div>
-
-                    
-
                   </div>
                 </div>
               </div>
             </div>
-          </div>
-          <div class="desktopNav__item">
-            <a href="{% url 'visa' %}">
-              VISA
-            </a>
-          </div>
-          <div class="desktopNav__item">
-            <a href="#">
-              FLIGHT
-            </a>
-          </div>
-          
-          <div class="desktopNav__item">
-            <a href="#">
-              HOTEL
-            </a>
-          </div>
-        </div>
 
+            <div class="desktopNav__item">
+              <a href="{% url 'visa' %}">
+                Visa
+              </a>
+            </div>
+
+            <div class="desktopNav__item">
+              <a href="#">
+                Flight
+              </a>
+            </div>
+
+            <div class="desktopNav__item">
+              <a href="#">
+                Hotel
+              </a>
+            </div>
+          </div>
+
+        </div>
       </div>
     </div>
 
-    <div class="headerMobile__right">
 
-      <button class="d-flex ml-20">
-        
-        {% if user.is_authenticated %}
-      <a href="{% url 'dashboard' %}" class="button -sm -outline-dark-1 rounded-200">
-        Dashboard
+    <div class="headerMobile__right">
+      {% if user.is_authenticated %}
+      <a href="{% url 'dashboard' %}" class="d-flex ml-20">
+        <i class="icon-person text-18 text-white"></i>
       </a>
       {% else %}
-      <a href="{% url 'login' %}" class="button -sm -outline-dark-1 rounded-200">
-        Log In
+      <a href="{% url 'login' %}" class="d-flex ml-20">
+        <i class="icon-person text-18 text-white"></i>
       </a>
-      
-    {% endif %}
-      </button>
+      {% endif %}
+
     </div>
 
-    <div class="header__right xl:d-none">
+    <div class="header__right">
 
-      <a href="{% url 'faq' %}">
-        FAQ
-      </a>
-      <a href="{% url 'blog_home' %}" class="ml-30">
+      <div class="headerDropdown -hover-light text-white js-form-dd">
+        <div class="headerDropdown__button" data-x-click="header-currency">
+          Others
+          <i class="icon-chevron-down text-18"></i>
+        </div>
+
+        <div class="headerDropdown__content" data-x="header-currency" data-x-toggle="is-active">
+          <div class="headerDropdown">
+            <div class="headerDropdown__container">
+
+              <div class="headerDropdown__item">
+                <a href="{% url 'faq' %}" class="button">
+                  FAQ
+                </a>
+              </div>
+
+              <div class="headerDropdown__item">
+                <a href="{% url 'contact_us' %}" class="button">
+                  CONTACT
+                </a>
+              </div>
+
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+      <a href="{% url 'blog_home' %}" class="text-white ml-10">
         TRAVEL GUIDE
       </a>
-      <a href="{% url 'contact_us' %}" class="ml-30">
-        CONTACT
-      </a>
-
-    {% if user.is_authenticated %}
-      <a href="{% url 'dashboard' %}" class="button -sm -outline-dark-1 rounded-200 ml-30">
-        DASHBOARD
-      </a>
+      {% if user.is_authenticated %}
+        <a href="{% url 'dashboard' %}" class="button -sm -outline-white text-white rounded-200 ml-30">
+          DASHBOARD
+        </a>
       {% else %}
-      <a href="{% url 'login' %}" class="button -sm -outline-dark-1 rounded-200 ml-30">
-        LOG IN
-      </a>
-      
-    {% endif %}
+        <a href="{% url 'login' %}" class="button -sm -outline-white text-white rounded-200 ml-30">
+          Log in
+        </a>
+      {% endif %}
     </div>
   </div>
 </header>
@@ -163,36 +185,71 @@
 
   <div class="menu__container">
     <div class="menu__header">
-      <h4>Menu</h4>
+      <h4>Main Menu</h4>
 
       <button class="js-menu-button"><i class="icon-cross text-10"></i></button>
     </div>
 
     <div class="menu__content">
       <ul class="menuNav js-navList">
-
         <li class="menuNav__item">
-          <a href="{% url 'index' %}" class="fw-500">Home</a>
-        </li>
-        <li class="menuNav__item">
-          <a href="{% url 'tour' %}" class="fw-500">Tour</a>
-        </li>
-        <li class="menuNav__item">
-          <a href="{% url 'visa' %}" class="fw-500">Visa</a>
-        </li>
-        <li class="menuNav__item">
-          <a href="#" class="fw-500">Flight</a>
-        </li>
-        <li class="menuNav__item">
-          <a href="#" class="fw-500">Hotel</a>
+          <a href="{% url 'index' %}">Home</a>
         </li>
 
-        <li class="menuNav__item">
-          <a href="{% url 'faq' %}" class="fw-500">Faq</a>
+        <li class="menuNav__item -has-submenu js-has-submenu">
+          <a>
+            Tour
+            <i class="icon-chevron-right"></i>
+          </a>
+
+          <ul class="submenu">
+            <li class="submenu__item js-nav-list-back">
+              <a>Back</a>
+            </li>
+
+
+            <li class="submenu__item">
+              <a href="#">Group Events</a>
+            </li>
+            <li class="submenu__item">
+              <a href="#">Tour Packages</a>
+            </li>
+
+
+          </ul>
         </li>
         <li class="menuNav__item">
-          <a href="{% url 'blog_home' %}" class="fw-500">Blog</a>
+          <a href="{% url 'visa' %}">Visa</a>
         </li>
+        <li class="menuNav__item -has-submenu js-has-submenu">
+          <a>
+            Others
+            <i class="icon-chevron-right"></i>
+          </a>
+
+          <ul class="submenu">
+            <li class="submenu__item js-nav-list-back">
+              <a>Back</a>
+            </li>
+
+
+            <li class="submenu__item">
+              <a href="{% url 'faq' %}">Faq</a>
+            </li>
+            <li class="submenu__item">
+              <a href="{% url 'blog_home' %}">Travel Guide</a>
+            </li>
+
+
+          </ul>
+        </li>
+
+        <li class="menuNav__item">
+          <a href="{% url 'contact_us' %}">Contact</a>
+        </li>
+
+
+        
       </ul>
     </div>
 
@@ -202,7 +259,7 @@
 
       <div class="text-20 lh-12 fw-500 mt-20">
         <div>Speak to our expert at</div>
-        <div class="text-accent-1">0188-7121534</div>
+        <div class="text-accent-1">1-800-453-6744</div>
       </div>
 
       <div class="d-flex items-center x-gap-10 pt-30">
