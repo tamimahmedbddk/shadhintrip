@@ -1,19 +1,20 @@
 {% load static %}
-<section data-anim="fade" class="hero -type-1 -min">
+<section data-anim="fade" class="hero -type-3">
     <div class="hero__bg">
       <img src="{{ background.image.url }}" alt="image">
-      <img src="{% static 'assets/img/cta/shape.svg' %}" alt="image">
+      <!-- <img src="{% static 'assets/img/cta/shape.svg' %}" alt="image"> -->
     </div>
   
     <div class="container">
       <div class="row justify-center">
-        <div class="col-xl-8 col-lg-10 pb-40">
-          <div class="hero__content py-80 sm:py-0">
-            <h1 class="hero__title fw-500 text-danger">
+        <div class="col-xl-8 col-lg-10 layout-pb-md">
+          <div class="hero__content">
+            <h1 class="hero__title">
               {% if background.title %}
               {{ background.title }}
               {% endif %}
             </h1>
+            {% include 'includes/banner-search.html' with tours=tours %}
           </div>
         </div>
       </div>
