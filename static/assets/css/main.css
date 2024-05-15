@@ -2861,7 +2861,6 @@ h1, h2, h3, h4, h5, h6 {
 
 .header.-type-7.-is-sticky {
   background-color: var(--color-dark-1);
-  color: white;
 }
 
 .header.-type-7 .header__container {
@@ -2907,7 +2906,6 @@ h1, h2, h3, h4, h5, h6 {
 
 .header.-type-7 .header__menuBtn i {
   font-size: 20px;
-  color: white;
 }
 
 .headerDropdown {
@@ -3323,13 +3321,20 @@ h1, h2, h3, h4, h5, h6 {
   }
 }
 
-.hero.-type-1 {
+/* .hero.-type-1 {
   position: relative;
   padding-top: 120px;
   padding-bottom: 220px;
   margin-top: 88px;
   z-index: 5;
+} */
+.hero.-type-3 {
+  position: relative;
+  padding-top: 192px;
+  padding-bottom: 378px;
+  z-index: 5;
 }
+
 
 @media (max-width: 767px) {
   .hero.-type-1 {
@@ -3652,12 +3657,6 @@ h1, h2, h3, h4, h5, h6 {
   z-index: -1;
 }
 
-.hero.-type-3 .hero__bg img {
-  width: 100%;
-  height: 100%;
-  -o-object-fit: cover;
-     object-fit: cover;
-}
 
 .hero.-type-3 .hero__title {
   position: relative;
@@ -14195,4 +14194,7 @@ button.gm-ui-hover-effect::after {
 
 .contact_us button{
   padding: 12px 20px;
+}
+.custom-text{
+  /* color: rgba(99, 94, 94, 0.884); */
 }
