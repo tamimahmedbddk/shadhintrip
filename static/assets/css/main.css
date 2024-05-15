@@ -2861,6 +2861,7 @@ h1, h2, h3, h4, h5, h6 {
 
 .header.-type-7.-is-sticky {
   background-color: var(--color-dark-1);
+  color: white;
 }
 
 .header.-type-7 .header__container {
@@ -2906,6 +2907,7 @@ h1, h2, h3, h4, h5, h6 {
 
 .header.-type-7 .header__menuBtn i {
   font-size: 20px;
+  color: white;
 }
 
 .headerDropdown {
