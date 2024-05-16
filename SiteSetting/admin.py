@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import SiteSettings, BackgroundImage, SocialLink, ContactInfo
+from .models import SiteSettings, BackgroundImage, SocialLink, ContactInfo,BackgroundVideo
 
 @admin.register(SiteSettings)
 class SiteSettingsAdmin(admin.ModelAdmin):
@@ -16,6 +16,12 @@ class SiteSettingsAdmin(admin.ModelAdmin):
 @admin.register(BackgroundImage)
 class BackgroundImageAdmin(admin.ModelAdmin):
     list_display = ['id', 'image', 'is_active']
+    list_filter = ['is_active']
+    search_fields = ['id']
+
+@admin.register(BackgroundVideo)
+class BackgroundVideoAdmin(admin.ModelAdmin):
+    list_display = ['id', 'video', 'is_active']
     list_filter = ['is_active']
     search_fields = ['id']
 

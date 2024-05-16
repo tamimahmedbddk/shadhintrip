@@ -21,6 +21,14 @@ class BackgroundImage(models.Model):
 
     def __str__(self):
         return f"Background Image {self.id}"
+    
+class BackgroundVideo(models.Model):
+    video = models.FileField(upload_to='background_videos/')
+    is_active = models.BooleanField(default=True)
+
+    def __str__(self):
+        return f"Background Video {self.id}"
+
 
 class SocialLink(models.Model):
     PLATFORM_CHOICES = [
