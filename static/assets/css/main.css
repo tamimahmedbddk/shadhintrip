@@ -14204,3 +14204,7 @@ button.gm-ui-hover-effect::after {
 .custom-text{
   /* color: rgba(99, 94, 94, 0.884); */
 }
+
+#bg-video {
+  width: 100%;
+}

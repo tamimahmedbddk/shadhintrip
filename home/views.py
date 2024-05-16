@@ -3,15 +3,17 @@ from django.http import HttpResponse
 from tours.models import Tour, Country, Category
 from visa.models import VisaPackage
 from blog.models import Post
-from SiteSetting.models import BackgroundImage, ContactInfo, SocialLink, SiteSettings
+from SiteSetting.models import BackgroundImage,BackgroundVideo, ContactInfo, SocialLink, SiteSettings
 
 def get_common_context():
+    background_videos = BackgroundVideo.objects.all()
     background_images = BackgroundImage.objects.all()
     site_settings = SiteSettings.objects.all()
     contact_info = ContactInfo.objects.all()
     social_links = SocialLink.objects.all()
 
     return {
+        'background_videos':background_videos,
         'background_images': background_images,
         'site_settings': site_settings,
         'contact_info': contact_info,
