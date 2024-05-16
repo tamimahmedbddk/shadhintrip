@@ -1,13 +1,5 @@
 {% load static %}
 <section data-anim="fade" class="hero -type-3">
-
-  <!-- <div class="hero__bg">
-    <video autoplay muted loop id="bg-video">
-      {% for background_video in background_videos %}
-        <source src="{{ background_video.video.url }}" type="video/mp4">
-      {% endfor %}
-    </video>
-  </div> -->
   
     <div class="hero__bg">
       {% for background_image in background_images %}
@@ -17,8 +9,8 @@
   
     <div class="container">
       <div class="row justify-center">
-        <div class="col-xl-8 col-lg-10 layout-pb-md">
-          <div class="hero__content">
+        <div class="col-xl-8 col-lg-10">
+          <div class="hero__content layout-pb-md layout-pt-md">
             <h1 class="hero__title">
               Discover Your Next Adventure with ShadhinTrip!
             </h1>
