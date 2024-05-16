@@ -103,5 +103,9 @@ def visa_booking_process(request, slug):
             quantity=num_applicants,
             total_price=total_price,
         )
-        return render(request, 'tours/booking_success.html')
-    return render(request, 'visa/visa_booking_summary.html')
+        context = {
+        'visa_package': visa_package,
+
+        }
+        return render(request, 'visa/booking-success.html', context)
+    return redirect('index')

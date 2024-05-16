@@ -89,7 +89,6 @@ def booking_success(request, slug):
 
         # Get number of travelers (default to 1 if not provided)
         num_travelers = int(request.POST.get('num_travelers', 1))
-        print(num_travelers)
 
         # Calculate total price based on the number of travelers
         total_price = tour.price * num_travelers
@@ -105,5 +104,9 @@ def booking_success(request, slug):
             # phone_number=phone_number,
             # Add other fields as needed
         )
-        return render(request, 'tours/booking_success.html')
-    return render(request, 'tours/booking_summary.html')
+        context = {
+        'tour_details': tour,
+
+        }
+        return render(request, 'tours/booking_success.html', context)
+    return redirect('index')
