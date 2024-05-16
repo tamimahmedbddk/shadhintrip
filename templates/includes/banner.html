@@ -1,21 +1,19 @@
 {% load static %}
 <section data-anim="fade" class="hero -type-3">
 
-  <div class="hero__bg">
+  <!-- <div class="hero__bg">
     <video autoplay muted loop id="bg-video">
-     
       {% for background_video in background_videos %}
         <source src="{{ background_video.video.url }}" type="video/mp4">
       {% endfor %}
-
     </video>
-  </div>
+  </div> -->
   
-    <!-- <div class="hero__bg">
+    <div class="hero__bg">
       {% for background_image in background_images %}
       <img src="{{background_image.image.url}}" alt="image">
       {% endfor %}
-    </div> -->
+    </div>
   
     <div class="container">
       <div class="row justify-center">
@@ -37,3 +35,9 @@
       </div>
     </div>
 </section>
+
+{% block additional_scripts %}
+
+<script src="https://www.youtube.com/iframe_api"></script>
+
+{% endblock additional_scripts %}
