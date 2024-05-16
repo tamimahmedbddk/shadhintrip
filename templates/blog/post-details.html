@@ -8,24 +8,23 @@ ShadhinTrip: Tours And Packages, all in one.
 {% endblock %}
 {% block content %}
 
-<section data-anim="fade" class="hero -type-1 -min-2">
+<section data-anim="fade" class="hero -type-10">
     <div class="hero__bg">
       <img src="{{ blog_details.featured_image.url }}" alt="image">
-      <img src="{% static 'assets/img/hero/1/shape.svg' %}" alt="image">
     </div>
 
     <div class="container">
       <div class="row justify-center">
         <div class="col-xl-12">
           <div class="hero__content">
-            <h1 class="hero__title">
+            <h1 class="hero__title text-white">
               Pubs with History: 7 of Dublin’s
               Most Storied Drinking Dens
             </h1>
 
-            <p class="hero__text">
+            <!-- <p class="hero__text">
               Find inspiration, guides and stories for wherever you're going Select a destination
-            </p>
+            </p> -->
           </div>
         </div>
       </div>
@@ -35,10 +34,8 @@ ShadhinTrip: Tours And Packages, all in one.
   <section class="layout-pt-md">
     <div class="container">
       <div class="row y-gap-30 justify-center">
-        <div class="col">
-          <img src="https://mir-s3-cdn-cf.behance.net/project_modules/disp/93615997004499.5ebb3291146ad.gif" alt="image">
-        </div>
-        <div class="col-md-8">
+
+        <div class="col-md-10">
           <h2 class="text-30 md:text-24"> {{ blog_details.title}} </h2>
           <p class="mt-20">{{ blog_details.content|safe}}</p>
 
@@ -89,9 +86,6 @@ ShadhinTrip: Tours And Packages, all in one.
 
         </div>
 
-        <div class="col">
-          <img src="https://tbbd-flight.s3.ap-southeast-1.amazonaws.com/promotion/IPDC_Travel_Loan_B2C_Promotional_Thumbnail.png" alt="image">
-        </div>
         
       </div>
     </div>

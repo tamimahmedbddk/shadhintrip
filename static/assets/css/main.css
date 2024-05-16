@@ -2245,6 +2245,12 @@ h1, h2, h3, h4, h5, h6 {
   font-weight: 500;
   line-height: 266.667%;
 }
+.headerDropdown .headerDropdown__item a{
+  color: #000000;
+}
+.headerDropdown .headerDropdown__item a:hover{
+  color: #4dd456;
+}
 
 .headerDropdown .headerDropdown__item button:hover {
   -webkit-text-decoration-line: underline;
