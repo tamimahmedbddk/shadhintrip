@@ -2,10 +2,7 @@
 {% load price_filter %}
 <section class="layout-pt-md layout-pb-md">
     <div data-anim-wrap class="container">
-      <!-- <div class="items-center pb-10">
-        <h2 class="text-30 md:text-24 text-center">Popular Tour Packages</h2>
-      </div> -->
-      <div data-anim-child="slide-up" class="row justify-between items-end y-gap-10">
+      <div data-anim-child="" class="row justify-between items-end y-gap-10">
         <div class="col-auto">
           <h2 class="text-30 md:text-24">Featured Tours</h2>
         </div>
@@ -19,7 +16,7 @@
         </div>
       </div>
 
-      <div data-anim-child="slide-up delay-2" class="relative pt-40 sm:pt-20">
+      <div data-anim-child="slide-up" class="relative pt-40 sm:pt-20">
         <div class="overflow-hidden js-section-slider" data-gap="30" data-slider-cols="xl-4 lg-3 md-2 sm-1 base-1" data-nav-prev="js-slider1-prev" data-nav-next="js-slider1-next">
           <div class="swiper-wrapper">
           {% for tour in Popular_Tour_Packages %}
