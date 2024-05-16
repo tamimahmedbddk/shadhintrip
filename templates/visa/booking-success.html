@@ -6,8 +6,8 @@ ShadhinTrip: Booking Summary
 {% block content %}
 <section data-anim="fade" class="hero -type-10 pt-0">
   <div class="hero__bg">
-    {% with tour_details.images.first as main_photo %}
-      <img src="{{ main_photo.image.url }}" alt="image">
+    {% with visa_package.image.url as main_photo %}
+      <img src="{{ main_photo }}" alt="image">
     {% endwith %}
   </div>
 </section>

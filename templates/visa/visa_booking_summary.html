@@ -7,7 +7,9 @@ ShadhinTrip: Visa Booking
 {% block content %}
 <section data-anim="fade" class="hero -type-10 pt-0">
   <div class="hero__bg">
-    <img src="{% static 'assets/img/cta/nepal.jpeg' %}" alt="image">
+    {% with visa_package.image.url as main_photo %}
+      <img src="{{ main_photo }}" alt="image">
+    {% endwith %}
   </div>
 </section>
 <section data-anim-wrap class="layout-pb-lg mt-header booking-summary">

@@ -8,7 +8,9 @@ ShadhinTrip: Booking Summary
 
 <section data-anim="fade" class="hero -type-10 pt-0">
   <div class="hero__bg">
-    <img src="{% static 'assets/img/cta/nepal.jpeg' %}" alt="image">
+    {% with tour_details.images.first as main_photo %}
+      <img src="{{ main_photo.image.url }}" alt="image">
+    {% endwith %}
   </div>
 </section>
 
