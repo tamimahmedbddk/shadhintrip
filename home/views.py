@@ -25,7 +25,7 @@ def index(request):
     popular_visa_packages = VisaPackage.objects.all()
     tours = Tour.objects.all().order_by('-id')[:6]
     Popular_Tour_Packages = Tour.objects.all().order_by('id')[:6]
-    countries = Country.objects.all()
+    countries = Country.objects.all().distinct()
     categories = Category.objects.all()
     blog_posts = Post.objects.all().order_by('-id')[:3]
 
