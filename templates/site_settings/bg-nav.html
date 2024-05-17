@@ -1,0 +1,10 @@
+<section data-anim="fade" class="hero -type-10 pt-0">
+    <div class="hero__bg bg-accent-2"></div>
+  </section>
+<section data-anim="fade" class="hero -type-10">
+    <div class="hero__bg">
+        {% for background_image in background_images %}
+      <img src="{{background_image.image.url}}" alt="image">
+      {% endfor %}
+    </div>
+</section>
