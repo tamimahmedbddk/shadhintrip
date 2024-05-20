@@ -77,6 +77,7 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'SiteSetting.context_processors.common_context',
             ],
         },
     },
@@ -157,3 +158,12 @@ EMAIL_USE_TLS = True
 EMAIL_HOST_USER = 'mazharulislam1725@gmail.com'  # Gmail email address
 EMAIL_HOST_PASSWORD = 'nmwm xokg yauf tibh'     # Gmail password or app-specific password
 DEFAULT_FROM_EMAIL = 'ShadhinTrip <info@shadhintrip.com>'
+
+CKEDITOR_UPLOAD_PATH = "uploads/"
+CKEDITOR_CONFIGS = {
+    'default': {
+        'toolbar': 'full',
+        'height': 300,
+        'width': '100%',
+    },
+}

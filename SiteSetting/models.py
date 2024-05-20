@@ -1,34 +1,34 @@
 from django.db import models
 from ckeditor.fields import RichTextField
-class SiteSettings(models.Model):
-    site_name = models.CharField(max_length=200, blank=True, null=True)
-    logo = models.ImageField(upload_to='logos/', help_text="Main logo for the site", blank=True, null=True)
-    favicon = models.ImageField(upload_to='favicons/', help_text="Favicon for the site", blank=True, null=True)
-    about_content = RichTextField(help_text="Content for the about page", blank=True, null=True)
-    privacy_policy_content = RichTextField(help_text="Content for the privacy policy page", blank=True, null=True)
-    terms_of_service = RichTextField(help_text="Content for the terms page", blank=True, null=True)
-    cancellation_policy = RichTextField(help_text="Content for the cancellation policy page", blank=True, null=True)
-    refund_policy = RichTextField(help_text="Content for the refund_policy page", blank=True, null=True)
-    faq = RichTextField(help_text="Content for the faq page", blank=True, null=True)
+from django.utils.translation import gettext_lazy as _
 
+class SiteSettings(models.Model):
+    site_name = models.CharField(max_length=200, blank=True, null=True, help_text=_("Enter the name of the site."))
+    logo = models.ImageField(upload_to='logos/', blank=True, null=True, help_text=_("Upload the main logo for the site."))
+    favicon = models.ImageField(upload_to='favicons/', blank=True, null=True, help_text=_("Upload the favicon for the site."))
+    about_content = RichTextField(blank=True, null=True, help_text=_("Content for the about page."))
+    privacy_policy_content = RichTextField(blank=True, null=True, help_text=_("Content for the privacy policy page."))
+    terms_of_service = RichTextField(blank=True, null=True, help_text=_("Content for the terms of service page."))
+    cancellation_policy = RichTextField(blank=True, null=True, help_text=_("Content for the cancellation policy page."))
+    refund_policy = RichTextField(blank=True, null=True, help_text=_("Content for the refund policy page."))
+    faq = RichTextField(blank=True, null=True, help_text=_("Content for the FAQ page."))
 
     def __str__(self):
-        return self.site_name
+        return self.site_name or "Site Settings"
 
 class BackgroundImage(models.Model):
-    image = models.ImageField(upload_to='background_images/')
-    is_active = models.BooleanField(default=True)
+    image = models.ImageField(upload_to='background_images/', help_text=_("Upload a background image."))
+    is_active = models.BooleanField(default=True, help_text=_("Activate this background image."))
 
     def __str__(self):
         return f"Background Image {self.id}"
-    
+
 class BackgroundVideo(models.Model):
-    video = models.FileField(upload_to='background_videos/')
-    is_active = models.BooleanField(default=True)
+    video = models.FileField(upload_to='background_videos/', help_text=_("Upload a background video."))
+    is_active = models.BooleanField(default=True, help_text=_("Activate this background video."))
 
     def __str__(self):
         return f"Background Video {self.id}"
-
 
 class SocialLink(models.Model):
     PLATFORM_CHOICES = [
@@ -40,17 +40,17 @@ class SocialLink(models.Model):
         # Add more platforms as needed
     ]
 
-    platform = models.CharField(max_length=20, choices=PLATFORM_CHOICES)
-    url = models.URLField()
-    icon_class = models.CharField(max_length=100, help_text="Class name for the icon")
+    platform = models.CharField(max_length=20, choices=PLATFORM_CHOICES, help_text=_("Select the social media platform."))
+    url = models.URLField(help_text=_("Enter the URL for the social media profile."))
+    icon_class = models.CharField(max_length=100, help_text=_("Class name for the icon."))
 
     def __str__(self):
         return f"{self.get_platform_display()}"
 
 class ContactInfo(models.Model):
-    phone = models.CharField(max_length=20)
-    email = models.EmailField()
-    address = models.TextField()
+    phone = models.CharField(max_length=20, help_text=_("Enter the contact phone number."))
+    email = models.EmailField(help_text=_("Enter the contact email address."))
+    address = models.TextField(help_text=_("Enter the contact address."))
 
     def __str__(self):
         return "Contact Information"

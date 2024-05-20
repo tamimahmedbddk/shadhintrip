@@ -1,8 +1,9 @@
 from django.db import models
 from django.core.validators import MinValueValidator
 from django.contrib.auth import get_user_model
-from tours.models import Tour
+from tours.models import Tour,GroupEvent
 from visa.models import VisaPackage
+from django.core.exceptions import ValidationError
 
 User = get_user_model()
 
@@ -18,9 +19,12 @@ PAYMENT_METHOD_CHOICES = [
     ('bank_transfer', 'Bank Transfer'),
 ]
 
+
+
 class TourBooking(models.Model):
-    tour = models.ForeignKey(Tour, related_name='bookings', on_delete=models.CASCADE)
     user = models.ForeignKey(User, related_name='tour_bookings', on_delete=models.CASCADE)
+    tour = models.ForeignKey(Tour, on_delete=models.CASCADE, null=True, blank=True)
+    group_event = models.ForeignKey(GroupEvent, on_delete=models.CASCADE, null=True, blank=True)
     quantity = models.PositiveIntegerField(default=1, validators=[MinValueValidator(1)])
     total_price = models.DecimalField(max_digits=10, decimal_places=2)
     booking_date = models.DateTimeField(auto_now_add=True)
@@ -36,9 +40,25 @@ class TourBooking(models.Model):
 
     class Meta:
         verbose_name_plural = "Tour Bookings"
+        constraints = [
+            models.UniqueConstraint(fields=['user', 'tour'], name='unique_tour_booking'),
+            models.UniqueConstraint(fields=['user', 'group_event'], name='unique_group_event_booking'),
+        ]
+
+    def clean(self):
+        if self.tour and self.group_event:
+            raise ValidationError("Cannot select both tour and group event. Please select only one.")
+        if not self.tour and not self.group_event:
+            raise ValidationError("Please select either a tour or a group event.")
+
+    def save(self, *args, **kwargs):
+        self.clean()
+        super().save(*args, **kwargs)
 
     def __str__(self):
-        return f"{self.user.email} - {self.tour.title} - {self.booking_date}"
+        return f"{self.user.email} - {self.tour.title if self.tour else self.group_event.title} - {self.booking_date}"
+
+
 
 class VisaBooking(models.Model):
     visa_package = models.ForeignKey(VisaPackage, related_name='bookings', on_delete=models.CASCADE)

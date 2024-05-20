@@ -8,8 +8,8 @@ from tours.models import Tour
 
 
 def index(request):
-    background = VisaBanner.objects.first()
-    countries = Country.objects.all()
+    banner = VisaBanner.objects.filter(is_active=True).first()
+    countries = Country.objects.all().order_by('-id')
     visa_types = VisaType.objects.all()
     visa_packages = VisaPackage.objects.all()
     popular_visa_packages = VisaPackage.objects.all()  #for banner , we shoud fix this later
@@ -17,7 +17,7 @@ def index(request):
     context = {
         'countries': countries,
         'visa_packages': visa_packages,
-        'background': background,
+        'banner': banner,
         'visa_types':visa_types,
         'popular_visa_packages':popular_visa_packages,
         'tours':tours,
