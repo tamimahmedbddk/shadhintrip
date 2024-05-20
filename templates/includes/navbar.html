@@ -11,7 +11,11 @@
     <div class="header__left">
       <div class="header__logo">
         <a href="{% url 'index' %}" class="header__logo">
-          <img src="{% static 'assets/img/logo/logo-small.png' %}" alt="logo icon">
+          {% for site_setting in site_settings%}
+          {% if site_setting.logo %}
+          <img src="{{site_setting.logo.url}}" alt="logo icon">
+          {% endif %}
+          {% endfor %}
         </a>
 
         <div class="xl:d-none ml-30">

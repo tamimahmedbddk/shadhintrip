@@ -13,7 +13,13 @@
               <div class="col-auto">
                 <div class="text-20 fw-500 text-white text-white">
                   Reach Us at 
-                  <span class="text-white">+880-1903-605500</span>
+                  <span class="text-white">
+                    {% for contact in contact_info %}
+                      {% if contact.phone %}
+                        {{ contact.phone }}
+                      {% endif %}
+                    {% endfor %}
+                  </span>
                 </div>
               </div>
             </div>
@@ -26,10 +32,9 @@
               </div>
 
               <div class="footerSocials__icons text-white">
-                <a href="https://facebook.com/shadhintripdotcom" class="icon-facebook" target="_blank"></a>
-                <a href="https://www.instagram.com/shadhintrip" class="icon-instagram" target="_blank"></a>
-                <a href="#" class="icon-twitter"></a>
-                <a href="https://www.linkedin.com/in/shadhin-trip-878277296/" class="icon-linkedin" target="_blank"></a>
+                {% for link in social_links %}
+                  <a href="{{ link.url }}" class="{{ link.icon_class }}" target="_blank"></a>
+                {% endfor %}
               </div>
             </div>
           </div>
@@ -45,9 +50,17 @@
               <h4 class="text-20 fw-500 text-white">Contact</h4>
 
               <div class="y-gap-10 mt-20 text-white">
-                <p class="d-block text-white">&#127968;  21/B,Garden Road,West Kawran Bazar,Dhaka-1215</p>
-                <p class="d-block text-white">&#128231;  support@shadhintrip.com</p>
-                <p class="d-block text-white">&#128224;  +880 1903-605500</p>
+                    {% for contact in contact_info %}
+                      {% if contact.phone %}
+                      <p class="d-block text-white">&#127968;  {{ contact.address }}</p>
+                      {% endif %}
+                      {% if contact.phone %}
+                      <p class="d-block text-white">&#128231;  {{ contact.email }}</p>
+                      {% endif %}
+                      {% if contact.phone %}
+                      <p class="d-block text-white">&#128224;  {{ contact.phone }}</p>
+                      {% endif %}
+                    {% endfor %}
               </div>
             </div>
 

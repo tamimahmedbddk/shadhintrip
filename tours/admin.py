@@ -1,48 +1,88 @@
 from django.contrib import admin
-from .models import Tour, TourImage, Service, Country, City, TourItinerary, Category, TourBanner
+from .models import (
+    TourBanner, Country, City, Category, Service,
+    Tour, GroupEvent, TourItinerary, Image, Video, TourImage, GroupEventImage, TourVideo, GroupEventVideo
+)
+from .forms import TourItineraryForm
 
-class TourItineraryInline(admin.StackedInline):
-    model = TourItinerary
-    extra = 1
+class TourBannerAdmin(admin.ModelAdmin):
+    list_display = ('id', 'image', 'title', 'is_active')
+    search_fields = ('title',)
+    list_filter = ('is_active',)
+
+class CountryAdmin(admin.ModelAdmin):
+    list_display = ('name','image')
+    search_fields = ('name',)
+
+class CityAdmin(admin.ModelAdmin):
+    list_display = ('name', 'country')
+    search_fields = ('name', 'country__name')
+    list_filter = ('country',)
+
+class CategoryAdmin(admin.ModelAdmin):
+    list_display = ('name',)
+    search_fields = ('name',)
+
+class ServiceAdmin(admin.ModelAdmin):
+    list_display = ('name','icon_class')
+    search_fields = ('name',)
+
+class ImageAdmin(admin.ModelAdmin):
+    list_display = ('file', 'uploaded_at', 'caption')
+    search_fields = ('caption',)
+
+class VideoAdmin(admin.ModelAdmin):
+    list_display = ('file', 'uploaded_at', 'caption')
+    search_fields = ('caption',)
 
 class TourImageInline(admin.TabularInline):
     model = TourImage
     extra = 1
 
-@admin.register(Tour)
+class GroupEventImageInline(admin.TabularInline):
+    model = GroupEventImage
+    extra = 1
+
+class TourVideoInline(admin.TabularInline):
+    model = TourVideo
+    extra = 1
+
+class GroupEventVideoInline(admin.TabularInline):
+    model = GroupEventVideo
+    extra = 1
+
+class TourItineraryInline(admin.TabularInline):
+    model = TourItinerary
+    form = TourItineraryForm
+    extra = 1
+    fields = ('title', 'day', 'description')
+    classes = ('collapse',)
+
 class TourAdmin(admin.ModelAdmin):
-    inlines = [TourItineraryInline, TourImageInline]
-    list_display = ['title', 'category', 'country', 'city', 'is_featured', 'is_active']
-    list_filter = ['category', 'country', 'city', 'is_featured', 'is_active']
-    search_fields = ['title', 'category__name', 'country__name', 'city__name', 'overview', 'description']
-    filter_horizontal = ['services']
-    fieldsets = [
-        ('Basic Information', {'fields': ['title', 'slug', 'overview', 'description']}),
-        ('Additional Information', {'fields': ['activities', 'includes', 'excludes', 'requirements', 'tour_rules', 'planned_destinations', 'cancellation_policy']}),
-        ('Booking Details', {'fields': ['max_participants', 'price']}),
-        ('Location Details', {'fields': ['category', 'country', 'city']}),
-        ('Duration Details', {'fields': ['duration_nights', 'duration_days']}),
-        ('Status', {'fields': ['is_featured', 'is_active']}),
-        ('Services', {'fields': ['services']}),
-    ]
+    list_display = ('title', 'category', 'country', 'city', 'price', 'is_featured', 'is_active')
+    search_fields = ('title', 'category__name', 'country__name', 'city__name')
+    list_filter = ('category', 'country', 'city', 'is_featured', 'is_active')
     prepopulated_fields = {'slug': ('title',)}
+    filter_horizontal = ['services']
+    inlines = [TourItineraryInline, TourImageInline, TourVideoInline]
+    # fieldsets = [
+    #     ('Basic Information', {'fields': ['title', 'slug', 'overview', 'description']}),
+    # ]
 
-@admin.register(Service)
-class ServiceAdmin(admin.ModelAdmin):
-    list_display = ['name', 'icon_class']
+class GroupEventAdmin(admin.ModelAdmin):
+    list_display = ('title', 'category', 'country', 'city', 'price', 'advance_percentage', 'start_date', 'end_date', 'is_featured', 'is_active')
+    search_fields = ('title', 'category__name', 'country__name', 'city__name')
+    list_filter = ('category', 'country', 'city', 'is_featured', 'is_active', 'start_date', 'end_date')
+    prepopulated_fields = {'slug': ('title',)}
+    filter_horizontal = ['services']
+    inlines = [TourItineraryInline, GroupEventImageInline, GroupEventVideoInline]
 
-@admin.register(Country)
-class CountryAdmin(admin.ModelAdmin):
-    list_display = ['name', 'image']
-
-@admin.register(City)
-class CityAdmin(admin.ModelAdmin):
-    list_display = ['name', 'country']
-
-@admin.register(Category)
-class CategoryAdmin(admin.ModelAdmin):
-    list_display = ['name', 'description']
-
-@admin.register(TourBanner)
-class TourBannerAdmin(admin.ModelAdmin):
-    list_display = ['id', 'image', 'title', 'is_active']
+admin.site.register(TourBanner, TourBannerAdmin)
+admin.site.register(Country, CountryAdmin)
+admin.site.register(City, CityAdmin)
+admin.site.register(Category, CategoryAdmin)
+admin.site.register(Service, ServiceAdmin)
+admin.site.register(Tour, TourAdmin)
+admin.site.register(GroupEvent, GroupEventAdmin)
+admin.site.register(Image, ImageAdmin)
+admin.site.register(Video, VideoAdmin)

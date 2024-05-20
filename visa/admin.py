@@ -38,7 +38,7 @@ class VisaPackageAdmin(admin.ModelAdmin):
 
 @admin.register(VisaBanner)
 class VisaBannerAdmin(admin.ModelAdmin):
-    list_display = ('id', 'image','title')
+    list_display = ('id', 'image','title','is_active')
 
 admin.site.register(Country)
 admin.site.register(VisaType)

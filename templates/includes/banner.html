@@ -2,9 +2,7 @@
 <section data-anim="fade" class="hero -type-3">
   
     <div class="hero__bg">
-      {% for background_image in background_images %}
-      <img src="{{background_image.image.url}}" alt="image">
-      {% endfor %}
+      <img src="{{ banner.image.url }}" alt="image">
     </div>
   
     <div class="container">

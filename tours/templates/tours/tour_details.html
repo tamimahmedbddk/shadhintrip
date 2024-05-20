@@ -1,0 +1,491 @@
+{% extends 'base.html' %}
+{% load static%}
+{% load price_filter %}
+{% load social_share %}
+{% block title %}
+ShadhinTrip: Tours And Packages, all in one.
+{% endblock %}
+{% block content %}
+<section data-anim="fade" class="hero -type-10 pt-0">
+  <div class="hero__bg bg-accent-2"></div>
+</section>
+<div data-anim="fade" class="container">
+  <div class="row justify-between pt-10 pb-20">
+    <div class="col-auto">
+      <div class="text-14">Home > Tours > {{ tour_details.title }}</div>
+    </div>
+
+  </div>
+</div>
+
+  <section class="shadow-shadhin">
+    <div data-anim-wrap class="container">
+      <div data-anim-child="slide-up" class="row y-gap-20 justify-between items-end">
+        <div class="col-auto">
+          <div class="row x-gap-20 y-gap-20 items-center">
+            <div class="col-auto">
+              <div class="d-flex items-center">
+               <h2>
+                {{ tour_details.title }}
+               </h2>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-auto">
+          <div class="d-flex y-gap-10">
+            <!-- class="d-flex items-center" -->
+            <i class="icon-share flex-center text-16 mr-10"></i>
+            {% post_to_facebook object_or_url "Share" %}
+          </div>
+        </div>
+      </div>
+
+      <div data-anim-child="slide-up delay-2" class="tourSingleGrid -type-1 mt-30">
+        <div class="tourSingleGrid__grid mobile-css-slider-2">
+          {% for image in tour_details.images.all|slice:":4" %}
+            <img src="{{ image.image.file.url }}" alt="{{ image.caption }}">
+          {% endfor %}
+        </div>
+      
+        <div class="tourSingleGrid__button">
+          <a href="{{ tour_details.images.first.image.file.url }}" class="js-gallery" data-gallery="gallery1">
+            <span class="button -accent-1 py-10 px-20 rounded-200 bg-dark-1 lh-16 text-white">See all photos</span>
+          </a>
+          {% for image in tour_details.images.all %}
+            <a href="{{ image.image.file.url }}" class="js-gallery" data-gallery="gallery1"></a>
+          {% endfor %}
+        </div>
+      </div>
+      
+
+    </div>
+  </section>
+
+  <section class="layout-pt-md js-pin-container">
+    <div class="container">
+      <div class="row y-gap-30 justify-between">
+        <div class="col-lg-8">
+          <div class="row y-gap-20 justify-between items-center layout-pb-md">
+
+            <div class="col-lg-3 col-6">
+              <div class="d-flex items-center">
+                <div class="flex-center size-50 rounded-12 border-1 bg-light-1">
+                  <i class="text-20 icon-clock"></i>
+                </div>
+
+                <div class="ml-10">
+                  <div class="lh-16">Duration</div>
+                  <div class="text-14 text-light-2 lh-16">{{ tour_details.duration_days }} days</div>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-lg-3 col-6">
+              <div class="d-flex items-center">
+                <div class="flex-center size-50 rounded-12 border-1 bg-light-1">
+                  <i class="text-20 icon-pin"></i>
+                </div>
+
+                <div class="ml-10">
+                  <div class="lh-16">Location</div>
+                  <div class="text-14 text-light-2 lh-16">{{ tour_details.city }}</div>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-lg-3 col-6">
+              <div class="d-flex items-center">
+                <div class="flex-center size-50 rounded-12 border-1 bg-light-1">
+                  <i class="text-20 icon-birthday-cake"></i>
+                </div>
+
+                <div class="ml-10">
+                  <div class="lh-16">Tour Type</div>
+                  <div class="text-14 text-light-2 lh-16">{{ tour_details.category }} </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-lg-3 col-6">
+              <div class="d-flex items-center">
+                <div class="flex-center size-50 rounded-12 border-1 bg-light-1">
+                  <i class="text-20 icon-translate"></i>
+                </div>
+
+                <div class="ml-10">
+                  <div class="lh-16">Languages</div>
+                  <div class="text-14 text-light-2 lh-16">Bengali, English</div>
+                </div>
+              </div>
+            </div>
+
+          </div>
+
+          <h2 class="text-30">Overview</h2>
+          <p class="mt-20">{{ tour_details.overview|safe }}</p>
+
+          <h2 class="text-30 mt-20">Description</h2>
+          <p class="mt-20">{{ tour_details.description|safe }}</p>
+          
+          <h2 class="text-30 pt-30">Itinerary</h2>
+
+          <div class="mt-30">
+            <div class="roadmap accordion -roadmap js-accordion">
+              {% for itinerary in tour_details.itineraries.all %}
+              <div class="roadmap__item accordion__item {% if forloop.first %}js-accordion-item-active{% endif %}">
+                <div class="roadmap__icon{% if forloop.first %}Big{% elif forloop.last %}Big{% endif %}">
+                  {% if forloop.first %}
+                  <i class="icon-pin"></i>
+                  {% elif forloop.last %}
+                  <i class="icon-flag"></i>
+                  {% endif %}
+                </div>
+                <div class="roadmap__wrap">
+                  <div class="accordion__button d-flex items-center justify-between">
+                    <div class="roadmap__title">Day {{ itinerary.day }}: {{ itinerary.title }} <i class="icon-chevron-down"></i></div>
+                  </div>
+                  <div class="accordion__content">
+                    <div class="roadmap__content">
+                      {{ itinerary.description|safe }}
+                    </div>
+                  </div>
+                </div>
+              </div>
+              {% endfor %}
+            </div>
+          </div>
+          
+          
+          
+        
+
+        <!-- <div class="line mt-30"></div> -->
+        <h2 class="text-30 pt-30">Additional Information</h2>
+        <div class="accordion -simple row y-gap-20 mt-30 js-accordion">
+
+          <div class="col-12">
+            <div class="accordion__item px-20 py-15 border-1 rounded-12">
+              <div class="accordion__button d-flex items-center justify-between">
+                <div class="button text-16 text-dark-1">Activities</div>
+
+                <div class="accordion__icon size-30 flex-center bg-light-2 rounded-full">
+                  <i class="icon-plus text-13"></i>
+                  <i class="icon-minus text-13"></i>
+                </div>
+              </div>
+
+              <div class="accordion__content">
+                <div class="pt-20">
+                  <p>{{ tour_details.activities|safe }}</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-12">
+            <div class="accordion__item px-20 py-15 border-1 rounded-12">
+              <div class="accordion__button d-flex items-center justify-between">
+                <div class="button text-16 text-dark-1">Requirements</div>
+
+                <div class="accordion__icon size-30 flex-center bg-light-2 rounded-full">
+                  <i class="icon-plus text-13"></i>
+                  <i class="icon-minus text-13"></i>
+                </div>
+              </div>
+
+              <div class="accordion__content">
+                <div class="pt-20">
+                  <p>{{ tour_details.requirements|safe }}</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-12">
+            <div class="accordion__item px-20 py-15 border-1 rounded-12">
+              <div class="accordion__button d-flex items-center justify-between">
+                <div class="button text-16 text-dark-1">Planned Destinations</div>
+
+                <div class="accordion__icon size-30 flex-center bg-light-2 rounded-full">
+                  <i class="icon-plus text-13"></i>
+                  <i class="icon-minus text-13"></i>
+                </div>
+              </div>
+
+              <div class="accordion__content">
+                <div class="pt-20">
+                  <p>{{ tour_details.destinations|safe }}</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-12">
+            <div class="accordion__item px-20 py-15 border-1 rounded-12">
+              <div class="accordion__button d-flex items-center justify-between">
+                <div class="button text-16 text-dark-1">Included/Excluded</div>
+
+                <div class="accordion__icon size-30 flex-center bg-light-2 rounded-full">
+                  <i class="icon-plus text-13"></i>
+                  <i class="icon-minus text-13"></i>
+                </div>
+              </div>
+
+              <div class="accordion__content">
+
+
+                  <div class="row x-gap-130 layout-pt-md">
+                    <div class="col-lg-6">
+                      <h2 class="text-20">Included</h2>
+                      <div class="y-gap-15 pt-30">
+                          {{ tour_details.includes|safe }}
+                      </div>
+                    </div>
+        
+                    <div class="col-lg-6">
+                      <h2 class="text-20">Excluded</h2>
+                      <div class="y-gap-15 pt-30">
+                        {{ tour_details.excludes|safe }}
+                      </div>
+                    </div>
+                  </div>
+
+
+
+              </div>
+            </div>
+          </div>
+
+          <div class="col-12">
+            <div class="accordion__item px-20 py-15 border-1 rounded-12">
+              <div class="accordion__button d-flex items-center justify-between">
+                <div class="button text-16 text-dark-1">Trip Rules</div>
+
+                <div class="accordion__icon size-30 flex-center bg-light-2 rounded-full">
+                  <i class="icon-plus text-13"></i>
+                  <i class="icon-minus text-13"></i>
+                </div>
+              </div>
+
+              <div class="accordion__content">
+                <div class="pt-20">
+                  <p>{{ tour_details.rules|safe }}</p>
+                </div>
+              </div>
+            </div>
+          </div>
+          {% if tour_details.start_date and tour_details.end_date %}
+          <div class="col-12">
+            <div class="accordion__item px-20 py-15 border-1 rounded-12">
+              <div class="accordion__button d-flex items-center justify-between">
+                <div class="button text-16 text-dark-1">Booking Policy</div>
+
+                <div class="accordion__icon size-30 flex-center bg-light-2 rounded-full">
+                  <i class="icon-plus text-13"></i>
+                  <i class="icon-minus text-13"></i>
+                </div>
+              </div>
+
+              <div class="accordion__content">
+                <div class="pt-20">
+                  <p>{{ tour_details.booking_policy|safe }}</p>
+                </div>
+              </div>
+            </div>
+          </div>
+          {% endif %}
+
+          <div class="col-12">
+            <div class="accordion__item px-20 py-15 border-1 rounded-12">
+              <div class="accordion__button d-flex items-center justify-between">
+                <div class="button text-16 text-dark-1">Cancellation Policy</div>
+
+                <div class="accordion__icon size-30 flex-center bg-light-2 rounded-full">
+                  <i class="icon-plus text-13"></i>
+                  <i class="icon-minus text-13"></i>
+                </div>
+              </div>
+
+              <div class="accordion__content">
+                <div class="pt-20">
+                  <p>{{ tour_details.cancellation_policy|safe }}</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-12">
+            <div class="accordion__item px-20 py-15 border-1 rounded-12">
+              <div class="accordion__button d-flex items-center justify-between">
+                <div class="button text-16 text-dark-1">Refund Policy</div>
+
+                <div class="accordion__icon size-30 flex-center bg-light-2 rounded-full">
+                  <i class="icon-plus text-13"></i>
+                  <i class="icon-minus text-13"></i>
+                </div>
+              </div>
+
+              <div class="accordion__content">
+                <div class="pt-20">
+                  <p>{{ tour_details.refund_policy|safe }}</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+        </div>
+
+        <div class="col-lg-4">
+          <div class="d-flex justify-end js-pin-content">
+              <div class="tourSingleSidebar">
+                <div class="d-flex items-center">
+                  <div>From</div>
+                  <div class="text-20 fw-500 ml-10">
+                    BDT {{ tour_details.price|format_price }}
+                  </div>
+
+                </div>
+
+                
+                <div class="line mt-20 mb-20"></div>
+                  <p class="text-20 fw-500 pb-20">Package Summary</p>
+                  <div class="layout-pb-md">
+                      <div class="d-flex items-center justify-between">
+                          <div class="text-14">Duration</div>
+                          <div class="d-flex items-center">
+                              <div class="flex-center ml-10 mr-10">
+                                  <div class="text-14 size-20"> <i class="icon-clock text-16 mr-5"></i> {{ tour_details.duration_days }} Days {{ tour_details.duration_nights }} Nights </div>
+                              </div>
+                          </div>
+                      </div>
+                      {% if tour_details.start_date and tour_details.end_date %}
+                      <div class="pt-10">
+                          <div class="d-flex items-center justify-between">
+                              <div class="text-14">Group Size</div>
+                              <div class="d-flex items-center">
+                                  <div class="flex-center ml-10 mr-10">
+                                      <div class="text-14 size-20"><i class="icon-teamwork text-16 mr-5"></i> {{ tour_details.max_participants }}</div>
+                                  </div>
+                              </div>
+                          </div>
+                      </div>
+                      {% endif %}
+                      <div class="pt-10">
+                        <div class="d-flex items-center justify-between">
+                            <div class="text-14">Price Per Person</div>
+                            <div class="d-flex items-center">
+                                <div class="flex-center ml-10 mr-10">
+                                    <div class="text-14 size-20"><i class="icon-person text-16 mr-5"></i> BDT {{ tour_details.price|format_price }}</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                      <div class="line mt-20 mb-20"></div>
+                      <a href="{% url 'booking_summary' slug=tour_details.slug %}" class="button -md -dark-1 col-12 bg-accent-1 text-white mt-20">
+                          Book Now
+                          <i class="icon-arrow-top-right ml-10"></i>
+                      </a>
+                  </div>
+              </div>
+          </div>
+      </div>
+      
+      
+      </div>
+    </div>
+  </section>
+
+  <section class="layout-pt-xl layout-pb-xl">
+    <div class="container">
+      <div class="row">
+        <div class="col-auto">
+          <h2 class="text-30">You might also like...</h2>
+        </div>
+      </div>
+
+      <div class="relative pt-40 sm:pt-20">
+        <div class="overflow-hidden pb-5 js-section-slider" data-gap="30" data-slider-cols="xl-4 lg-3 md-2 sm-1 base-1" data-nav-prev="js-slider1-prev" data-nav-next="js-slider1-next">
+          <div class="swiper-wrapper">
+            {% for tour in other_tours %}
+            <div class="swiper-slide">
+
+              <a href="{% url 'tour_detail' slug=tour.slug %}" class="tourCard -type-1 py-10 px-10 border-1 rounded-12 bg-white -hover-shadow">
+                <div class="tourCard__header">
+                  
+                {% with tour.images.first as main_photo %}
+                  <div class="tourCard__image ratio ratio-28:20">
+                    <img src="{{ main_photo.image.url }}" alt="image" class="img-ratio rounded-12">
+                  </div>
+                  {% endwith %}
+
+                  <button class="tourCard__favorite">
+                    <i class="icon-heart"></i>
+                  </button>
+                </div>
+
+                <div class="tourCard__content px-10 pt-10">
+                  <div class="tourCard__location d-flex items-center text-13 text-light-2">
+                    <i class="icon-pin d-flex text-16 text-light-2 mr-5"></i>
+                    {{tour.city}}
+                  </div>
+
+                  <h3 class="tourCard__title text-16 fw-500 mt-5">
+                    <span>{{tour.title}}</span>
+                  </h3>
+
+                  <div class="tourCard__rating d-flex items-center text-13 mt-5">
+                    <div class="row x-gap-20 y-gap-5 py-10">
+                      {% for service in tour.services.all %}
+                      <div class="col-auto">
+                        <div class="service-icon-active">
+                          {{ service.icon_class|safe }}
+                        </div>
+                        
+                      </div>
+                      {% endfor %}
+                    </div>
+
+                    
+                  </div>
+
+                  <div class="d-flex justify-between items-center border-1-top text-13 text-dark-1 pt-10 mt-10">
+                    <div class="d-flex items-center">
+                      <i class="icon-clock text-16 mr-5"></i>
+                      {{ tour.duration_days }} Days  {{ tour.duration_nights }} Nights
+                    </div>
+
+                    <div><span class="text-16 fw-500">BDT {{ tour.price|format_price }}</span></div>
+                  </div>
+                </div>
+              </a>
+
+            </div>
+            {% endfor %}
+
+
+          </div>
+        </div>
+
+        <div class="navAbsolute">
+          <button class="navAbsolute__button bg-white js-slider1-prev">
+            <i class="icon-arrow-left text-14"></i>
+          </button>
+
+          <button class="navAbsolute__button bg-white js-slider1-next">
+            <i class="icon-arrow-right text-14"></i>
+          </button>
+        </div>
+      </div>
+    </div>
+  </section>
+  
+{% endblock content%}
+
+{% block additional_scripts %}
+
+
+
+{% endblock additional_scripts %}
