@@ -44,6 +44,11 @@ class VisaPackage(models.Model):
     description = RichTextField()
     requirements = models.ManyToManyField('self', symmetrical=False, through='RequiredDocuments', related_name='related_documents', blank=True)
     cancellation_policy = RichTextField()
+
+    valid_for = models.CharField(blank=True,null=True, max_length=100, help_text="Validity period of the visa, e.g., 90 days after issued")
+    number_of_entries = models.CharField(blank=True,null=True, max_length=50, help_text="Number of entries allowed, e.g., single entry")
+    max_stay = models.CharField(blank=True,null=True, max_length=50, help_text="Maximum stay per entry, e.g., 30 days per entry")
+
     visa_fee = models.DecimalField(max_digits=10, decimal_places=2)
     processing_fee = models.DecimalField(max_digits=10, decimal_places=2)
     total_fee = models.DecimalField(max_digits=10, decimal_places=2, editable=False)  # Total fee will be calculated automatically

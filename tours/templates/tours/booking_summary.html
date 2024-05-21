@@ -11,7 +11,7 @@ ShadhinTrip: Booking Summary
 </section>
 
 
-<section data-anim-wrap class="layout-pb-lg mt-header booking-summary">
+<section data-anim-wrap class="py-40 booking-summary">
   <div class="container">
       {% if messages %}
         <ul class="messages">
@@ -82,11 +82,11 @@ ShadhinTrip: Booking Summary
           <div class="d-flex justify-end js-pin-content">
             <div class="tourSingleSidebar">
               <div class="d-flex mt-30 mb-20">
-                {% if main_image %}
-                    <img src="{{ main_image.image.file.url }}" alt="Main image">
+
+                {% if tour_details.images.exists %}
+                    <img src="{{ tour_details.images.first.image.file.url  }}" alt="Main image">
                 {% else %}
-                   
-                    <p>No main image available</p>
+                <img src="{% static 'assets/img/tour/card/1.png' %}" alt="Main image">
                 {% endif %}
             </div>
             

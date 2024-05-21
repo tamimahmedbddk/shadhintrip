@@ -19,21 +19,25 @@
       <div data-anim-child="slide-up" class="relative pt-40 sm:pt-20">
         <div class="overflow-hidden js-section-slider" data-gap="30" data-slider-cols="xl-4 lg-3 md-2 sm-1 base-1" data-nav-prev="js-slider1-prev" data-nav-next="js-slider1-next">
           <div class="swiper-wrapper">
-          {% for tour in Popular_Tour_Packages %}
+          {% for tour in tours %}
             <div class="swiper-slide">
 
               <a href="{% url 'tour_detail' slug=tour.slug %}" class="tourCard -type-1 d-block bg-white">
-                  {% with tour.images.first as main_photo %}
+                 
                 <div class="tourCard__header">
                   <div class="tourCard__image ratio ratio-28:20">
-                    <img src="{{ main_photo.image.url }}" alt="image" class="img-ratio rounded-12">
+                    {% if tour.images.exists %}
+                      <img src="{{ tour.images.first.image.file.url }}" alt="image" class="img-ratio rounded-12">
+                    {% else %}
+                      <img src="{% static 'assets/img/tour/banner/1.png' %}" alt="image" class="img-ratio rounded-12">
+                    {% endif %}
                   </div>
 
                   <button class="tourCard__favorite">
                     <i class="icon-heart"></i>
                   </button>
                 </div>
-                  {% endwith %}
+
 
                 <div class="tourCard__content pt-10">
                   <div class="tourCard__location d-flex items-center text-13 text-light-2">
