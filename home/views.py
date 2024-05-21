@@ -1,23 +1,21 @@
 from django.shortcuts import render
-from tours.models import Tour, Country, Category
+from tours.models import Tour, Country, Category,GroupEvent
 from visa.models import VisaPackage
 from blog.models import Post
 
 def index(request):
     popular_visa_packages = VisaPackage.objects.all()
-    tours = Tour.objects.all().order_by('-id')[:6]
-    Popular_Tour_Packages = Tour.objects.all().order_by('id')[:6]
-    countries = Country.objects.all()
-    categories = Category.objects.all()
+    tours = list(Tour.objects.all()) + list(GroupEvent.objects.all())
+    # countries = Country.objects.all()
+    # categories = Category.objects.all()
     blog_posts = Post.objects.all().order_by('-id')[:3]
 
     context = {
         'popular_visa_packages': popular_visa_packages,
         'tours': tours,
-        'countries': countries,
-        'categories': categories,
+        # 'countries': countries,
+        # 'categories': categories,
         'blog_posts': blog_posts,
-        'Popular_Tour_Packages': Popular_Tour_Packages,
     }
     return render(request, 'index.html', context)
 

@@ -1,7 +1,11 @@
 {% load static %}
 <section data-anim="fade" class="hero -type-3">
     <div class="hero__bg">
-      <img src="{{ banner.image.url }}" alt="image">
+      {% if banner.image%}
+        <img src="{{ banner.image.url }}" alt="image">
+        {% else %}
+        <img src="{% static 'assets/img/tour/banner/1.png' %}" alt="image">
+      {% endif %}
     </div>
   
     <div class="container">

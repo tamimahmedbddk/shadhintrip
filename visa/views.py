@@ -5,25 +5,33 @@ from django.http import JsonResponse
 from django.contrib import messages
 from bookings.models import VisaBooking
 from tours.models import Tour
-
+from django.core.paginator import Paginator
 
 def index(request):
     banner = VisaBanner.objects.filter(is_active=True).first()
     countries = Country.objects.all().order_by('-id')
     visa_types = VisaType.objects.all()
-    visa_packages = VisaPackage.objects.all()
-    popular_visa_packages = VisaPackage.objects.all()  #for banner , we shoud fix this later
-    tours = Tour.objects.all().order_by('-id') #for banner , we shoud fix this later
+    popular_visa_packages = VisaPackage.objects.all()  # for banner, we should fix this later
+    tours = Tour.objects.all().order_by('-id')  # for banner, we should fix this later
+
+    # Pagination for visa packages
+    visa_packages_list = VisaPackage.objects.all()
+    paginator = Paginator(visa_packages_list, 12)  # Show 10 visa packages per page
+    page_number = request.GET.get('page')
+    page_obj = paginator.get_page(page_number)
+
     context = {
         'countries': countries,
-        'visa_packages': visa_packages,
+        'visa_packages': page_obj,  # Pass the paginated visa packages
         'banner': banner,
-        'visa_types':visa_types,
-        'popular_visa_packages':popular_visa_packages,
-        'tours':tours,
+        'visa_types': visa_types,
+        'popular_visa_packages': popular_visa_packages,
+        'tours': tours,
+        'page_obj': page_obj,  # Pass the page object for pagination controls
     }
 
     return render(request, 'visa/index.html', context)
+
 
 def visa_details(request, slug):
     visa_details = get_object_or_404(VisaPackage, slug=slug)

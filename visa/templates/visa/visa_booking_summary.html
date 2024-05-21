@@ -71,9 +71,11 @@ ShadhinTrip: Visa Booking
           <div class="d-flex justify-end js-pin-content">
             <div class="tourSingleSidebar">
               <div class="d-flex mt-30 mb-20">
-                {% with visa_package.image.url as main_photo %}
-                <img src="{{ main_photo }}" alt="image">
-                {% endwith %}
+                {% if visa_package.image%}
+                  <img src="{{ visa_package.image.url }}" alt="image">
+                {% else %}
+                  <img src="{% static 'assets/img/tour/banner/1.png' %}" alt="image">
+                {% endif %}
               </div>
               <h2 class="text-20 fw-500 text-center">{{ visa_package.title }}</h2>
               <div class="line mt-20 mb-20"></div>
@@ -88,7 +90,7 @@ ShadhinTrip: Visa Booking
                   </div>
                 </div>
               </div>
-              <div>
+              <div class="mt-10">
                 <div class="d-flex items-center justify-between">
                   <div class="text-14">Visa Type</div>
                   <div class="d-flex items-center">
@@ -98,6 +100,47 @@ ShadhinTrip: Visa Booking
                   </div>
                 </div>
               </div>
+
+
+              {% if visa_package.valid_for %}
+                  <div class="mt-10">
+                    <div class="d-flex items-center justify-between">
+                        <div class="text-14">Valid For</div>
+                        <div class="d-flex items-center">
+                            <div class="flex-center ml-10 mr-10">
+                              
+                                <div class="text-14 size-20">{{ visa_package.valid_for }}</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {% endif %}
+                {% if visa_package.max_stay %}
+                  <div class="mt-10">
+                    <div class="d-flex items-center justify-between">
+                        <div class="text-14">Max Stay</div>
+                        <div class="d-flex items-center">
+                            <div class="flex-center ml-10 mr-10">
+                              
+                                <div class="text-14 size-20">{{ visa_package.max_stay }}</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {% endif %}
+                {% if visa_package.number_of_entries %}
+                  <div class="mt-10">
+                    <div class="d-flex items-center justify-between">
+                        <div class="text-14">Number Of Entries</div>
+                        <div class="d-flex items-center">
+                            <div class="flex-center ml-10 mr-10">
+                              
+                                <div class="text-14 size-20">{{ visa_package.number_of_entries }}</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {% endif %}
               <div class="layout-pb-md">
                 <div class="line mt-10"></div>
                 <p class="text-20 fw-500 pb-20">Price Summary</p>

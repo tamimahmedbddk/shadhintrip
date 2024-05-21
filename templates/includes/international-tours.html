@@ -19,17 +19,21 @@
 
     <div data-anim-wrap class="grid -type-1 pt-40 sm:pt-20">
       {% for tour in tours %}
-      <a href="{% url 'tour_detail' slug=tour.slug %}" data-anim-child="slide-up delay-{{ forloop.counter }}" class="featureCard -type-1 -hover-1 overflow-hidden rounded-12 px-30 py-30">
-        <div class="featureCard__image">
-          <img src="{{ tour.images.first.image.url }}" alt="image">
-        </div>
-    
-        <div class="featureCard__content">
-          <h4 class="text-white">
-            {{ tour.title }}
-          </h4>
-        </div>
-      </a>
+        <a href="{% url 'tour_detail' slug=tour.slug %}" data-anim-child="slide-up delay-{{ forloop.counter }}" class="featureCard -type-1 -hover-1 overflow-hidden rounded-12 px-30 py-30">
+          <div class="featureCard__image">
+            {% if tour.images.exists %}
+              <img src="{{ tour.images.first.image.file.url }}" alt="image">
+            {% else %}
+              <img src="{% static 'assets/img/tour/banner/1.png' %}" alt="image">
+            {% endif %}
+          </div>
+      
+          <div class="featureCard__content">
+            <h4 class="text-white">
+              {{ tour.title }}
+            </h4>
+          </div>
+        </a>
       {% endfor %}
     </div>
     

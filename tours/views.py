@@ -5,6 +5,7 @@ from django.contrib import messages
 from visa.models import VisaPackage
 from bookings.models import TourBooking
 from django.db import IntegrityError
+from django.core.paginator import Paginator
 
 def list_tours(request):
     popular_visa_packages = VisaPackage.objects.all()
@@ -32,14 +33,20 @@ def list_tours(request):
     if place:
         tours = [tour for tour in tours if place.lower() in tour.destinations.lower()]
 
+    # Pagination
+    paginator = Paginator(tours, 10)  # Show 10 tours per page
+    page_number = request.GET.get('page')
+    page_obj = paginator.get_page(page_number)
+
     context = {
         'popular_visa_packages': popular_visa_packages,
         'banner': banner,
-        'tours': tours,
+        'tours': page_obj,  # Pass the paginated tours
         'categories': categories,
         'countries': countries,
         'cities': cities,
         'selected_category': selected_category,
+        'page_obj': page_obj,  # Pass the page object for pagination controls
     }
     return render(request, 'tours/home.html', context)
 
@@ -68,14 +75,14 @@ def tour_detail(request, slug):
 def booking_summary(request, slug):
     try:
         tour_details = Tour.objects.get(slug=slug)
-        main_image = tour_details.images.filter(is_main=True).first()
+        is_tour = True
     except Tour.DoesNotExist:
         tour_details = get_object_or_404(GroupEvent, slug=slug)
-        main_image = tour_details.images.filter(is_main=True).first()
+        is_tour = False
 
     context = {
         'tour_details': tour_details,
-        'main_image': main_image,
+        'is_tour': is_tour,
     }
     return render(request, 'tours/booking_summary.html', context)
 

@@ -393,7 +393,6 @@ ShadhinTrip: Tours And Packages, all in one.
           </div>
       </div>
       
-      
       </div>
     </div>
   </section>
@@ -415,11 +414,15 @@ ShadhinTrip: Tours And Packages, all in one.
               <a href="{% url 'tour_detail' slug=tour.slug %}" class="tourCard -type-1 py-10 px-10 border-1 rounded-12 bg-white -hover-shadow">
                 <div class="tourCard__header">
                   
-                {% with tour.images.first as main_photo %}
+                  {% if tour.images.exists %}
                   <div class="tourCard__image ratio ratio-28:20">
-                    <img src="{{ main_photo.image.url }}" alt="image" class="img-ratio rounded-12">
+                    <img src="{{  tour.images.first.image.file.url }}" alt="{{ tour.title }}" class="img-ratio rounded-12">
                   </div>
-                  {% endwith %}
+                  {% else %}
+                  <div class="tourCard__image ratio ratio-28:20">
+                    <img src="{% static 'assets/img/tour/card/1.png' %}" alt="{{ tour.title }}" class="img-ratio rounded-12">
+                  </div>
+                  {% endif %}
 
                   <button class="tourCard__favorite">
                     <i class="icon-heart"></i>
