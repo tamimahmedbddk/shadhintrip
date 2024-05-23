@@ -2,6 +2,22 @@ from django.db import models
 from ckeditor.fields import RichTextField
 from django.utils.translation import gettext_lazy as _
 
+
+class Country(models.Model):
+    name = models.CharField(max_length=200, unique=True, help_text=_("Enter the name of the country."))
+    image = models.ImageField(upload_to='country_images/', help_text=_("Upload an image representing the country."))
+
+    def __str__(self):
+        return self.name
+
+class City(models.Model):
+    name = models.CharField(max_length=200, help_text=_("Enter the name of the city."))
+    country = models.ForeignKey(Country, related_name='cities', on_delete=models.CASCADE, help_text=_("Select the country this city belongs to."))
+
+    def __str__(self):
+        return f"{self.name}, {self.country}"
+
+
 class SiteSettings(models.Model):
     site_name = models.CharField(max_length=200, blank=True, null=True, help_text=_("Enter the name of the site."))
     logo = models.ImageField(upload_to='logos/', blank=True, null=True, help_text=_("Upload the main logo for the site."))

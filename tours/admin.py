@@ -20,7 +20,7 @@ class CityAdmin(admin.ModelAdmin):
     list_filter = ('country',)
 
 class CategoryAdmin(admin.ModelAdmin):
-    list_display = ('name',)
+    list_display = ('name','icon_class')
     search_fields = ('name',)
 
 class ServiceAdmin(admin.ModelAdmin):

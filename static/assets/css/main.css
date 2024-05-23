@@ -5933,7 +5933,9 @@ h1, h2, h3, h4, h5, h6 {
 .tourCard.-type-2 .tourCard__image img {
   width: 100%;
   height: 100%;
-  border-radius: 12px;
+  /* border-radius: 12px; */
+  border-top-right-radius: 80px;
+  border-bottom-left-radius: 80px;
   -o-object-fit: cover;
      object-fit: cover;
 }
@@ -11096,7 +11098,9 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .rounded-12 {
-  border-radius: 12px;
+  /* border-radius: 12px; */
+  border-top-right-radius: 80px;
+  border-bottom-left-radius: 80px;
 }
 
 .rounded-20 {
@@ -14211,3 +14215,4 @@ button.gm-ui-hover-effect::after {
 #bg-video {
   width: 100%;
 }
+

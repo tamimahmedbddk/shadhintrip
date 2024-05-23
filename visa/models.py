@@ -4,6 +4,7 @@ from ckeditor.fields import RichTextField
 from django.contrib.auth import get_user_model
 from django.core.validators import MinValueValidator  # Import MinValueValidator
 from django.utils.translation import gettext_lazy as _
+from SiteSetting.models import Country
 
 User = get_user_model()
 
@@ -14,13 +15,6 @@ class VisaBanner(models.Model):
 
     def __str__(self):
         return f"Background Image {self.id}"
-
-class Country(models.Model):
-    name = models.CharField(max_length=200, unique=True)
-    image = models.ImageField(upload_to='country_images/')
-
-    def __str__(self):
-        return self.name
 
 class VisaType(models.Model):
     """
