@@ -3,6 +3,7 @@ from django.utils.text import slugify
 from ckeditor.fields import RichTextField
 from django.core.validators import MinValueValidator, MaxValueValidator
 from django.utils.translation import gettext_lazy as _
+from SiteSetting.models import Country, City
 
 class TourBanner(models.Model):
     image = models.ImageField(upload_to='background_images/', help_text=_("Upload a background image for the tour banner."))
@@ -12,23 +13,10 @@ class TourBanner(models.Model):
     def __str__(self):
         return self.title or f"Background Image {self.id}"
 
-class Country(models.Model):
-    name = models.CharField(max_length=200, unique=True, help_text=_("Enter the name of the country."))
-    image = models.ImageField(upload_to='country_images/', help_text=_("Upload an image representing the country."))
-
-    def __str__(self):
-        return self.name
-
-class City(models.Model):
-    name = models.CharField(max_length=200, help_text=_("Enter the name of the city."))
-    country = models.ForeignKey(Country, related_name='cities', on_delete=models.CASCADE, help_text=_("Select the country this city belongs to."))
-
-    def __str__(self):
-        return f"{self.name}, {self.country}"
 
 class Category(models.Model):
     name = models.CharField(max_length=200, unique=True, help_text=_("Enter the name of the tour category, such as trekking, sightseeing, etc."))
-
+    icon_class = models.CharField(default='<i class="icon-office text-24 text-accent-1"></i>', max_length=100, help_text=_("Enter the CSS class for the Category icon."))
     class Meta:
         verbose_name_plural = "Categories"
 
@@ -59,7 +47,6 @@ class BaseTourEvent(models.Model):
     cancellation_policy = RichTextField(help_text=_("Describe the cancellation policy for the tour or event."))
     refund_policy = RichTextField(help_text=_("Describe the refund policy for the tour or event."))
     max_participants = models.PositiveIntegerField(
-        default=1,
         help_text=_("Maximum number of participants allowed for the tour or event.")
     )
     price = models.DecimalField(max_digits=10, decimal_places=2, help_text=_("Enter the price for the tour or event."))
