@@ -41,7 +41,7 @@
                                 </div>
                                 <div class="searchFormItemDropdown -location" data-x="tour-country" data-x-toggle="is-active">
                                     <div class="searchFormItemDropdown__container">
-                                        <div class="searchFormItemDropdown__list sroll-bar-1">
+                                        <div class="searchFormItemDropdown__list">
                                             {% for tour in tours %}
                                             <div class="searchFormItemDropdown__item search-country-image">
                                                 <button class="js-select-control-button" data-value="{{ tour.country.id }}">
@@ -66,7 +66,7 @@
                                 </div>
                                 <div class="searchFormItemDropdown -visa-type" data-x="tour-type" data-x-toggle="is-active">
                                     <div class="searchFormItemDropdown__container">
-                                        <div class="searchFormItemDropdown__list sroll-bar-1">
+                                        <div class="searchFormItemDropdown__list">
                                             {% for tour in tours %}
                                             <div class="searchFormItemDropdown__item search-country-image">
                                                 <button class="js-select-control-button" data-value="{{ tour.category.id }}">
@@ -93,15 +93,13 @@
                                 </div>
                                 <div class="searchFormItemDropdown -visa-package" data-x="tour-package" data-x-toggle="is-active">
                                     <div class="searchFormItemDropdown__container">
-                                        <div class="searchFormItemDropdown__list sroll-bar-1">
+                                        <div class="searchFormItemDropdown__list">
                                             {% for tour in tours %}
                                             <div class="searchFormItemDropdown__item search-country-image">
                                                 <button class="js-select-control-button" data-slug="{{ tour.slug }}">
                                                     <span class="js-select-control-choice">{{ tour.title }}</span>
                                                     <span>
-                                                        {% with tour.images.first as main_photo %}
-                                                        <img src="{{ main_photo.image.url }}" alt="logo icon">
-                                                        {% endwith %}
+                                                        <img src="{{ tour.images.first.image.file.url }}" alt="logo icon">
                                                     </span>
                                                 </button>
                                             </div>
