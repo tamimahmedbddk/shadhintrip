@@ -21,7 +21,7 @@ ShadhinTrip: Tours And Packages, all in one.
 
 <section class="js-pin-container shadow-shadhin">
     <div class="container">
-      <div class="row y-gap-30 justify-between">
+      <div class="row y-gap-30 justify-between visa-content">
         <div data-anim="slide-up delay-1" class="col-lg-8">
           <div class="">
             <h2 class="text-40 sm:text-30 lh-14">
@@ -79,7 +79,7 @@ ShadhinTrip: Tours And Packages, all in one.
                     </div>
                     {% endfor %}
                 </div>
-                <div class="tabs__content pt-20 py-40 js-tabs-content">
+                <div class="tabs__content pt-20 js-tabs-content">
                     {% for required_document in visa_details.required_documents.all %}
                     <div class="tabs__pane tab-item-{{ required_document.id }}{% if forloop.first %} is-tab-el-active{% endif %}">
                         <p>{{ required_document.description|safe }}</p>
@@ -88,7 +88,7 @@ ShadhinTrip: Tours And Packages, all in one.
                 </div>
             </div>
         </div>
-        <div class="line mt-10"></div>
+        <div class="line mt-20 mb-20"></div>
         <div>
             <h2 class="text-20 mt-20">Cancellation Policy</h2>
             <p class="mt-20">{{ visa_details.cancellation_policy|safe }}</p>

@@ -17,6 +17,7 @@ class TourBanner(models.Model):
 class Category(models.Model):
     name = models.CharField(max_length=200, unique=True, help_text=_("Enter the name of the tour category, such as trekking, sightseeing, etc."))
     icon_class = models.CharField(default='<i class="icon-office text-24 text-accent-1"></i>', max_length=100, help_text=_("Enter the CSS class for the Category icon."))
+    
     class Meta:
         verbose_name_plural = "Categories"
 
@@ -26,6 +27,13 @@ class Category(models.Model):
 class Service(models.Model):
     name = models.CharField(max_length=200, help_text=_("Enter the name of the service."))
     icon_class = models.CharField(max_length=100, help_text=_("Enter the CSS class for the service icon."))
+
+    def __str__(self):
+        return self.name
+    
+class Place(models.Model):
+    name = models.CharField(max_length=200, help_text=_("Enter the name of the place."))
+    description = RichTextField(help_text=_("Provide a brief description of the place."))
 
     def __str__(self):
         return self.name
@@ -43,7 +51,7 @@ class BaseTourEvent(models.Model):
     excludes = RichTextField(help_text=_("List what is not included in the tour or event."))
     requirements = RichTextField(help_text=_("Specify any requirements for participants."))
     rules = RichTextField(help_text=_("Specify any rules for the tour or event."))
-    destinations = RichTextField(help_text=_("List the places or locations planned to be visited during the tour."))
+    places = models.ManyToManyField(Place, related_name='%(class)ss', blank=True, help_text=_("Select the places for the tour or event."))
     cancellation_policy = RichTextField(help_text=_("Describe the cancellation policy for the tour or event."))
     refund_policy = RichTextField(help_text=_("Describe the refund policy for the tour or event."))
     max_participants = models.PositiveIntegerField(

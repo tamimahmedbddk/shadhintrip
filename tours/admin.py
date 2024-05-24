@@ -1,7 +1,7 @@
 from django.contrib import admin
 from .models import (
     TourBanner, Country, City, Category, Service,
-    Tour, GroupEvent, TourItinerary, Image, Video, TourImage, GroupEventImage, TourVideo, GroupEventVideo
+    Tour, GroupEvent, TourItinerary, Image, Video, TourImage, GroupEventImage, TourVideo, GroupEventVideo, Place
 )
 from .forms import TourItineraryForm
 
@@ -11,7 +11,7 @@ class TourBannerAdmin(admin.ModelAdmin):
     list_filter = ('is_active',)
 
 class CountryAdmin(admin.ModelAdmin):
-    list_display = ('name','image')
+    list_display = ('name', 'image')
     search_fields = ('name',)
 
 class CityAdmin(admin.ModelAdmin):
@@ -20,11 +20,15 @@ class CityAdmin(admin.ModelAdmin):
     list_filter = ('country',)
 
 class CategoryAdmin(admin.ModelAdmin):
-    list_display = ('name','icon_class')
+    list_display = ('name', 'icon_class')
     search_fields = ('name',)
 
 class ServiceAdmin(admin.ModelAdmin):
-    list_display = ('name','icon_class')
+    list_display = ('name', 'icon_class')
+    search_fields = ('name',)
+
+class PlaceAdmin(admin.ModelAdmin):
+    list_display = ('name', 'description')
     search_fields = ('name',)
 
 class ImageAdmin(admin.ModelAdmin):
@@ -63,18 +67,15 @@ class TourAdmin(admin.ModelAdmin):
     search_fields = ('title', 'category__name', 'country__name', 'city__name')
     list_filter = ('category', 'country', 'city', 'is_featured', 'is_active')
     prepopulated_fields = {'slug': ('title',)}
-    filter_horizontal = ['services']
+    filter_horizontal = ['services', 'places']
     inlines = [TourItineraryInline, TourImageInline, TourVideoInline]
-    # fieldsets = [
-    #     ('Basic Information', {'fields': ['title', 'slug', 'overview', 'description']}),
-    # ]
 
 class GroupEventAdmin(admin.ModelAdmin):
     list_display = ('title', 'category', 'country', 'city', 'price', 'advance_percentage', 'start_date', 'end_date', 'is_featured', 'is_active')
     search_fields = ('title', 'category__name', 'country__name', 'city__name')
     list_filter = ('category', 'country', 'city', 'is_featured', 'is_active', 'start_date', 'end_date')
     prepopulated_fields = {'slug': ('title',)}
-    filter_horizontal = ['services']
+    filter_horizontal = ['services', 'places']
     inlines = [TourItineraryInline, GroupEventImageInline, GroupEventVideoInline]
 
 admin.site.register(TourBanner, TourBannerAdmin)
@@ -82,6 +83,7 @@ admin.site.register(Country, CountryAdmin)
 admin.site.register(City, CityAdmin)
 admin.site.register(Category, CategoryAdmin)
 admin.site.register(Service, ServiceAdmin)
+admin.site.register(Place, PlaceAdmin)
 admin.site.register(Tour, TourAdmin)
 admin.site.register(GroupEvent, GroupEventAdmin)
 admin.site.register(Image, ImageAdmin)
