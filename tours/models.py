@@ -13,7 +13,6 @@ class TourBanner(models.Model):
     def __str__(self):
         return self.title or f"Background Image {self.id}"
 
-
 class Category(models.Model):
     name = models.CharField(max_length=200, unique=True, help_text=_("Enter the name of the tour category, such as trekking, sightseeing, etc."))
     icon_class = models.CharField(default='<i class="icon-office text-24 text-accent-1"></i>', max_length=100, help_text=_("Enter the CSS class for the Category icon."))
@@ -30,20 +29,18 @@ class Service(models.Model):
 
     def __str__(self):
         return self.name
-    
+
 class Place(models.Model):
+    city = models.ForeignKey(City, related_name='places', on_delete=models.CASCADE, help_text=_("Select the location city name."))
     name = models.CharField(max_length=200, help_text=_("Enter the name of the place."))
-    description = RichTextField(help_text=_("Provide a brief description of the place."))
+    description = RichTextField(blank=True, help_text=_("Provide a brief description of the place."))
 
     def __str__(self):
         return self.name
 
 class BaseTourEvent(models.Model):
-    title = models.CharField(
-        max_length=200,
-        help_text=_("Enter the title of the tour or event. This will be displayed to users.")
-    )
-    slug = models.SlugField(max_length=200, unique=True, blank=True)
+    title = models.CharField(max_length=200, help_text=_("Enter the title of the tour or event. This will be displayed to users."))
+    slug = models.SlugField(max_length=200, unique=True)
     overview = RichTextField(help_text=_("Provide a brief overview of the tour or event."))
     description = RichTextField(help_text=_("Provide a detailed description of the tour or event."))
     activities = RichTextField(help_text=_("List the activities included in the tour or event."))
@@ -51,35 +48,21 @@ class BaseTourEvent(models.Model):
     excludes = RichTextField(help_text=_("List what is not included in the tour or event."))
     requirements = RichTextField(help_text=_("Specify any requirements for participants."))
     rules = RichTextField(help_text=_("Specify any rules for the tour or event."))
-    places = models.ManyToManyField(Place, related_name='%(class)ss', blank=True, help_text=_("Select the places for the tour or event."))
+    places = models.ManyToManyField(Place, related_name='%(app_label)s_%(class)s_related', blank=True, help_text=_("Select the places for the tour or event."))
     cancellation_policy = RichTextField(help_text=_("Describe the cancellation policy for the tour or event."))
     refund_policy = RichTextField(help_text=_("Describe the refund policy for the tour or event."))
-    max_participants = models.PositiveIntegerField(
-        help_text=_("Maximum number of participants allowed for the tour or event.")
-    )
+    max_participants = models.PositiveIntegerField(help_text=_("Maximum number of participants allowed for the tour or event."))
     price = models.DecimalField(max_digits=10, decimal_places=2, help_text=_("Enter the price for the tour or event."))
-    category = models.ForeignKey(
-        Category, related_name='%(class)ss', on_delete=models.CASCADE,
-        help_text=_("Select the category for the tour or event.")
-    )
-    country = models.ForeignKey(
-        Country, related_name='%(class)ss', on_delete=models.CASCADE,
-        help_text=_("Select the country where the tour or event will take place.")
-    )
-    city = models.ForeignKey(
-        City, related_name='%(class)ss', on_delete=models.CASCADE,
-        help_text=_("Select the city where the tour or event will take place.")
-    )
+    category = models.ForeignKey(Category, related_name='%(app_label)s_%(class)s_related', on_delete=models.CASCADE, help_text=_("Select the category for the tour or event."))
+    country = models.ForeignKey(Country, related_name='%(app_label)s_%(class)s_related', on_delete=models.CASCADE, help_text=_("Select the country where the tour or event will take place."))
+    city = models.ForeignKey(City, related_name='%(app_label)s_%(class)s_related', on_delete=models.CASCADE, help_text=_("Select the city where the tour or event will take place."))
     duration_nights = models.PositiveIntegerField(help_text=_("Number of nights the tour or event will last."))
     duration_days = models.PositiveIntegerField(help_text=_("Number of days the tour or event will last."))
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
     is_featured = models.BooleanField(default=False, help_text=_("Check if the tour or event is featured."))
     is_active = models.BooleanField(default=True, help_text=_("Check if the tour or event is currently active."))
-    services = models.ManyToManyField(
-        Service, related_name='%(class)ss', blank=True,
-        help_text=_("Select the services included in the tour or event.")
-    )
+    services = models.ManyToManyField(Service, related_name='%(app_label)s_%(class)s_related', blank=True, help_text=_("Select the services included in the tour or event."))
 
     class Meta:
         abstract = True
@@ -100,11 +83,7 @@ class Tour(BaseTourEvent):
 
 class GroupEvent(BaseTourEvent):
     booking_policy = RichTextField(blank=True, verbose_name=_('Booking Policy'), help_text=_("Booking Policy"))
-    advance_percentage = models.PositiveIntegerField(
-        default=20,
-        validators=[MinValueValidator(0), MaxValueValidator(100)],
-        help_text=_("Percentage of the total price required for confirmation.")
-    )
+    advance_percentage = models.PositiveIntegerField(default=20, validators=[MinValueValidator(0), MaxValueValidator(100)], help_text=_("Percentage of the total price required for confirmation."))
     start_date = models.DateField(help_text=_("Start date of the group event."))
     end_date = models.DateField(help_text=_("End date of the group event."))
 

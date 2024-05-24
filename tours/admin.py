@@ -28,8 +28,9 @@ class ServiceAdmin(admin.ModelAdmin):
     search_fields = ('name',)
 
 class PlaceAdmin(admin.ModelAdmin):
-    list_display = ('name', 'description')
-    search_fields = ('name',)
+    list_display = ('name', 'description', 'city')
+    search_fields = ('name', 'city__name')
+    list_filter = ('city',)
 
 class ImageAdmin(admin.ModelAdmin):
     list_display = ('file', 'uploaded_at', 'caption')
