@@ -209,9 +209,13 @@ ShadhinTrip: Tours And Packages, all in one.
                 {% if tour.slug %}
                     <div class="col-12 tour-package" data-category="{{ tour.category.id }}" data-country="{{ tour.country.id }}">
                         <div class="tourCard -type-2">
-                            {% if tour.images.exists %}
+                            
                                 <div class="tourCard__image">
+                                  {% if tour.images.exists %}
                                     <img src="{{ tour.images.first.image.file.url }}" alt="{{ tour.title }}">
+                                    {% else %}
+                                    <img src="{% static 'assets/img/tour/card/card.png' %}" alt="{{ tour.title }}">
+                                    {% endif %}
                                     <div class="tourCard__badge">
                                         <div class="rounded-12 text-white lh-11 text-13 px-15 py-10"></div>
                                     </div>
@@ -221,11 +225,6 @@ ShadhinTrip: Tours And Packages, all in one.
                                         </button>
                                     </div>
                                 </div>
-                            {% else %}
-                                <div class="relative overflow-hidden rounded-t-md shadow dark:shadow-gray-700 mx-3 mt-3">
-                                    <img src="{% static 'assets/img/tour/card/1.png' %}" class="scale-125 group-hover:scale-100 duration-500" alt="{{ tour.title }}">
-                                </div>
-                            {% endif %}
                             <div class="tourCard__content">
                                 <div class="tourCard__location">
                                     <i class="icon-pin text-20"></i>
@@ -248,10 +247,10 @@ ShadhinTrip: Tours And Packages, all in one.
                                     {% endfor %}
                                 </div>
                               <div class="row x-gap-20 y-gap-5 pt-20">
-                                {% for service in tour.services.all %}
+                                {% for place in tour.places.all %}
                                     <div class="col-auto">
                                         <div class="destinations-icon">
-                                          <i class="icon-pin text-20"></i> dssdsdf
+                                          <i class="icon-pin text-20"></i> {{ place.name }}
                                         </div>
                                     </div>
                                 {% endfor %}
