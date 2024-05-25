@@ -33,9 +33,11 @@
 
               <div class="footerSocials__icons text-white">
                 {% for link in social_links %}
-                  <a href="{{ link.url }}" class="{{ link.icon_class }}" target="_blank"></a>
+                    <a href="{{ link.url }}" class="{{ link.icon_class }}" target="_blank"></a>
                 {% endfor %}
-              </div>
+            </div>
+            
+
             </div>
           </div>
         </div>
@@ -50,17 +52,20 @@
               <h4 class="text-20 fw-500 text-white">Contact</h4>
 
               <div class="y-gap-10 mt-20 text-white">
-                    {% for contact in contact_info %}
-                      {% if contact.phone %}
-                      <p class="d-block text-white">&#127968;  {{ contact.address }}</p>
-                      {% endif %}
-                      {% if contact.phone %}
-                      <p class="d-block text-white">&#128231;  {{ contact.email }}</p>
-                      {% endif %}
-                      {% if contact.phone %}
-                      <p class="d-block text-white">&#128224;  {{ contact.phone }}</p>
-                      {% endif %}
-                    {% endfor %}
+                  {% for contact in contact_info %}
+                    {% if contact.address %}
+                        <p class="d-block text-white">&#127968;  {{ contact.address }}</p>
+                    {% else %}
+                        <p class="d-block text-white">&#127968;  Address not available</p>
+                    {% endif %}
+                    {% if contact.email %}
+                        <p class="d-block text-white">&#128231;  {{ contact.email }}</p>
+                    {% endif %}
+                    {% if contact.phone %}
+                        <p class="d-block text-white">&#128224;  {{ contact.phone }}</p>
+                    {% endif %}
+                  {% endfor %}
+            
               </div>
             </div>
 

@@ -24,7 +24,7 @@ class BackgroundVideoAdmin(admin.ModelAdmin):
     search_fields = ('id',)
 
 class SocialLinkAdmin(admin.ModelAdmin):
-    list_display = ('platform', 'url')
+    list_display = ('platform', 'url','icon_class')
     list_filter = ('platform',)
     search_fields = ('platform', 'url')
 

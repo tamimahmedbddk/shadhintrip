@@ -14,6 +14,8 @@
           {% for site_setting in site_settings%}
           {% if site_setting.logo %}
           <img src="{{site_setting.logo.url}}" alt="logo icon">
+          {% else %}
+            <img src="{% static 'assets/img/logo/logo-big.png' %}" alt="image">
           {% endif %}
           {% endfor %}
         </a>
