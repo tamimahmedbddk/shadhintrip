@@ -26,7 +26,7 @@ ShadhinTrip: Tours And Packages, all in one.
                     {% if country.image%}
                     <img src="{{ country.image.url }}" alt="image" class="size-130 object-cover rounded-full">
                     {% else %}
-                    <img src="{% static 'assets/img/tour/banner/1.png' %}" alt="image" class="size-130 object-cover rounded-full">
+                    <img src="{% static 'assets/img/tour/card/card.png' %}" alt="image" class="size-130 object-cover rounded-full">
                     {% endif %}
                   </div>
                   <h3 class="featureImage__title text-16 fw-500 mt-20">{{ country.name }}</h3>
@@ -59,7 +59,7 @@ ShadhinTrip: Tours And Packages, all in one.
                   {% if visa_package.image%}
                     <img src="{{visa_package.image.url}}" alt="image" class="img-ratio rounded-12">
                   {% else %}
-                    <img src="{% static 'assets/img/tour/banner/1.png' %}" alt="image" class="img-ratio rounded-12">
+                    <img src="{% static 'assets/img/tour/card/card.png' %}" alt="image" class="img-ratio rounded-12">
                   {% endif %}
                 </div>
                 <button class="tourCard__favorite">

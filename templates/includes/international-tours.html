@@ -18,13 +18,13 @@
     </div>
 
     <div data-anim-wrap class="grid -type-1 pt-40 sm:pt-20">
-      {% for tour in tours %}
+      {% for tour in tours|slice:6 %}
         <a href="{% url 'tour_detail' slug=tour.slug %}" data-anim-child="slide-up delay-{{ forloop.counter }}" class="featureCard -type-1 -hover-1 overflow-hidden rounded-12 px-30 py-30">
           <div class="featureCard__image">
             {% if tour.images.exists %}
               <img src="{{ tour.images.first.image.file.url }}" alt="image">
             {% else %}
-              <img src="{% static 'assets/img/tour/banner/1.png' %}" alt="image">
+              <img src="{% static 'assets/img/tour/card/card.png' %}" alt="image">
             {% endif %}
           </div>
       

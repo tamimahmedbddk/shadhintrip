@@ -54,7 +54,7 @@ ShadhinTrip: Tours And Packages, all in one.
                     {% if visa_details.image%}
                         <img src="{{ visa_details.image.url }}" alt="image" class="img-cover rounded-12">
                     {% else %}
-                        <img src="{% static 'assets/img/tour/banner/1.png' %}" alt="image" class="img-cover rounded-12">
+                        <img src="{% static 'assets/img/tour/card/card.png' %}" alt="image" class="img-cover rounded-12">
                     {% endif %}
                   </div>
                 </div>
@@ -102,7 +102,7 @@ ShadhinTrip: Tours And Packages, all in one.
                             {% if visa_details.image%}
                                 <img src="{{ visa_details.country.image.url }}" alt="logo icon">
                             {% else %}
-                                <img src="{% static 'assets/img/tour/banner/1.png' %}" alt="logo icon">
+                                <img src="{% static 'assets/img/tour/card/card.png' %}" alt="logo icon">
                             {% endif %}
                         </div>
                         <div class="text-20 fw-500 ml-10">{{ visa_details.country }}</div>
