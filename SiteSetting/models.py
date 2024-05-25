@@ -46,6 +46,7 @@ class BackgroundVideo(models.Model):
     def __str__(self):
         return f"Background Video {self.id}"
 
+
 class SocialLink(models.Model):
     PLATFORM_CHOICES = [
         ('facebook', 'Facebook'),
@@ -56,12 +57,27 @@ class SocialLink(models.Model):
         # Add more platforms as needed
     ]
 
+    PLATFORM_ICON_CLASSES = {
+        'facebook': 'icon-facebook',
+        'twitter': 'icon-twitter',
+        'instagram': 'icon-instagram',
+        'linkedin': 'icon-linkedin',
+        'youtube': 'fa fa-youtube',
+        # Add more mappings as needed
+    }
+
     platform = models.CharField(max_length=20, choices=PLATFORM_CHOICES, help_text=_("Select the social media platform."))
     url = models.URLField(help_text=_("Enter the URL for the social media profile."))
-    icon_class = models.CharField(max_length=100, help_text=_("Class name for the icon."))
+    icon_class = models.CharField(max_length=100, blank=True, help_text=_("Class name for the icon."))
 
     def __str__(self):
         return f"{self.get_platform_display()}"
+
+    def save(self, *args, **kwargs):
+        if not self.icon_class:
+            self.icon_class = self.PLATFORM_ICON_CLASSES.get(self.platform, '')
+        super().save(*args, **kwargs)
+
 
 class ContactInfo(models.Model):
     phone = models.CharField(max_length=20, help_text=_("Enter the contact phone number."))
