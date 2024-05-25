@@ -80,8 +80,8 @@ class GroupEventAdmin(admin.ModelAdmin):
     inlines = [TourItineraryInline, GroupEventImageInline, GroupEventVideoInline]
 
 admin.site.register(TourBanner, TourBannerAdmin)
-admin.site.register(Country, CountryAdmin)
-admin.site.register(City, CityAdmin)
+# admin.site.register(Country, CountryAdmin)
+# admin.site.register(City, CityAdmin)
 admin.site.register(Category, CategoryAdmin)
 admin.site.register(Service, ServiceAdmin)
 admin.site.register(Place, PlaceAdmin)

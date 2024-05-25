@@ -1,10 +1,16 @@
+{% load static %}
 <section data-anim="fade" class="hero -type-10 pt-0">
     <div class="hero__bg bg-accent-2"></div>
   </section>
 <section data-anim="fade" class="hero -type-10">
-    <div class="hero__bg">
-        {% for background_image in background_images %}
-      <img src="{{background_image.image.url}}" alt="image">
-      {% endfor %}
-    </div>
+  <div class="hero__bg">
+    {% for site_setting in site_settings %}
+        {% if site_setting.banner_image %}
+            <img src="{{ site_setting.banner_image.url }}" alt="banner image">
+        {% else %}
+            <img src="{% static 'assets/img/tour/banner/1.png' %}" alt="default image">
+        {% endif %}
+    {% endfor %}
+</div>
+
 </section>

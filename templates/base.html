@@ -23,11 +23,9 @@
   <link rel="stylesheet" href="{% static 'assets/css/main.css'%}">
 
   <title>{% block title %}Website Title{% endblock %}</title>
-    {% for site_setting in site_settings%}
-      {% if site_setting.favicon %}
-        <link rel="icon" type="image/x-icon" href="{{ site_setting.favicon.url }}">
+      {% if favicon.image %}
+        <link rel="icon" type="image/x-icon" href="{{ favicon.image.url }}">
       {% endif %}
-    {% endfor %}
   
   {% block additional_styles %}{% endblock %}
 </head>

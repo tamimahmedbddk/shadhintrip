@@ -23,7 +23,7 @@ class TagAdmin(admin.ModelAdmin):
     search_fields = ('name',)
 
 class BackgroundImageAdmin(admin.ModelAdmin):
-    list_display = ('id', 'is_active')
+    list_display = ('id', 'image', 'is_active')
     list_editable = ('is_active',)
 
 admin.site.register(Category, CategoryAdmin)

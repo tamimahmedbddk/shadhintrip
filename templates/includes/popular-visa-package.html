@@ -17,7 +17,11 @@
               <a href="{% url 'visa_detail' slug=popular_visa_Package.slug %}" class="tourCard -type-1 d-block bg-white">
                 <div class="tourCard__header">
                   <div class="tourCard__image ratio ratio-28:20">
-                    <img src="{{ popular_visa_Package.image.url}}" alt="image" class="img-ratio rounded-12">
+                    {% if popular_visa_Package.image %}
+                      <img src="{{ popular_visa_Package.image.url}}" alt="image" class="img-ratio rounded-12">
+                    {% else %}
+                      <img src="{% static 'assets/img/tour/card/1.png' %}" alt="image" class="img-ratio rounded-12">
+                    {% endif %}
                   </div>
 
                   <button class="tourCard__favorite">

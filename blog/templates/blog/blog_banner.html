@@ -2,9 +2,12 @@
 <section data-anim="fade" class="hero -type-10">
     <div class="hero__bg">
       {% for background_image in background_images %}
-      <img src="{{ background_image.image.url }}" alt="image">
+      {% if background_image.image.url %}
+        <img src="{{ background_image.image.url }}" alt="image">
+      {% else %}
+        <img src="{% static 'assets/img/tour/card/1.png' %}" alt="image">
+      {% endif %}
       {% endfor %}
-      <!-- <img src="{% static 'assets/img/cta/shape.svg' %}" alt="image"> -->
     </div>
   
     <div class="container">
@@ -14,10 +17,6 @@
             <h1>
               Your guide to everywhere
             </h1>
-  
-            <p class="text-white">
-              Find inspiration, guides, and stories for wherever you're going. Select a destination.
-            </p>
           </div>
         </div>
       </div>

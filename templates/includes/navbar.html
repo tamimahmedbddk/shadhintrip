@@ -11,13 +11,11 @@
     <div class="header__left">
       <div class="header__logo">
         <a href="{% url 'index' %}" class="header__logo">
-          {% for site_setting in site_settings%}
-          {% if site_setting.logo %}
-          <img src="{{site_setting.logo.url}}" alt="logo icon">
+          {% if logo.image %}
+          <img src="{{logo.image.url}}" alt="logo icon">
           {% else %}
             <img src="{% static 'assets/img/logo/logo-big.png' %}" alt="image">
           {% endif %}
-          {% endfor %}
         </a>
 
         <div class="xl:d-none ml-30">

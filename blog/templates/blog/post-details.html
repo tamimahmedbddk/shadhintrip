@@ -10,7 +10,11 @@ ShadhinTrip: Tours And Packages, all in one.
 
 <section data-anim="fade" class="hero -type-10">
     <div class="hero__bg">
-      <img src="{{ blog_details.featured_image.url }}" alt="image">
+      {% if blog_details.featured_image %}
+        <img src="{{ blog_details.featured_image.url }}" alt="image">
+      {% else %}
+       <img src="{% static 'assets/img/tour/card/1.png' %}" alt="image">
+      {% endif %}
     </div>
 
     <div class="container">
@@ -18,13 +22,10 @@ ShadhinTrip: Tours And Packages, all in one.
         <div class="col-xl-12">
           <div class="hero__content">
             <h1 class="hero__title text-white">
-              Pubs with History: 7 of Dublin’s
-              Most Storied Drinking Dens
+              {% if blog_details.title %}
+                {{blog_details.title}}
+              {% endif %}
             </h1>
-
-            <!-- <p class="hero__text">
-              Find inspiration, guides and stories for wherever you're going Select a destination
-            </p> -->
           </div>
         </div>
       </div>
@@ -114,7 +115,11 @@ ShadhinTrip: Tours And Packages, all in one.
         <div class="col-lg-4 col-md-6">
           <a href="{% url 'blog_details' slug=blog_other.slug %}" class="blogCard -type-1">
             <div class="blogCard__image ratio ratio-41:30">
-              <img src="{{ blog_other.featured_image.url }}" alt="image" class="img-ratio rounded-12">
+              {% if blog_other.featured_image %}
+                <img src="{{ blog_other.featured_image.url }}" alt="image" class="img-ratio rounded-12">
+              {% else %}
+                <img src="{% static 'assets/img/tour/card/1.png' %}" alt="image" class="img-ratio rounded-12">
+              {% endif %}
 
               <div class="blogCard__badge">{{ blog_other.category }}</div>
               
