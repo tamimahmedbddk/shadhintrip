@@ -684,6 +684,8 @@ button:focus {
   border-color: #0751e6;
   background-color: #0751e6 !important;
   color: white;
+  border-top-right-radius: 80px; 
+  border-bottom-left-radius: 80px;
 }
 
 .button.-outline-accent-1:hover {
@@ -4584,13 +4586,17 @@ h1, h2, h3, h4, h5, h6 {
 .searchForm.-type-1 .searchForm__button a {
   height: 100%;
   padding: 0 30px;
+  border-top-right-radius: 80px;
+  border-bottom-left-radius: 80px;
 }
 
 @media (max-width: 767px) {
   .searchForm.-type-1 .searchForm__button a {
     height: 60px;
     width: 100%;
-    border-radius: 0 0 12px 12px !important;
+    /* border-radius: 0 0 12px 12px !important; */
+    border-top-right-radius: 80px !important;
+    border-bottom-left-radius: 80px !important;
   }
 }
 .searchForm.-type-1 .searchFormItem {
@@ -4653,7 +4659,9 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .searchForm.-type-1 .searchFormItemDropdown__container {
-  border-radius: 12px;
+  /* border-radius: 12px; */
+  border-top-right-radius: 80px;
+  border-bottom-left-radius: 80px;
   background-color: white;
   border: 1px solid var(--Border, #E7E6E6);
   box-shadow: 0px 10px 40px 0px rgba(0, 0, 0, 0.05);
@@ -5891,7 +5899,9 @@ h1, h2, h3, h4, h5, h6 {
   grid-template-columns: max-content 1fr min-content;
   gap: 30px;
   height: 100%;
-  border-radius: 12px;
+  /* border-radius: 12px; */
+  border-top-right-radius: 80px; 
+  border-bottom-left-radius: 80px;
   border: 1px solid var(--border, #E7E6E6);
   padding: 20px;
   transition: 0.2s;
@@ -5933,7 +5943,9 @@ h1, h2, h3, h4, h5, h6 {
 .tourCard.-type-2 .tourCard__image img {
   width: 100%;
   height: 100%;
-  border-radius: 12px;
+  /* border-radius: 12px; */
+  border-top-right-radius: 80px;
+  border-bottom-left-radius: 80px;
   -o-object-fit: cover;
      object-fit: cover;
 }
@@ -6349,7 +6361,9 @@ h1, h2, h3, h4, h5, h6 {
 .cta.-type-4 .cta__content {
   position: relative;
   overflow: hidden;
-  border-radius: 12px;
+  /* border-radius: 12px; */
+  border-top-right-radius: 80px;
+  border-bottom-left-radius: 80px;
   background-color: var(--color-light-4);
   padding: 60px;
   z-index: 2;
@@ -11096,7 +11110,9 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .rounded-12 {
-  border-radius: 12px;
+  /* border-radius: 12px; */
+  border-top-right-radius: 80px;
+  border-bottom-left-radius: 80px;
 }
 
 .rounded-20 {
@@ -14203,6 +14219,8 @@ button.gm-ui-hover-effect::after {
 
 .contact_us button{
   padding: 12px 20px;
+  border-top-right-radius: 50px;
+  border-bottom-left-radius: 50px;
 }
 .custom-text{
   /* color: rgba(99, 94, 94, 0.884); */
@@ -14210,4 +14228,13 @@ button.gm-ui-hover-effect::after {
 
 #bg-video {
   width: 100%;
+}
+
+.visa-content .line {
+  border-top: 1px solid #ccc;
+  margin: 10px 0;
+}
+
+.destinations-icon i{
+  font-size: 10px;;
 }
