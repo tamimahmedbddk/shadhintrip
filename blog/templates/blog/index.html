@@ -17,7 +17,12 @@ ShadhinTrip: Tours And Packages, all in one.
             <div class="pl-blog-list__image">
               
               <a href="{% url 'blog_details' slug=post.slug %}">
-                <img src="{{ post.featured_image.url }}" alt="image">
+                {% if post.featured_image%}
+                  <img src="{{ post.featured_image.url }}" alt="image">
+                {% else %}
+                <img src="{% static 'assets/img/tour/card/1.png' %}" alt="image">
+                
+                {% endif %}
               </a>
             </div>
             <div class="pl-blog-list__content">
@@ -78,7 +83,11 @@ ShadhinTrip: Tours And Packages, all in one.
               {% for recent_post in recent_posts %}
                 <a href="{% url 'blog_details' slug=recent_post.slug %}" class="d-flex align-center">
                   <div class="size-70 overflow-hidden rounded-12">
-                    <img src="{{ recent_post.featured_image.url }}" alt="image" class="img-cover">
+                    {% if recent_post.featured_image%}
+                      <img src="{{ recent_post.featured_image.url }}" alt="image" class="img-cover">
+                    {% else %}
+                      <img src="{% static 'assets/img/tour/card/1.png' %}" alt="image">
+                    {% endif %}
                   </div>
                   <div class="ml-20">
                     <h5 class="text-15 lh-14 fw-500">{{ recent_post.title }}</h5>
@@ -99,6 +108,47 @@ ShadhinTrip: Tours And Packages, all in one.
           </div>
         </div>
       </div>
+
+      <!-- Pagination Controls -->
+      <div class="d-flex justify-center flex-column mt-60">
+        <div class="pagination justify-center">
+            {% if page_obj.has_previous %}
+                <a class="pagination__button button -accent-1 mr-15 -prev" href="?page={{ page_obj.previous_page_number }}">
+                    <i class="icon-arrow-left text-15"></i>
+                </a>
+            {% else %}
+                <span class="pagination__button button -accent-1 mr-15 -prev disabled">
+                    <i class="icon-arrow-left text-15"></i>
+                </span>
+            {% endif %}
+
+            <div class="pagination__count">
+                {% for i in page_obj.paginator.page_range %}
+                    {% if page_obj.number == i %}
+                        <a href="?page={{ i }}" class="is-active">{{ i }}</a>
+                    {% elif i > page_obj.number|add:-3 and i < page_obj.number|add:3 %}
+                        <a href="?page={{ i }}">{{ i }}</a>
+                    {% endif %}
+                {% endfor %}
+                {% if page_obj.number < page_obj.paginator.num_pages|add:-3 %}
+                    <div>...</div>
+                    <a href="?page={{ page_obj.paginator.num_pages }}">{{ page_obj.paginator.num_pages }}</a>
+                {% endif %}
+            </div>
+
+            {% if page_obj.has_next %}
+                <a class="pagination__button button -accent-1 ml-15 -next" href="?page={{ page_obj.next_page_number }}">
+                    <i class="icon-arrow-right text-15"></i>
+                </a>
+            {% else %}
+                <span class="pagination__button button -accent-1 ml-15 -next disabled">
+                    <i class="icon-arrow-right text-15"></i>
+                </span>
+            {% endif %}
+        </div>
+
+        <div class="text-14 text-center mt-20">Showing results {{ page_obj.start_index }}-{{ page_obj.end_index }} of {{ page_obj.paginator.count }}</div>
+    </div>
     </div>
   </div>
 </section>

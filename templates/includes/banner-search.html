@@ -46,7 +46,9 @@
                                             <div class="searchFormItemDropdown__item search-country-image">
                                                 <button class="js-select-control-button" data-value="{{ tour.country.id }}">
                                                     <span class="js-select-control-choice">{{ tour.country }}</span>
+                                                    {% if tour.country.image %}
                                                     <img src="{{ tour.country.image.url }}" alt="logo icon">
+                                                    {% endif %}
                                                 </button>
                                             </div>
                                             {% endfor %}
@@ -99,7 +101,11 @@
                                                 <button class="js-select-control-button" data-slug="{{ tour.slug }}">
                                                     <span class="js-select-control-choice">{{ tour.title }}</span>
                                                     <span>
-                                                        <img src="{{ tour.images.first.image.file.url }}" alt="logo icon">
+                                                      {% if tour.images.exists %}
+                                                        <img src="{{ tour.images.first.image.file.url}}" alt="logo icon">
+                                                      {% else %}
+                                                        <img src="{% static 'assets/img/tour/card/1.png' %}" alt="logo icon">
+                                                      {% endif %}
                                                     </span>
                                                 </button>
                                             </div>
@@ -190,7 +196,11 @@
                               <button class="js-select-control-button">
                                 <span class="js-select-control-choice">{{visa.visa_type.name}}</span>
                                 <span>{{visa.country}}
-                                  <img src="{% static 'assets/img/hero/1/in.png' %}" alt="logo icon">
+                                  {% if visa.image %}
+                                    <img src="{{visa.image.url}}" alt="logo icon">
+                                  {% else %}
+                                    <img src="{% static 'assets/img/tour/card/1.png' %}" alt="logo icon">
+                                  {% endif %}
                                 </span>
                                 
                               </button>
@@ -225,7 +235,11 @@
                             <div class="searchFormItemDropdown__item search-country-image">
                               <button class="js-select-control-button">
                                 <span class="js-select-control-choice">{{visa.title}}</span>
+                                {% if visa.image %}
                                 <img src="{{visa.image.url}}" alt="logo icon">
+                                {% else %}
+                                <img src="{% static 'assets/img/tour/card/1.png' %}" alt="logo icon">
+                                {% endif %}
                                 
                               </button>
                             </div>

@@ -22,8 +22,11 @@
         <div class="col-lg-4 col-md-6">
           <a href="{% url 'blog_details' slug=blog_post.slug %}" class="blogCard -type-1">
             <div class="blogCard__image ratio ratio-41:30">
-              <img src="{{ blog_post.featured_image.url }}" alt="image" class="img-ratio rounded-12">
-
+              {% if blog_post.featured_image%}
+                <img src="{{ blog_post.featured_image.url }}" alt="image" class="img-ratio rounded-12">
+              {% else %}
+                <img src="{% static 'assets/img/tour/card/1.png' %}" alt="image" class="img-ratio rounded-12">
+              {% endif %}
               <div class="blogCard__badge">{{ blog_post.category }}</div>
               
             </div>

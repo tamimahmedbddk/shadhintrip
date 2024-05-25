@@ -2,7 +2,6 @@ from django.db import models
 from ckeditor.fields import RichTextField
 from django.utils.translation import gettext_lazy as _
 
-
 class Country(models.Model):
     name = models.CharField(max_length=200, unique=True, help_text=_("Enter the name of the country."))
     image = models.ImageField(upload_to='country_images/', help_text=_("Upload an image representing the country."))
@@ -17,11 +16,8 @@ class City(models.Model):
     def __str__(self):
         return f"{self.name}, {self.country}"
 
-
-class SiteSettings(models.Model):
-    site_name = models.CharField(max_length=200, blank=True, null=True, help_text=_("Enter the name of the site."))
-    logo = models.ImageField(upload_to='logos/', blank=True, null=True, help_text=_("Upload the main logo for the site."))
-    favicon = models.ImageField(upload_to='favicons/', blank=True, null=True, help_text=_("Upload the favicon for the site."))
+class SiteConfiguration(models.Model):
+    banner_image = models.ImageField(upload_to='background_images/', blank=True, null=True, help_text=_("Upload the banner image for the site."))
     about_content = RichTextField(blank=True, null=True, help_text=_("Content for the about page."))
     privacy_policy_content = RichTextField(blank=True, null=True, help_text=_("Content for the privacy policy page."))
     terms_of_service = RichTextField(blank=True, null=True, help_text=_("Content for the terms of service page."))
@@ -30,7 +26,21 @@ class SiteSettings(models.Model):
     faq = RichTextField(blank=True, null=True, help_text=_("Content for the FAQ page."))
 
     def __str__(self):
-        return self.site_name or "Site Settings"
+        return "Site Configuration"
+
+class Logo(models.Model):
+    image = models.ImageField(upload_to='logos/', help_text=_("Upload the main logo for the site."))
+    is_active = models.BooleanField(default=True, help_text=_("Activate this logo."))
+
+    def __str__(self):
+        return f"Logo {self.id}"
+
+class Favicon(models.Model):
+    image = models.ImageField(upload_to='favicons/', help_text=_("Upload the favicon for the site."))
+    is_active = models.BooleanField(default=True, help_text=_("Activate this favicon."))
+
+    def __str__(self):
+        return f"Favicon {self.id}"
 
 class BackgroundImage(models.Model):
     image = models.ImageField(upload_to='background_images/', help_text=_("Upload a background image."))
@@ -45,7 +55,6 @@ class BackgroundVideo(models.Model):
 
     def __str__(self):
         return f"Background Video {self.id}"
-
 
 class SocialLink(models.Model):
     PLATFORM_CHOICES = [
@@ -77,7 +86,6 @@ class SocialLink(models.Model):
         if not self.icon_class:
             self.icon_class = self.PLATFORM_ICON_CLASSES.get(self.platform, '')
         super().save(*args, **kwargs)
-
 
 class ContactInfo(models.Model):
     phone = models.CharField(max_length=20, help_text=_("Enter the contact phone number."))

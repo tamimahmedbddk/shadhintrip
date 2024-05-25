@@ -1,6 +1,7 @@
 from django.shortcuts import get_object_or_404, render, render
 from django.http import JsonResponse
 from .models import Post, Category, Tag, BackgroundImage
+from django.core.paginator import Paginator
 
 def blog_home(request):
     posts = Post.objects.all()
@@ -9,8 +10,14 @@ def blog_home(request):
     recent_posts = Post.objects.order_by('-created_on')[:5]
     background_images = BackgroundImage.objects.all()
 
+    # Pagination
+    paginator = Paginator(posts, 5)  # Show 10 tours per page
+    page_number = request.GET.get('page')
+    page_obj = paginator.get_page(page_number)
+
     context = {
-        'posts': posts,
+        'posts': page_obj,
+        'page_obj': page_obj,  # Pass the page object for pagination controls
         'categories': categories,
         'tags': tags,
         'recent_posts': recent_posts,
