@@ -21,6 +21,7 @@ class VisaType(models.Model):
     Model to represent types of visas for different countries.
     """
     name = models.CharField(max_length=200)
+    description = RichTextField(null=True, blank=True, verbose_name=_('Description'))
     country = models.ForeignKey(Country, related_name='visa_types', on_delete=models.CASCADE)
 
     def __str__(self):
@@ -36,8 +37,10 @@ class VisaPackage(models.Model):
     visa_type = models.ForeignKey(VisaType, related_name='visa_packages', on_delete=models.CASCADE)
     overview = RichTextField()
     description = RichTextField()
+    general_documents_required = RichTextField(blank=True,null=True,verbose_name=_('General Documents Required'), help_text=_('Documents required for all applicants'))
     requirements = models.ManyToManyField('self', symmetrical=False, through='RequiredDocuments', related_name='related_documents', blank=True)
     cancellation_policy = RichTextField()
+    refund_policy = RichTextField(null=True, blank=True)
 
     valid_for = models.CharField(blank=True,null=True, max_length=100, help_text="Validity period of the visa, e.g., 90 days after issued")
     number_of_entries = models.CharField(blank=True,null=True, max_length=50, help_text="Number of entries allowed, e.g., single entry")
@@ -46,8 +49,8 @@ class VisaPackage(models.Model):
     visa_fee = models.DecimalField(max_digits=10, decimal_places=2)
     processing_fee = models.DecimalField(max_digits=10, decimal_places=2)
     total_fee = models.DecimalField(max_digits=10, decimal_places=2, editable=False)  # Total fee will be calculated automatically
-    our_processing_time = models.PositiveIntegerField(null=True, blank=True)  # Assuming processing time is in days
-    visa_processing_time = models.PositiveIntegerField(null=True, blank=True)  # Assuming processing time is in days
+    our_processing_time = models.CharField(blank=True,null=True, max_length=100, help_text="Processing time, e.g., 1 days, 5 hous, 1-2 days/hours ")
+    visa_processing_time = models.CharField(blank=True,null=True, max_length=100, help_text="Processing time, e.g., 1 days, 5 hous, 1-2 days/hours ")
     image = models.ImageField(upload_to='visa_images/')
     is_featured = models.BooleanField(default=False)
     is_active = models.BooleanField(default=True)

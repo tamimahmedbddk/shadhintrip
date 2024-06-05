@@ -17,7 +17,7 @@ class VisaPackageAdmin(admin.ModelAdmin):
             'fields': ('title', 'slug', 'country', 'visa_type')
         }),
         ('Content', {
-            'fields': ('overview', 'description', 'cancellation_policy')
+            'fields': ('overview', 'description', 'general_documents_required', 'cancellation_policy','refund_policy')
         }),
         ('Fees & Processing Time', {
             'fields': ('visa_fee', 'processing_fee', 'total_fee', 'our_processing_time', 'visa_processing_time','valid_for','number_of_entries','max_stay')

@@ -78,114 +78,132 @@ ShadhinTrip: Visa Booking
                 {% endif %}
               </div>
               <h2 class="text-20 fw-500 text-center">{{ visa_package.title }}</h2>
-              <div class="line mt-20 mb-20"></div>
-              <p class="text-20 fw-500 pb-20">Package Summary</p>
+              <div class="line mt-10"></div>
+              <p class="text-20 fw-500 mb-20">Visa Details</p>
               <div class="">
                 <div class="d-flex items-center justify-between">
-                  <div class="text-14">Country</div>
+                    <div class="text-14">Visa Type</div>
+                    <div class="d-flex items-center">
+                        <div class="flex-center ml-10 mr-10">
+                            <div class="text-14 size-20">{{ visa_package.visa_type.name }}</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% if visa_package.valid_for %}
+            <div class="mt-10">
+              <div class="d-flex items-center justify-between">
+                  <div class="text-14">Valid For</div>
                   <div class="d-flex items-center">
-                    <div class="flex-center ml-10 mr-10">
-                      <div class="text-14 size-20">{{ visa_package.country }}</div>
-                    </div>
+                      <div class="flex-center ml-10 mr-10">
+                        
+                          <div class="text-14 size-20">{{ visa_package.valid_for }}</div>
+                      </div>
                   </div>
-                </div>
               </div>
-              <div class="mt-10">
-                <div class="d-flex items-center justify-between">
-                  <div class="text-14">Visa Type</div>
+          </div>
+          {% endif %}
+          {% if visa_package.max_stay %}
+            <div class="mt-10">
+              <div class="d-flex items-center justify-between">
+                  <div class="text-14">Max Stay</div>
                   <div class="d-flex items-center">
-                    <div class="flex-center ml-10 mr-10">
-                      <div class="text-14 size-20">{{ visa_package.visa_type.name }}</div>
-                    </div>
+                      <div class="flex-center ml-10 mr-10">
+                        
+                          <div class="text-14 size-20">{{ visa_package.max_stay }}</div>
+                      </div>
                   </div>
-                </div>
               </div>
+          </div>
+          {% endif %}
+          {% if visa_package.number_of_entries %}
+            <div class="mt-10">
+              <div class="d-flex items-center justify-between">
+                  <div class="text-14">Number Of Entries</div>
+                  <div class="d-flex items-center">
+                      <div class="flex-center ml-10 mr-10">
+                        
+                          <div class="text-14 size-20">{{ visa_package.number_of_entries }}</div>
+                      </div>
+                  </div>
+              </div>
+          </div>
+          {% endif %}
+            {% if visa_package.our_processing_time %}
+            <div class="mt-10">
+              <div class="d-flex items-center justify-between">
+                  <div class="text-14">Application Processing Time</div>
+                  <div class="d-flex items-center">
+                      <div class="flex-center ml-10 mr-10">
+                        
+                          <div class="text-14 size-20">{{ visa_package.our_processing_time }}</div>
+                      </div>
+                  </div>
+              </div>
+          </div>
+          {% endif %}
+          {% if visa_package.visa_processing_time %}
+            <div class="mt-10">
+              <div class="d-flex items-center justify-between">
+                  <div class="text-14">Estimated Visa Approval Time</div>
+                  <div class="d-flex items-center">
+                      <div class="flex-center ml-10 mr-10">
+                        
+                          <div class="text-14 size-20">{{ visa_package.visa_processing_time }}</div>
+                      </div>
+                  </div>
+              </div>
+          </div>
+          {% endif %}
 
-
-              {% if visa_package.valid_for %}
-                  <div class="mt-10">
-                    <div class="d-flex items-center justify-between">
-                        <div class="text-14">Valid For</div>
-                        <div class="d-flex items-center">
-                            <div class="flex-center ml-10 mr-10">
-                              
-                                <div class="text-14 size-20">{{ visa_package.valid_for }}</div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                {% endif %}
-                {% if visa_package.max_stay %}
-                  <div class="mt-10">
-                    <div class="d-flex items-center justify-between">
-                        <div class="text-14">Max Stay</div>
-                        <div class="d-flex items-center">
-                            <div class="flex-center ml-10 mr-10">
-                              
-                                <div class="text-14 size-20">{{ visa_package.max_stay }}</div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                {% endif %}
-                {% if visa_package.number_of_entries %}
-                  <div class="mt-10">
-                    <div class="d-flex items-center justify-between">
-                        <div class="text-14">Number Of Entries</div>
-                        <div class="d-flex items-center">
-                            <div class="flex-center ml-10 mr-10">
-                              
-                                <div class="text-14 size-20">{{ visa_package.number_of_entries }}</div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                {% endif %}
               <div class="layout-pb-md">
                 <div class="line mt-10"></div>
                 <p class="text-20 fw-500 pb-20">Price Summary</p>
-                <div class="">
+
+                <div class="pb-20">
                   <div class="d-flex items-center justify-between">
-                    <div class="text-14">Visa Fee</div>
-                    <div class="d-flex items-center">
-                      <div class="flex-center ml-10 mr-10">
-                        <div id="tourprice" class="text-14 size-20 js-count">{{ visa_package.visa_fee }}</div>
+                      <div class="text-14">Visa Fee</div>
+                      <div class="d-flex items-center js-counter">
+                          <div class="flex-center ml-10 mr-10">
+                              <div id="visaFee" class="text-14 size-20 js-count">BDT {{ visa_package.visa_fee|format_price }}</div>
+                          </div>
                       </div>
-                    </div>
                   </div>
-                </div>
-                <div class="">
+              </div>
+              <div class="pb-20">
                   <div class="d-flex items-center justify-between">
-                    <div class="text-14">Processing Fee</div>
-                    <div class="d-flex items-center">
-                      <div class="flex-center ml-10 mr-10">
-                        <div id="tourprice" class="text-14 size-20 js-count">{{ visa_package.processing_fee }} </div>
+                      <div class="text-14">Processing Fee</div>
+                      <div class="d-flex items-center js-counter">
+                          <div class="flex-center ml-10 mr-10">
+                              <div id="processingFee" class="text-14 size-20 js-count">BDT {{ visa_package.processing_fee|format_price }}</div>
+                          </div>
                       </div>
-                    </div>
                   </div>
-                </div>
-                <div>
-                  <div class="d-flex items-center justify-between">
-                    <div class="text-14">No. of Applicants</div>
-                    <div class="d-flex items-center">
-                      <a type="button" class="button size-30 border-1 rounded-full js-down">
-                        <i class="icon-minus text-10"></i>
-                      </a>
-                      <div class="flex-center ml-10 mr-10">
-                        <div id="numApplicants" class="text-14 size-20 js-count">1</div>
-                        <input type="hidden" name="num_applicants" id="numApplicantsInput" value="1">
-                      </div>
-                      <a type="button" class="button size-30 border-1 rounded-full js-up">
-                        <i class="icon-plus text-10"></i>
-                      </a>
-                    </div>
-                  </div>
-                </div>
-                <div class="line mt-20 mb-20"></div>
+              </div>
+              
+              <div>
                 <div class="d-flex items-center justify-between">
-                  <div class="text-18 fw-500">Total:</div>
-                  <div id="totalPrice" class="text-18 fw-500">BDT </div>
+                  <div class="text-14">No. of Applicants</div>
+                  <div class="d-flex items-center">
+                    <a type="button" class="button size-30 border-1 rounded-full js-down">
+                      <i class="icon-minus text-10"></i>
+                    </a>
+                    <div class="flex-center ml-10 mr-10">
+                      <div id="numTravelers" class="text-14 size-20 js-count">1</div>
+                      <input type="hidden" name="numTravelers" id="numTravelers" value="1">
+                    </div>
+                    <a type="button" class="button size-30 border-1 rounded-full js-up">
+                      <i class="icon-plus text-10"></i>
+                    </a>
+                  </div>
                 </div>
+              </div>
+              <div class="line mt-20 mb-20"></div>
+              <div class="d-flex items-center justify-between">
+                  <div class="text-18 fw-500">Total:</div>
+                  <div id="totalPrice" class="text-18 fw-500">BDT {{ visa_package.total_fee }}</div>
+              </div>
+
                 <div class="pt-30">
                   <button type="submit" class="button -md -dark-1 bg-accent-1 text-white m-auto">
                     Complete Booking
@@ -207,45 +225,34 @@ ShadhinTrip: Visa Booking
 
 <script>
   document.addEventListener('DOMContentLoaded', function() {
-    let numApplicants = 1;
-    const tourprice = parseFloat("{{ visa_package.total_fee }}"); // Get total fee from the server
-  
-    // Function to format the price
-    function formatPrice(price) {
-      if (Number.isInteger(price)) {
-        return price.toLocaleString('en-BD');
-      } else {
-        return price.toLocaleString('en-BD', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+      let numTravelers = 1;
+      const visaPrice = parseFloat("{{ visa_package.visa_fee }}");
+      const processingFeePerPerson = parseFloat("{{ visa_package.processing_fee }}");
+
+      function updateTotalPrice() {
+          const visaFee = visaPrice * numTravelers;
+          const processingFee = processingFeePerPerson * numTravelers;
+          const totalPrice = visaFee + processingFee;
+          document.getElementById('visaFee').textContent = `BDT ${visaFee.toFixed(2)}`;
+          document.getElementById('processingFee').textContent = `BDT ${processingFee.toFixed(2)}`;
+          document.getElementById('totalPrice').textContent = `BDT ${totalPrice.toFixed(2)}`;
       }
-    }
-  
-    // Function to update total price
-    function updateTotalPrice() {
-      const totalPrice = tourprice * numApplicants;
-      document.getElementById('tourprice').textContent = `BDT ${formatPrice(tourprice)}`;
-      document.getElementById('totalPrice').textContent = `BDT ${formatPrice(totalPrice)}`;
-    }
-  
-    // Event listener for increasing number of applicants
-    document.querySelector('.js-up').addEventListener('click', function() {
-      numApplicants++;
-      document.querySelector('#numApplicants').textContent = numApplicants;
-      document.querySelector('#numApplicantsInput').value = numApplicants; // Update hidden input value
+
+      document.querySelector('.js-up').addEventListener('click', function() {
+          numTravelers++;
+          document.querySelector('#numTravelers').textContent = numTravelers;
+          updateTotalPrice();
+      });
+
+      document.querySelector('.js-down').addEventListener('click', function() {
+          if (numTravelers > 1) {
+              numTravelers--;
+              document.querySelector('#numTravelers').textContent = numTravelers;
+              updateTotalPrice();
+          }
+      });
+
       updateTotalPrice();
-    });
-  
-    // Event listener for decreasing number of applicants
-    document.querySelector('.js-down').addEventListener('click', function() {
-      if (numApplicants > 1) {
-        numApplicants--;
-        document.querySelector('#numApplicants').textContent = numApplicants;
-        document.querySelector('#numApplicantsInput').value = numApplicants; // Update hidden input value
-        updateTotalPrice();
-      }
-    });
-  
-    // Update total price initially
-    updateTotalPrice();
   });
 </script>
 
