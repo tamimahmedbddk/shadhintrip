@@ -16,11 +16,6 @@ else:
     from .settings_dev import *
 
 
-#dbbackup on production
-
-DBBACKUP_STORAGE = 'django.core.files.storage.FileSystemStorage'
-DBBACKUP_STORAGE_OPTIONS = {'location': '/home/shadhintrip/backup/'}
-
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = 'django-insecure-j5n)oae-5v!rm(+$vktd2^hy!(9@@zn@#p_!)&7ug$ksjwyk8#'
 
