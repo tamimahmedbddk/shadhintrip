@@ -3,8 +3,7 @@ from datetime import timedelta
 from django.core.management.base import BaseCommand
 from django.contrib.auth import get_user_model
 from faker import Faker
-from SiteSetting.models import Country, City
-from tours.models import Tour, GroupEvent, Category, Service
+from tours.models import Tour, GroupEvent, Category, Service,Country, City
 
 User = get_user_model()
 
