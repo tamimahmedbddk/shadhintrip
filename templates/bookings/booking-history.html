@@ -47,7 +47,7 @@ ShadhinTrip: Tours And Packages, all in one.
                 </thead>
 
                 <tbody>
-            {% for visa_booking in bookings%}
+            {% for visa_booking in visa_bookings%}
                   <tr>
                     <td>#00{{visa_booking.id}}</td>
 
@@ -82,26 +82,42 @@ ShadhinTrip: Tours And Packages, all in one.
 
 
             <div class="pagination justify-center">
-              <button class="pagination__button button -accent-1 mr-15 -prev">
-                <i class="icon-arrow-left text-15"></i>
-              </button>
-
+              {% if visa_booking_page_obj.has_previous %}
+                  <a class="pagination__button button -accent-1 mr-15 -prev" href="?page={{ visa_booking_page_obj.previous_page_number }}">
+                      <i class="icon-arrow-left text-15"></i>
+                  </a>
+              {% else %}
+                  <span class="pagination__button button -accent-1 mr-15 -prev disabled">
+                      <i class="icon-arrow-left text-15"></i>
+                  </span>
+              {% endif %}
+  
               <div class="pagination__count">
-                <a href="#">1</a>
-                <a href="#" class="is-active">2</a>
-                <a href="#">3</a>
-                <a href="#">4</a>
-                <a href="#">5</a>
-                <div>...</div>
-                <a href="#">20</a>
+                  {% for i in visa_booking_page_obj.paginator.page_range %}
+                      {% if visa_booking_page_obj.number == i %}
+                          <a href="?page={{ i }}" class="is-active">{{ i }}</a>
+                      {% elif i > visa_booking_page_obj.number|add:-3 and i < visa_booking_page_obj.number|add:3 %}
+                          <a href="?page={{ i }}">{{ i }}</a>
+                      {% endif %}
+                  {% endfor %}
+                  {% if visa_booking_page_obj.number < visa_booking_page_obj.paginator.num_pages|add:-3 %}
+                      <div>...</div>
+                      <a href="?page={{ visa_booking_page_obj.paginator.num_pages }}">{{ visa_booking_page_obj.paginator.num_pages }}</a>
+                  {% endif %}
               </div>
+  
+              {% if visa_booking_page_obj.has_next %}
+                  <a class="pagination__button button -accent-1 ml-15 -next" href="?page={{ visa_booking_page_obj.next_page_number }}">
+                      <i class="icon-arrow-right text-15"></i>
+                  </a>
+              {% else %}
+                  <span class="pagination__button button -accent-1 ml-15 -next disabled">
+                      <i class="icon-arrow-right text-15"></i>
+                  </span>
+              {% endif %}
+          </div>
 
-              <button class="pagination__button button -accent-1 ml-15 -next">
-                <i class="icon-arrow-right text-15"></i>
-              </button>
-            </div>
-
-            <div class="text-14 text-center mt-20">Showing results 1-30 of 1,415</div>
+          <div class="text-14 text-center mt-20">Showing results {{ visa_booking_page_obj.start_index }}-{{ visa_booking_page_obj.end_index }} of {{ visa_booking_page_obj.paginator.count }}</div>
 
           </div>
 
@@ -152,26 +168,42 @@ ShadhinTrip: Tours And Packages, all in one.
 
 
             <div class="pagination justify-center">
-              <button class="pagination__button button -accent-1 mr-15 -prev">
-                <i class="icon-arrow-left text-15"></i>
-              </button>
-
+              {% if tour_booking_page_obj.has_previous %}
+                  <a class="pagination__button button -accent-1 mr-15 -prev" href="?page={{ tour_booking_page_obj.previous_page_number }}">
+                      <i class="icon-arrow-left text-15"></i>
+                  </a>
+              {% else %}
+                  <span class="pagination__button button -accent-1 mr-15 -prev disabled">
+                      <i class="icon-arrow-left text-15"></i>
+                  </span>
+              {% endif %}
+  
               <div class="pagination__count">
-                <a href="#">1</a>
-                <a href="#" class="is-active">2</a>
-                <a href="#">3</a>
-                <a href="#">4</a>
-                <a href="#">5</a>
-                <div>...</div>
-                <a href="#">20</a>
+                  {% for i in tour_booking_page_obj.paginator.page_range %}
+                      {% if tour_booking_page_obj.number == i %}
+                          <a href="?page={{ i }}" class="is-active">{{ i }}</a>
+                      {% elif i > tour_booking_page_obj.number|add:-3 and i < tour_booking_page_obj.number|add:3 %}
+                          <a href="?page={{ i }}">{{ i }}</a>
+                      {% endif %}
+                  {% endfor %}
+                  {% if tour_booking_page_obj.number < tour_booking_page_obj.paginator.num_pages|add:-3 %}
+                      <div>...</div>
+                      <a href="?page={{ tour_booking_page_obj.paginator.num_pages }}">{{ tour_booking_page_obj.paginator.num_pages }}</a>
+                  {% endif %}
               </div>
+  
+              {% if tour_booking_page_obj.has_next %}
+                  <a class="pagination__button button -accent-1 ml-15 -next" href="?page={{ tour_booking_page_obj.next_page_number }}">
+                      <i class="icon-arrow-right text-15"></i>
+                  </a>
+              {% else %}
+                  <span class="pagination__button button -accent-1 ml-15 -next disabled">
+                      <i class="icon-arrow-right text-15"></i>
+                  </span>
+              {% endif %}
+          </div>
 
-              <button class="pagination__button button -accent-1 ml-15 -next">
-                <i class="icon-arrow-right text-15"></i>
-              </button>
-            </div>
-
-            <div class="text-14 text-center mt-20">Showing results 1-30 of 1,415</div>
+          <div class="text-14 text-center mt-20">Showing results {{ tour_booking_page_obj.start_index }}-{{ tour_booking_page_obj.end_index }} of {{ tour_booking_page_obj.paginator.count }}</div>
 
           </div>
 
