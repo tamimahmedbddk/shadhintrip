@@ -11110,9 +11110,9 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .rounded-12 {
-  /* border-radius: 12px; */
-  border-top-right-radius: 80px;
-  border-bottom-left-radius: 80px;
+  border-radius: 12px;
+  /* border-top-right-radius: 80px;
+  border-bottom-left-radius: 80px; */
 }
 
 .rounded-20 {

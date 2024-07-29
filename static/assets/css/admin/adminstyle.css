@@ -1,0 +1,22 @@
+#header{
+    color: #FFFFFF;
+    background-color: #05073C;
+}
+#branding{
+    
+}
+
+#branding img{
+    height: 55px;
+}
+#branding h1{
+    padding-top: 10px;
+}
+.login-panel{
+    display: block; 
+    text-align: center;
+    color: #FFFFFF;
+}
+.login #header h1 {
+    color: #FFFFFF;
+}
