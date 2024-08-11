@@ -8,26 +8,22 @@ class RequiredDocumentsInline(admin.TabularInline):
 class VisaPackageAdmin(admin.ModelAdmin):
     list_display = ('title', 'country', 'visa_type', 'is_featured', 'is_active', 'created_at', 'updated_at')
     list_filter = ('country', 'visa_type', 'is_featured', 'is_active')
-    search_fields = ('title', 'overview', 'description')
+    search_fields = ('title', 'overview')
     prepopulated_fields = {'slug': ('title',)}
-    readonly_fields = ('created_at', 'updated_at', 'total_fee')
+    readonly_fields = ('total_fee',)
     inlines = [RequiredDocumentsInline]  # Add inline for RequiredDocuments
     fieldsets = (
         (None, {
             'fields': ('title', 'slug', 'country', 'visa_type')
         }),
         ('Content', {
-            'fields': ('overview', 'description', 'general_documents_required', 'cancellation_policy','refund_policy')
+            'fields': ('overview',)
         }),
         ('Fees & Processing Time', {
             'fields': ('visa_fee', 'processing_fee', 'total_fee', 'our_processing_time', 'visa_processing_time','valid_for','number_of_entries','max_stay')
         }),
         ('Image & Status', {
             'fields': ('image', 'is_featured', 'is_active')
-        }),
-        ('Timestamps', {
-            'fields': ('created_at', 'updated_at'),
-            'classes': ('collapse',)
         })
     )
 

@@ -36,11 +36,8 @@ class VisaPackage(models.Model):
     country = models.ForeignKey(Country, related_name='visa_packages', on_delete=models.CASCADE)
     visa_type = models.ForeignKey(VisaType, related_name='visa_packages', on_delete=models.CASCADE)
     overview = RichTextField()
-    description = RichTextField()
-    general_documents_required = RichTextField(blank=True,null=True,verbose_name=_('General Documents Required'), help_text=_('Documents required for all applicants'))
     requirements = models.ManyToManyField('self', symmetrical=False, through='RequiredDocuments', related_name='related_documents', blank=True)
-    cancellation_policy = RichTextField()
-    refund_policy = RichTextField(null=True, blank=True)
+
 
     valid_for = models.CharField(blank=True,null=True, max_length=100, help_text="Validity period of the visa, e.g., 90 days after issued")
     number_of_entries = models.CharField(blank=True,null=True, max_length=50, help_text="Number of entries allowed, e.g., single entry")

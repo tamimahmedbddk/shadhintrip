@@ -67,12 +67,7 @@ ShadhinTrip: Tours And Packages, all in one.
                 <p class="mt-20">{{ visa_details.overview|safe }}</p>
             </div>
           {% endif %}
-          {% if visa_details.description %}
-            <div>
-                <h2 class="text-20 mt-20">Description</h2>
-                <p class="mt-20">{{ visa_details.description|safe }}</p>
-            </div>
-          {% endif %}
+
           {% if visa_details.required_documents %}
             <div>
                 <h2 class="text-20 mt-20">Documents Required</h2>
@@ -95,25 +90,105 @@ ShadhinTrip: Tours And Packages, all in one.
             </div>
             {% endif %}
 
-        {% if visa_details.general_documents_required %}
-        <div>
-            <h2 class="text-20 mt-20">Other Requirements</h2>
-            <p class="mt-20">{{ visa_details.general_documents_required|safe }}</p>
-        </div>
-        {% endif %}
+            <h2 class="text-30 pt-30">Frequently Asked Questions</h2>
+            <div class="accordion -simple row y-gap-20 mt-30 mb-30 js-accordion">
+                <div class="col-12">
+                    <div class="accordion__item px-20 py-15 border-1 rounded-12">
+                    <div class="accordion__button d-flex items-center justify-between">
+                        <div class="button text-16 text-dark-1">What is a visa, and why do I need one?</div>
 
-        {% if visa_details.cancellation_policy %}
-            <div>
-                <h2 class="text-20 mt-20">Cancellation Policy</h2>
-                <p class="mt-20">{{ visa_details.cancellation_policy|safe }}</p>
+                        <div class="accordion__icon size-30 flex-center bg-light-2 rounded-full">
+                        <i class="icon-plus text-13"></i>
+                        <i class="icon-minus text-13"></i>
+                        </div>
+                    </div>
+
+                    <div class="accordion__content">
+                        <div class="pt-20">
+                        <p>A visa is an official document that allows you to enter, stay in, and leave a foreign country. It is typically stamped or glued into your passport. Whether you need a visa depends on your nationality and the country you wish to visit. A visa ensures that you meet the entry requirements for your destination.</p>
+                        </div>
+                    </div>
+                    </div>
+                </div>
+
+                <div class="col-12">
+                    <div class="accordion__item px-20 py-15 border-1 rounded-12">
+                    <div class="accordion__button d-flex items-center justify-between">
+                        <div class="button text-16 text-dark-1">How can I apply for a visa through ShadhinTrip?</div>
+
+                        <div class="accordion__icon size-30 flex-center bg-light-2 rounded-full">
+                        <i class="icon-plus text-13"></i>
+                        <i class="icon-minus text-13"></i>
+                        </div>
+                    </div>
+
+                    <div class="accordion__content">
+                        <div class="pt-20">
+                        <p>You can apply for a visa through ShadhinTrip by visiting our website and selecting the visa type you need. Our platform will guide you through the application process, including document submission and payment. Our team is also available to assist you with any questions you might have during the process.</p>
+                        </div>
+                    </div>
+                    </div>
+                </div>
+
+                <div class="col-12">
+                    <div class="accordion__item px-20 py-15 border-1 rounded-12">
+                    <div class="accordion__button d-flex items-center justify-between">
+                        <div class="button text-16 text-dark-1">Can I get a refund if my visa application is denied?</div>
+
+                        <div class="accordion__icon size-30 flex-center bg-light-2 rounded-full">
+                        <i class="icon-plus text-13"></i>
+                        <i class="icon-minus text-13"></i>
+                        </div>
+                    </div>
+
+                    <div class="accordion__content">
+                        <div class="pt-20">
+                        <p>Unfortunately, visa fees and the ShadhinTrip processing fee are non-refundable, as they cover the administrative costs associated with processing your application.</p>
+                        </div>
+                    </div>
+                    </div>
+                </div>
+
+                <div class="col-12">
+                    <div class="accordion__item px-20 py-15 border-1 rounded-12">
+                    <div class="accordion__button d-flex items-center justify-between">
+                        <div class="button text-16 text-dark-1">How long does it take to process a visa?</div>
+
+                        <div class="accordion__icon size-30 flex-center bg-light-2 rounded-full">
+                        <i class="icon-plus text-13"></i>
+                        <i class="icon-minus text-13"></i>
+                        </div>
+                    </div>
+
+                    <div class="accordion__content">
+                        <div class="pt-20">
+                        <p>The processing time for a visa depends on the type of visa and the destination country. Some visas are processed within a few days, while others may take several weeks. We recommend applying well in advance of your planned travel date to avoid any delays.</p>
+                        </div>
+                    </div>
+                    </div>
+                </div>
+
+                
+
+                <div class="col-12">
+                    <div class="accordion__item px-20 py-15 border-1 rounded-12">
+                    <div class="accordion__button d-flex items-center justify-between">
+                        <div class="button text-16 text-dark-1">Do I need a visa if I am just transiting through a country?</div>
+
+                        <div class="accordion__icon size-30 flex-center bg-light-2 rounded-full">
+                        <i class="icon-plus text-13"></i>
+                        <i class="icon-minus text-13"></i>
+                        </div>
+                    </div>
+
+                    <div class="accordion__content">
+                        <div class="pt-20">
+                        <p>Some countries require a transit visa if you are passing through their territory on the way to another destination. It is essential to verify the transit visa requirements for all the countries on your travel route.</p>
+                        </div>
+                    </div>
+                    </div>
+                </div>
             </div>
-        {% endif %}
-        {% if visa_details.refund_policy %}
-            <div>
-                <h2 class="text-20 mt-20">Refund Policy</h2>
-                <p class="mt-20">{{ visa_details.refund_policy|safe }}</p>
-            </div>
-        {% endif %}
 
         </div>
         <div class="col-lg-4">

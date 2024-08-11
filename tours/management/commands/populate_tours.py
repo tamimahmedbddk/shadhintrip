@@ -31,13 +31,9 @@ class Command(BaseCommand):
             # Create Tours
             title = fake.sentence(nb_words=6)
             overview = fake.paragraph(nb_sentences=3)
-            description = fake.paragraph(nb_sentences=10)
-            activities = fake.paragraph(nb_sentences=5)
             includes = fake.paragraph(nb_sentences=3)
             excludes = fake.paragraph(nb_sentences=3)
-            requirements = fake.paragraph(nb_sentences=2)
             rules = fake.paragraph(nb_sentences=2)
-            cancellation_policy = fake.paragraph(nb_sentences=2)
             refund_policy = fake.paragraph(nb_sentences=2)
             max_participants = fake.random_int(min=1, max=30)
             price = fake.random_number(digits=2)
@@ -47,13 +43,9 @@ class Command(BaseCommand):
             tour = Tour(
                 title=title,
                 overview=overview,
-                description=description,
-                activities=activities,
                 includes=includes,
                 excludes=excludes,
-                requirements=requirements,
                 rules=rules,
-                cancellation_policy=cancellation_policy,
                 refund_policy=refund_policy,
                 max_participants=max_participants,
                 price=price,
@@ -77,13 +69,9 @@ class Command(BaseCommand):
             # Create Group Events
             title = fake.sentence(nb_words=6)
             overview = fake.paragraph(nb_sentences=3)
-            description = fake.paragraph(nb_sentences=10)
-            activities = fake.paragraph(nb_sentences=5)
             includes = fake.paragraph(nb_sentences=3)
             excludes = fake.paragraph(nb_sentences=3)
-            requirements = fake.paragraph(nb_sentences=2)
             rules = fake.paragraph(nb_sentences=2)
-            cancellation_policy = fake.paragraph(nb_sentences=2)
             refund_policy = fake.paragraph(nb_sentences=2)
             max_participants = fake.random_int(min=1, max=30)
             price = fake.random_number(digits=2)
@@ -96,13 +84,9 @@ class Command(BaseCommand):
             group_event = GroupEvent(
                 title=title,
                 overview=overview,
-                description=description,
-                activities=activities,
                 includes=includes,
                 excludes=excludes,
-                requirements=requirements,
                 rules=rules,
-                cancellation_policy=cancellation_policy,
                 refund_policy=refund_policy,
                 max_participants=max_participants,
                 price=price,

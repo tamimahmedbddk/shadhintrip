@@ -125,9 +125,6 @@ ShadhinTrip: Tours And Packages, all in one.
 
           <h2 class="text-30">Overview</h2>
           <p class="mt-20">{{ tour_details.overview|safe }}</p>
-
-          <h2 class="text-30 mt-20">Description</h2>
-          <p class="mt-20">{{ tour_details.description|safe }}</p>
           
           <h2 class="text-30 pt-30">Itinerary</h2>
 
@@ -157,70 +154,13 @@ ShadhinTrip: Tours And Packages, all in one.
             </div>
           </div>
           
-          
-          
-        
-
         <!-- <div class="line mt-30"></div> -->
         <h2 class="text-30 pt-30">Additional Information</h2>
         <div class="accordion -simple row y-gap-20 mt-30 js-accordion">
 
-          <div class="col-12">
-            <div class="accordion__item px-20 py-15 border-1 rounded-12">
-              <div class="accordion__button d-flex items-center justify-between">
-                <div class="button text-16 text-dark-1">Activities</div>
+          
 
-                <div class="accordion__icon size-30 flex-center bg-light-2 rounded-full">
-                  <i class="icon-plus text-13"></i>
-                  <i class="icon-minus text-13"></i>
-                </div>
-              </div>
-
-              <div class="accordion__content">
-                <div class="pt-20">
-                  <p>{{ tour_details.activities|safe }}</p>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div class="col-12">
-            <div class="accordion__item px-20 py-15 border-1 rounded-12">
-              <div class="accordion__button d-flex items-center justify-between">
-                <div class="button text-16 text-dark-1">Requirements</div>
-
-                <div class="accordion__icon size-30 flex-center bg-light-2 rounded-full">
-                  <i class="icon-plus text-13"></i>
-                  <i class="icon-minus text-13"></i>
-                </div>
-              </div>
-
-              <div class="accordion__content">
-                <div class="pt-20">
-                  <p>{{ tour_details.requirements|safe }}</p>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div class="col-12">
-            <div class="accordion__item px-20 py-15 border-1 rounded-12">
-              <div class="accordion__button d-flex items-center justify-between">
-                <div class="button text-16 text-dark-1">Planned Destinations</div>
-
-                <div class="accordion__icon size-30 flex-center bg-light-2 rounded-full">
-                  <i class="icon-plus text-13"></i>
-                  <i class="icon-minus text-13"></i>
-                </div>
-              </div>
-
-              <div class="accordion__content">
-                <div class="pt-20">
-                  <p>{{ tour_details.destinations|safe }}</p>
-                </div>
-              </div>
-            </div>
-          </div>
+         
 
           <div class="col-12">
             <div class="accordion__item px-20 py-15 border-1 rounded-12">
@@ -296,25 +236,6 @@ ShadhinTrip: Tours And Packages, all in one.
             </div>
           </div>
           {% endif %}
-
-          <div class="col-12">
-            <div class="accordion__item px-20 py-15 border-1 rounded-12">
-              <div class="accordion__button d-flex items-center justify-between">
-                <div class="button text-16 text-dark-1">Cancellation Policy</div>
-
-                <div class="accordion__icon size-30 flex-center bg-light-2 rounded-full">
-                  <i class="icon-plus text-13"></i>
-                  <i class="icon-minus text-13"></i>
-                </div>
-              </div>
-
-              <div class="accordion__content">
-                <div class="pt-20">
-                  <p>{{ tour_details.cancellation_policy|safe }}</p>
-                </div>
-              </div>
-            </div>
-          </div>
 
           <div class="col-12">
             <div class="accordion__item px-20 py-15 border-1 rounded-12">
