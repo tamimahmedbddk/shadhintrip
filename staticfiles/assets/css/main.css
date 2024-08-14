@@ -14164,7 +14164,7 @@ button.gm-ui-hover-effect::after {
   padding: 10px;
   margin-bottom: 10px;
   border: 1px solid #ccc;
-  border-radius: 5px;
+  border-radius: 14px;
 }
 
 .newsletter-submit-btn {
