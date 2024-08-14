@@ -10,7 +10,7 @@ SECRET_KEY='25^l5j0a(!o6am^-$6y_tnluht0n-3z=zpemm%=&(=95o%)h6o'
 #dbbackup on local host
 
 DBBACKUP_STORAGE = 'django.core.files.storage.FileSystemStorage'
-DBBACKUP_STORAGE_OPTIONS = {'location': '/Users/iqbal/Desktop/shadhintrip-final/dbbackup'}
+DBBACKUP_STORAGE_OPTIONS = {'location': '/Users/iqbal/Desktop/shadhintrip/backup'}
 
 
 
