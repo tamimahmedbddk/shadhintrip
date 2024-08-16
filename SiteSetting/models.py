@@ -4,7 +4,7 @@ from django.utils.translation import gettext_lazy as _
 
 class Country(models.Model):
     name = models.CharField(max_length=200, unique=True, help_text=_("Enter the name of the country."))
-    image = models.ImageField(upload_to='country_images/', help_text=_("Upload an image representing the country."))
+    image = models.ImageField(upload_to='gallery/site_images/country_images/', help_text=_("Upload an image representing the country."))
 
     def __str__(self):
         return self.name
@@ -17,7 +17,7 @@ class City(models.Model):
         return f"{self.name}, {self.country}"
 
 class SiteConfiguration(models.Model):
-    banner_image = models.ImageField(upload_to='background_images/', blank=True, null=True, help_text=_("Upload the banner image for the site."))
+    banner_image = models.ImageField(upload_to='gallery/site_images/main_banner/', blank=True, null=True, help_text=_("Upload the banner image for the site."))
     about_content = RichTextField(blank=True, null=True, help_text=_("Content for the about page."))
     privacy_policy_content = RichTextField(blank=True, null=True, help_text=_("Content for the privacy policy page."))
     terms_of_service = RichTextField(blank=True, null=True, help_text=_("Content for the terms of service page."))
@@ -29,21 +29,21 @@ class SiteConfiguration(models.Model):
         return "Site Configuration"
 
 class Logo(models.Model):
-    image = models.ImageField(upload_to='logos/', help_text=_("Upload the main logo for the site."))
+    image = models.ImageField(upload_to='gallery/site_images/logo/', help_text=_("Upload the main logo for the site."))
     is_active = models.BooleanField(default=True, help_text=_("Activate this logo."))
 
     def __str__(self):
         return f"Logo {self.id}"
 
 class Favicon(models.Model):
-    image = models.ImageField(upload_to='favicons/', help_text=_("Upload the favicon for the site."))
+    image = models.ImageField(upload_to='gallery/site_images/favicons/', help_text=_("Upload the favicon for the site."))
     is_active = models.BooleanField(default=True, help_text=_("Activate this favicon."))
 
     def __str__(self):
         return f"Favicon {self.id}"
 
 class BackgroundImage(models.Model):
-    image = models.ImageField(upload_to='background_images/', help_text=_("Upload a background image."))
+    image = models.ImageField(upload_to='gallery/site_images/main_banner/', help_text=_("Upload a background image."))
     is_active = models.BooleanField(default=True, help_text=_("Activate this background image."))
 
     def __str__(self):

@@ -6,7 +6,7 @@ from django.utils.translation import gettext_lazy as _
 from SiteSetting.models import Country, City
 
 class TourBanner(models.Model):
-    image = models.ImageField(upload_to='background_images/', help_text=_("Upload a background image for the tour banner."))
+    image = models.ImageField(upload_to='gallery/tour_images/tour_banner/', help_text=_("Upload a background image for the tour banner."))
     title = models.CharField(max_length=50, blank=True, null=True, help_text=_("Enter an optional title for the tour banner."))
     is_active = models.BooleanField(default=False, help_text=_("Activate this banner."))
 
@@ -101,7 +101,7 @@ class TourItinerary(models.Model):
         return f"{self.tour.title if self.tour else self.group_event.title} - Day {self.day}: {self.title}"
 
 class Image(models.Model):
-    file = models.ImageField(upload_to='gallery/', help_text=_("Upload an image."))
+    file = models.ImageField(upload_to='gallery/tour_images/images/', help_text=_("Upload an image."))
     uploaded_at = models.DateTimeField(auto_now_add=True)
     caption = models.CharField(max_length=255, blank=True, help_text=_("Enter an optional caption for the image."))
 
@@ -125,7 +125,7 @@ class GroupEventImage(models.Model):
         return f"Image for {self.group_event.title} {'(Main)' if self.is_main else ''}"
 
 class Video(models.Model):
-    file = models.FileField(upload_to='videos/', help_text=_("Upload a video."))
+    file = models.FileField(upload_to='gallery/tour_videos/', help_text=_("Upload a video."))
     uploaded_at = models.DateTimeField(auto_now_add=True)
     caption = models.CharField(max_length=255, blank=True, help_text=_("Enter an optional caption for the video."))
 

@@ -28,7 +28,7 @@ class BackgroundImage(models.Model):
     """
     Model to store background images.
     """
-    image = models.ImageField(upload_to='background_images/')
+    image = models.ImageField(upload_to='gallery/blog_images/blog_banner/')
     is_active = models.BooleanField(default=True)
 
     def __str__(self):
@@ -55,7 +55,7 @@ class Post(models.Model):
     content = RichTextField(verbose_name="Content")
     created_on = models.DateTimeField(auto_now_add=True, verbose_name="Created On")
     updated_on = models.DateTimeField(auto_now=True, verbose_name="Updated On")
-    featured_image = models.ImageField(upload_to='blog/images/', null=True, blank=True, verbose_name="Featured Image")
+    featured_image = models.ImageField(upload_to='gallery/blog_images/images/', null=True, blank=True, verbose_name="Featured Image")
     slug = models.SlugField(max_length=200, unique=True, blank=True, verbose_name="Slug")
     status = models.IntegerField(choices=((0,"Draft"), (1,"Published")), default=0, verbose_name="Status")
     category = models.ForeignKey(Category, related_name='blog_posts', on_delete=models.CASCADE, verbose_name="Category")
@@ -80,7 +80,7 @@ class Post(models.Model):
 
         if self.featured_image:
             image = Image.open(self.featured_image)
-            image = image.resize((600, 450), Image.ANTIALIAS)
+            image = image.resize((600, 450), Image.Resampling.LANCZOS)
             image.save(self.featured_image.path)
 
 class Comment(models.Model):

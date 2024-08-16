@@ -9,7 +9,7 @@ from SiteSetting.models import Country
 User = get_user_model()
 
 class VisaBanner(models.Model):
-    image = models.ImageField(upload_to='background_images/')
+    image = models.ImageField(upload_to='gallery/visa_images/visa_banner/')
     title = models.CharField(max_length=50, blank=True,null=True)
     is_active = models.BooleanField(default=True)
 
@@ -37,8 +37,7 @@ class VisaPackage(models.Model):
     visa_type = models.ForeignKey(VisaType, related_name='visa_packages', on_delete=models.CASCADE)
     overview = RichTextField()
     requirements = models.ManyToManyField('self', symmetrical=False, through='RequiredDocuments', related_name='related_documents', blank=True)
-
-
+    
     valid_for = models.CharField(blank=True,null=True, max_length=100, help_text="Validity period of the visa, e.g., 90 days after issued")
     number_of_entries = models.CharField(blank=True,null=True, max_length=50, help_text="Number of entries allowed, e.g., single entry")
     max_stay = models.CharField(blank=True,null=True, max_length=50, help_text="Maximum stay per entry, e.g., 30 days per entry")
@@ -48,7 +47,7 @@ class VisaPackage(models.Model):
     total_fee = models.DecimalField(max_digits=10, decimal_places=2, editable=False)  # Total fee will be calculated automatically
     our_processing_time = models.CharField(blank=True,null=True, max_length=100, help_text="Processing time, e.g., 1 days, 5 hous, 1-2 days/hours ")
     visa_processing_time = models.CharField(blank=True,null=True, max_length=100, help_text="Processing time, e.g., 1 days, 5 hous, 1-2 days/hours ")
-    image = models.ImageField(upload_to='visa_images/')
+    image = models.ImageField(upload_to='gallery/visa_images/images/')
     is_featured = models.BooleanField(default=False)
     is_active = models.BooleanField(default=True)
     created_at = models.DateTimeField(auto_now_add=True)
