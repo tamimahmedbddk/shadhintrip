@@ -1,6 +1,1 @@
-# Ignore media folder
-/media/
 
-# Other files and folders to ignore
-*.pyc
-__pycache__/
