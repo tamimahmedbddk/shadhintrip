@@ -94,17 +94,26 @@ class VisaPackage(models.Model):
             self._compress_image(self.image, (800, 600))  # Adjust size as needed
 
     def _compress_image(self, image_field, size):
-        original_path = image_field.path
+        # Open the image using a file-like object
         image = PILImage.open(image_field)  # Use PILImage to avoid conflict with your Image model
+
+        # Convert the image to RGB if it's in a mode incompatible with JPEG
+        if image.mode in ("RGBA", "LA", "P"):
+            image = image.convert("RGB")
+
+        # Resize the image
         image = image.resize(size, PILImage.Resampling.LANCZOS)
-        im_io = BytesIO()
-        image.save(im_io, format='JPEG', quality=85)
-        new_image = ContentFile(im_io.getvalue(), name=os.path.basename(original_path))
 
-        if os.path.exists(original_path):
-            os.remove(original_path)
+        # Prepare the path for saving the file manually
+        image_path = os.path.join(os.path.dirname(image_field.path), os.path.basename(image_field.name))
 
-        image_field.save(os.path.basename(original_path), new_image, save=False)
+        # Save the image to the correct path
+        image.save(image_path, format='JPEG', quality=85)
+
+        # Update the ImageField's file
+        image_field.name = os.path.basename(image_path)
+
+
 
 class RequiredDocuments(models.Model):
     visa_package = models.ForeignKey(VisaPackage, related_name='required_documents', on_delete=models.CASCADE)

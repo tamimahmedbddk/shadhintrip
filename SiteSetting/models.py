@@ -3,8 +3,8 @@ from ckeditor.fields import RichTextField
 from django.utils.translation import gettext_lazy as _
 from io import BytesIO
 from django.core.files.base import ContentFile
-import os
 from PIL import Image
+import os
 
 class Country(models.Model):
     name = models.CharField(max_length=200, unique=True, help_text=_("Enter the name of the country."))
@@ -19,17 +19,25 @@ class Country(models.Model):
             self._compress_image(self.image, (800, 600))  # Adjust size as needed
 
     def _compress_image(self, image_field, size):
-        original_path = image_field.path
+        # Open the image using a file-like object
         image = Image.open(image_field)
+
+        # Convert the image to RGB if it's in a mode incompatible with JPEG
+        if image.mode in ("RGBA", "LA", "P"):
+            image = image.convert("RGB")
+
+        # Resize the image
         image = image.resize(size, Image.Resampling.LANCZOS)
-        im_io = BytesIO()
-        image.save(im_io, format='JPEG', quality=85)
-        new_image = ContentFile(im_io.getvalue(), name=os.path.basename(original_path))
 
-        if os.path.exists(original_path):
-            os.remove(original_path)
+        # Prepare the path for saving the file manually
+        image_path = os.path.join(os.path.dirname(image_field.path), os.path.basename(image_field.name))
 
-        image_field.save(os.path.basename(original_path), new_image, save=False)
+        # Save the image to the correct path
+        image.save(image_path, format='JPEG', quality=85)
+
+        # Update the ImageField's file
+        image_field.name = os.path.basename(image_path)
+
 
 class City(models.Model):
     name = models.CharField(max_length=200, help_text=_("Enter the name of the city."))
@@ -56,17 +64,25 @@ class SiteConfiguration(models.Model):
             self._compress_image(self.banner_image, (1920, 1080))  # Adjust size as needed
 
     def _compress_image(self, image_field, size):
-        original_path = image_field.path
+        # Open the image using a file-like object
         image = Image.open(image_field)
+
+        # Convert the image to RGB if it's in a mode incompatible with JPEG
+        if image.mode in ("RGBA", "LA", "P"):
+            image = image.convert("RGB")
+
+        # Resize the image
         image = image.resize(size, Image.Resampling.LANCZOS)
-        im_io = BytesIO()
-        image.save(im_io, format='JPEG', quality=85)
-        new_image = ContentFile(im_io.getvalue(), name=os.path.basename(original_path))
 
-        if os.path.exists(original_path):
-            os.remove(original_path)
+        # Prepare the path for saving the file manually
+        image_path = os.path.join(os.path.dirname(image_field.path), os.path.basename(image_field.name))
 
-        image_field.save(os.path.basename(original_path), new_image, save=False)
+        # Save the image to the correct path
+        image.save(image_path, format='JPEG', quality=85)
+
+        # Update the ImageField's file
+        image_field.name = os.path.basename(image_path)
+
 
 class Logo(models.Model):
     image = models.ImageField(upload_to='site_images/logo/', help_text=_("Upload the main logo for the site."))
@@ -75,23 +91,6 @@ class Logo(models.Model):
     def __str__(self):
         return f"Logo {self.id}"
 
-    def save(self, *args, **kwargs):
-        super().save(*args, **kwargs)
-        if self.image:
-            self._compress_image(self.image, (300, 300))  # Adjust size as needed
-
-    def _compress_image(self, image_field, size):
-        original_path = image_field.path
-        image = Image.open(image_field)
-        image = image.resize(size, Image.Resampling.LANCZOS)
-        im_io = BytesIO()
-        image.save(im_io, format='JPEG', quality=85)
-        new_image = ContentFile(im_io.getvalue(), name=os.path.basename(original_path))
-
-        if os.path.exists(original_path):
-            os.remove(original_path)
-
-        image_field.save(os.path.basename(original_path), new_image, save=False)
 
 class Favicon(models.Model):
     image = models.ImageField(upload_to='site_images/favicons/', help_text=_("Upload the favicon for the site."))
@@ -100,23 +99,6 @@ class Favicon(models.Model):
     def __str__(self):
         return f"Favicon {self.id}"
 
-    def save(self, *args, **kwargs):
-        super().save(*args, **kwargs)
-        if self.image:
-            self._compress_image(self.image, (64, 64))  # Adjust size as needed
-
-    def _compress_image(self, image_field, size):
-        original_path = image_field.path
-        image = Image.open(image_field)
-        image = image.resize(size, Image.Resampling.LANCZOS)
-        im_io = BytesIO()
-        image.save(im_io, format='PNG', quality=95)  # PNG is more suitable for icons
-        new_image = ContentFile(im_io.getvalue(), name=os.path.basename(original_path))
-
-        if os.path.exists(original_path):
-            os.remove(original_path)
-
-        image_field.save(os.path.basename(original_path), new_image, save=False)
 
 class BackgroundImage(models.Model):
     image = models.ImageField(upload_to='site_images/main_banner/', help_text=_("Upload a background image."))
@@ -131,17 +113,25 @@ class BackgroundImage(models.Model):
             self._compress_image(self.image, (1920, 1080))  # Adjust size as needed
 
     def _compress_image(self, image_field, size):
-        original_path = image_field.path
+        # Open the image using a file-like object
         image = Image.open(image_field)
+
+        # Convert the image to RGB if it's in a mode incompatible with JPEG
+        if image.mode in ("RGBA", "LA", "P"):
+            image = image.convert("RGB")
+
+        # Resize the image
         image = image.resize(size, Image.Resampling.LANCZOS)
-        im_io = BytesIO()
-        image.save(im_io, format='JPEG', quality=85)
-        new_image = ContentFile(im_io.getvalue(), name=os.path.basename(original_path))
 
-        if os.path.exists(original_path):
-            os.remove(original_path)
+        # Prepare the path for saving the file manually
+        image_path = os.path.join(os.path.dirname(image_field.path), os.path.basename(image_field.name))
 
-        image_field.save(os.path.basename(original_path), new_image, save=False)
+        # Save the image to the correct path
+        image.save(image_path, format='JPEG', quality=85)
+
+        # Update the ImageField's file
+        image_field.name = os.path.basename(image_path)
+
 
 class BackgroundVideo(models.Model):
     video = models.FileField(upload_to='background_videos/', help_text=_("Upload a background video."))
