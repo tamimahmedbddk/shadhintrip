@@ -2,19 +2,42 @@ from django.db import models
 from django.utils.text import slugify
 from ckeditor.fields import RichTextField
 from django.contrib.auth import get_user_model
-from django.core.validators import MinValueValidator  # Import MinValueValidator
+from django.core.validators import MinValueValidator
 from django.utils.translation import gettext_lazy as _
 from SiteSetting.models import Country
+
+from io import BytesIO
+from django.core.files.base import ContentFile
+import os
+from PIL import Image as PILImage  # Alias the PIL Image class to avoid conflicts
 
 User = get_user_model()
 
 class VisaBanner(models.Model):
-    image = models.ImageField(upload_to='gallery/visa_images/visa_banner/')
-    title = models.CharField(max_length=50, blank=True,null=True)
-    is_active = models.BooleanField(default=True)
+    image = models.ImageField(upload_to='gallery/background_images/visa_banner/', help_text=_("Upload a background image for the visa banner."))
+    title = models.CharField(max_length=50, blank=True, null=True, help_text=_("Enter an optional title for the visa banner."))
+    is_active = models.BooleanField(default=False, help_text=_("Activate this banner."))
 
     def __str__(self):
-        return f"Background Image {self.id}"
+        return self.title or f"Background Image {self.id}"
+
+    def save(self, *args, **kwargs):
+        super().save(*args, **kwargs)
+        if self.image:
+            self._compress_image(self.image, (1920, 1080))  # Adjust size as needed
+
+    def _compress_image(self, image_field, size):
+        original_path = image_field.path
+        image = PILImage.open(image_field)  # Use PILImage to avoid conflict with your Image model
+        image = image.resize(size, PILImage.Resampling.LANCZOS)
+        im_io = BytesIO()
+        image.save(im_io, format='JPEG', quality=85)
+        new_image = ContentFile(im_io.getvalue(), name=os.path.basename(original_path))
+
+        if os.path.exists(original_path):
+            os.remove(original_path)
+
+        image_field.save(os.path.basename(original_path), new_image, save=False)
 
 class VisaType(models.Model):
     """
@@ -45,8 +68,8 @@ class VisaPackage(models.Model):
     visa_fee = models.DecimalField(max_digits=10, decimal_places=2)
     processing_fee = models.DecimalField(max_digits=10, decimal_places=2)
     total_fee = models.DecimalField(max_digits=10, decimal_places=2, editable=False)  # Total fee will be calculated automatically
-    our_processing_time = models.CharField(blank=True,null=True, max_length=100, help_text="Processing time, e.g., 1 days, 5 hous, 1-2 days/hours ")
-    visa_processing_time = models.CharField(blank=True,null=True, max_length=100, help_text="Processing time, e.g., 1 days, 5 hous, 1-2 days/hours ")
+    our_processing_time = models.CharField(blank=True,null=True, max_length=100, help_text="Processing time, e.g., 1 days, 5 hours, 1-2 days/hours ")
+    visa_processing_time = models.CharField(blank=True,null=True, max_length=100, help_text="Processing time, e.g., 1 days, 5 hours, 1-2 days/hours ")
     image = models.ImageField(upload_to='gallery/visa_images/images/')
     is_featured = models.BooleanField(default=False)
     is_active = models.BooleanField(default=True)
@@ -67,6 +90,21 @@ class VisaPackage(models.Model):
         if not self.slug:
             self.slug = slugify(self.title)
         super().save(*args, **kwargs)
+        if self.image:
+            self._compress_image(self.image, (800, 600))  # Adjust size as needed
+
+    def _compress_image(self, image_field, size):
+        original_path = image_field.path
+        image = PILImage.open(image_field)  # Use PILImage to avoid conflict with your Image model
+        image = image.resize(size, PILImage.Resampling.LANCZOS)
+        im_io = BytesIO()
+        image.save(im_io, format='JPEG', quality=85)
+        new_image = ContentFile(im_io.getvalue(), name=os.path.basename(original_path))
+
+        if os.path.exists(original_path):
+            os.remove(original_path)
+
+        image_field.save(os.path.basename(original_path), new_image, save=False)
 
 class RequiredDocuments(models.Model):
     visa_package = models.ForeignKey(VisaPackage, related_name='required_documents', on_delete=models.CASCADE)
@@ -79,4 +117,3 @@ class RequiredDocuments(models.Model):
 
     def __str__(self):
         return f"{self.visa_package.title} - {self.document_for}"
-

@@ -4,19 +4,41 @@ from ckeditor.fields import RichTextField
 from django.core.validators import MinValueValidator, MaxValueValidator
 from django.utils.translation import gettext_lazy as _
 from SiteSetting.models import Country, City
+from io import BytesIO
+from django.core.files.base import ContentFile
+import os
+from PIL import Image as PILImage  # Alias the PIL Image class to avoid conflicts
 
 class TourBanner(models.Model):
-    image = models.ImageField(upload_to='gallery/tour_images/tour_banner/', help_text=_("Upload a background image for the tour banner."))
+    image = models.ImageField(upload_to='gallery/background_images/tour_banner/', help_text=_("Upload a background image for the tour banner."))
     title = models.CharField(max_length=50, blank=True, null=True, help_text=_("Enter an optional title for the tour banner."))
     is_active = models.BooleanField(default=False, help_text=_("Activate this banner."))
 
     def __str__(self):
         return self.title or f"Background Image {self.id}"
 
+    def save(self, *args, **kwargs):
+        super().save(*args, **kwargs)
+        if self.image:
+            self._compress_image(self.image, (1920, 1080))  # Adjust size as needed
+
+    def _compress_image(self, image_field, size):
+        original_path = image_field.path
+        image = PILImage.open(image_field)  # Use PILImage to avoid conflict with your Image model
+        image = image.resize(size, PILImage.Resampling.LANCZOS)
+        im_io = BytesIO()
+        image.save(im_io, format='JPEG', quality=85)
+        new_image = ContentFile(im_io.getvalue(), name=os.path.basename(original_path))
+
+        if os.path.exists(original_path):
+            os.remove(original_path)
+
+        image_field.save(os.path.basename(original_path), new_image, save=False)
+
 class Category(models.Model):
     name = models.CharField(max_length=200, unique=True, help_text=_("Enter the name of the tour category, such as trekking, sightseeing, etc."))
     icon_class = models.CharField(default='<i class="icon-office text-24 text-accent-1"></i>', max_length=100, help_text=_("Enter the CSS class for the Category icon."))
-    
+
     class Meta:
         verbose_name_plural = "Categories"
 
@@ -101,12 +123,30 @@ class TourItinerary(models.Model):
         return f"{self.tour.title if self.tour else self.group_event.title} - Day {self.day}: {self.title}"
 
 class Image(models.Model):
-    file = models.ImageField(upload_to='gallery/tour_images/images/', help_text=_("Upload an image."))
+    file = models.ImageField(upload_to='gallery/tour_images/', help_text=_("Upload an image."))
     uploaded_at = models.DateTimeField(auto_now_add=True)
     caption = models.CharField(max_length=255, blank=True, help_text=_("Enter an optional caption for the image."))
 
     def __str__(self):
         return self.file.name
+
+    def save(self, *args, **kwargs):
+        super().save(*args, **kwargs)
+        if self.file:
+            self._compress_image(self.file, (800, 600))  # Adjust size as needed
+
+    def _compress_image(self, image_field, size):
+        original_path = image_field.path
+        image = PILImage.open(image_field)  # Use PILImage to avoid conflict with your Image model
+        image = image.resize(size, PILImage.Resampling.LANCZOS)
+        im_io = BytesIO()
+        image.save(im_io, format='JPEG', quality=85)
+        new_image = ContentFile(im_io.getvalue(), name=os.path.basename(original_path))
+
+        if os.path.exists(original_path):
+            os.remove(original_path)
+
+        image_field.save(os.path.basename(original_path), new_image, save=False)
 
 class TourImage(models.Model):
     tour = models.ForeignKey(Tour, related_name='images', on_delete=models.CASCADE)
@@ -122,10 +162,10 @@ class GroupEventImage(models.Model):
     is_main = models.BooleanField(default=False, help_text=_("Check if this is the main image for the group event."))
 
     def __str__(self):
-        return f"Image for {self.group_event.title} {'(Main)' if self.is_main else ''}"
+        return f"Image for {self.group_event.title} {'(Main)' if this.is_main else ''}"
 
 class Video(models.Model):
-    file = models.FileField(upload_to='gallery/tour_videos/', help_text=_("Upload a video."))
+    file = models.FileField(upload_to='videos/', help_text=_("Upload a video."))
     uploaded_at = models.DateTimeField(auto_now_add=True)
     caption = models.CharField(max_length=255, blank=True, help_text=_("Enter an optional caption for the video."))
 

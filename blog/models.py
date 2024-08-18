@@ -5,6 +5,10 @@ from ckeditor.fields import RichTextField
 from PIL import Image
 from django.core.exceptions import ValidationError
 
+from io import BytesIO
+from django.core.files.base import ContentFile
+import os
+
 User = get_user_model()
 
 def custom_slugify(value, allow_unicode=False):
@@ -28,11 +32,39 @@ class BackgroundImage(models.Model):
     """
     Model to store background images.
     """
-    image = models.ImageField(upload_to='gallery/blog_images/blog_banner/')
+    image = models.ImageField(upload_to='background_images/')
     is_active = models.BooleanField(default=True)
 
     def __str__(self):
         return f"Background Image {self.id}"
+
+    def save(self, *args, **kwargs):
+        # First, save the model to ensure the image field has a path
+        if not self.pk:
+            super().save(*args, **kwargs)
+
+        if self.image:
+            # Get the original file path
+            original_path = self.image.path
+
+            # Open the image file
+            image = Image.open(self.image)
+
+            # Resize and compress the image
+            image = image.resize((1920, 1080), Image.Resampling.LANCZOS)
+            im_io = BytesIO()
+            image.save(im_io, format='JPEG', quality=85)
+            new_image = ContentFile(im_io.getvalue(), name=os.path.basename(original_path))
+
+            # Delete the old file to prevent duplication
+            if os.path.exists(original_path):
+                os.remove(original_path)
+
+            # Overwrite the existing image file with the new one
+            self.image.save(os.path.basename(original_path), new_image, save=False)
+
+        # Now save the model instance without triggering another image save
+        super().save(update_fields=['is_active'])
     
 class Category(models.Model):
     """
@@ -55,7 +87,7 @@ class Post(models.Model):
     content = RichTextField(verbose_name="Content")
     created_on = models.DateTimeField(auto_now_add=True, verbose_name="Created On")
     updated_on = models.DateTimeField(auto_now=True, verbose_name="Updated On")
-    featured_image = models.ImageField(upload_to='gallery/blog_images/images/', null=True, blank=True, verbose_name="Featured Image")
+    featured_image = models.ImageField(upload_to='blog/images/', null=True, blank=True, verbose_name="Featured Image")
     slug = models.SlugField(max_length=200, unique=True, blank=True, verbose_name="Slug")
     status = models.IntegerField(choices=((0,"Draft"), (1,"Published")), default=0, verbose_name="Status")
     category = models.ForeignKey(Category, related_name='blog_posts', on_delete=models.CASCADE, verbose_name="Category")
@@ -71,17 +103,36 @@ class Post(models.Model):
 
     def save(self, *args, **kwargs):
         """
-        Override save method to generate slug and resize featured image.
+        Override save method to generate slug, resize, and compress featured image.
         """
         if not self.slug:
             self.slug = custom_slugify(self.title)
 
+        # Save the model first to ensure the image file has a path
         super().save(*args, **kwargs)
 
         if self.featured_image:
+            # Get the original file path
+            original_path = self.featured_image.path
+
+            # Open the image file
             image = Image.open(self.featured_image)
-            image = image.resize((600, 450), Image.Resampling.LANCZOS)
-            image.save(self.featured_image.path)
+
+            # Resize and compress the image
+            image = image.resize((1920, 1080), Image.Resampling.LANCZOS)
+            im_io = BytesIO()
+            image.save(im_io, format='JPEG', quality=85)
+            new_image = ContentFile(im_io.getvalue(), name=os.path.basename(original_path))
+
+            # Delete the old file to prevent duplication
+            if os.path.exists(original_path):
+                os.remove(original_path)
+
+            # Overwrite the existing image file with the new one
+            self.featured_image.save(os.path.basename(original_path), new_image, save=False)
+
+        # Finally, save the model instance without triggering another image save
+        super().save(update_fields=['title', 'slug', 'content', 'category', 'status', 'is_featured', 'is_active'])
 
 class Comment(models.Model):
     """
