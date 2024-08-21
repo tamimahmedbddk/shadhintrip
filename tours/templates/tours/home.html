@@ -18,7 +18,7 @@ ShadhinTrip: Tours And Packages, all in one.
         <div class="">
           <a href="#" class="pl-tag filter-category" data-category="{{ category.id }}">
             <div class="pl-tag__icon">
-              {{ category.icon_class }}
+              {{ category.icon_class|safe }}
             </div>
             <div class="pl-tag__title text-dark-1">{{ category.name }}</div>
           </a>
