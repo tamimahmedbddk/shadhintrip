@@ -150,8 +150,8 @@ EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
-EMAIL_HOST_USER = 'mazharulislam1725@gmail.com'  # Gmail email address
-EMAIL_HOST_PASSWORD = 'nmwm xokg yauf tibh'     # Gmail password or app-specific password
+EMAIL_HOST_USER = 'shadhintripbd@gmail.com'  # Gmail email address
+EMAIL_HOST_PASSWORD = 'vydw rfew jfsw gtuv'     # Gmail password or app-specific password
 DEFAULT_FROM_EMAIL = 'ShadhinTrip <info@shadhintrip.com>'
 
 CKEDITOR_UPLOAD_PATH = "uploads/"
