@@ -50,7 +50,6 @@ def list_tours(request):
     }
     return render(request, 'tours/home.html', context)
 
-
 def tour_detail(request, slug):
     # Try to find a Tour or GroupEvent with the given slug
     try:
@@ -62,11 +61,19 @@ def tour_detail(request, slug):
         other_tours = GroupEvent.objects.exclude(slug=slug)
         is_tour = False
 
+    # Resolve the absolute URL for the image
+    if tour_details.images.exists():
+        og_image_url = request.build_absolute_uri(tour_details.images.first().image.file.url)
+    else:
+        og_image_url = request.build_absolute_uri(static('assets/img/tour/card/1.png'))
+
     context = {
         'tour_details': tour_details,
         'other_tours': other_tours,
+        'og_image_url': og_image_url,
     }
     return render(request, 'tours/tour_details.html', context)
+
 
 
 
