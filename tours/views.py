@@ -61,7 +61,7 @@ def tour_detail(request, slug):
         other_tours = GroupEvent.objects.exclude(slug=slug)
         is_tour = False
 
-    # Resolve the absolute URL for the image
+    # Resolve the absolute URL for the image (facebook social share)
     if tour_details.images.exists():
         og_image_url = request.build_absolute_uri(tour_details.images.first().image.file.url)
     else:
