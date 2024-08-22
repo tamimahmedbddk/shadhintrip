@@ -4,7 +4,7 @@
 
 <head>
   <!-- Open Graph Meta Tags -->
-  <meta property="og:title" content="{% block og_title %}ShadhinTrip{% endblock %}" />
+  <meta property="og:title" content="{% block og_title %} {% endblock %}" />
   <meta property="og:description" content="{% block og_description %}ShadhinTrip: Where Every Journey Begins With Freedom.{% endblock %}" />
   <meta property="og:image" content="{% block og_image %}{% static 'assets/img/tour/card/1.png' %}{% endblock %}" />
   <meta property="og:url" content="{% block og_url %}{{ request.build_absolute_uri }}{% endblock %}" />

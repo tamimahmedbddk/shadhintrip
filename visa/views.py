@@ -35,11 +35,17 @@ def index(request):
 
 def visa_details(request, slug):
     visa_details = get_object_or_404(VisaPackage, slug=slug)
+    
+    if visa_details.image:
+        image_url = request.build_absolute_uri(visa_details.image.url)
+    else:
+        image_url = request.build_absolute_uri(static('assets/img/tour/card/1.png'))
+    
     context = {
         'visa_details': visa_details,
+        'image_url': image_url,  # Add this to the context
     }
     return render(request, 'visa/visa-details.html', context)
-
 
 
 

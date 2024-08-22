@@ -14,16 +14,9 @@ ShadhinTrip: Tours And Packages, all in one.
 {{ visa_details.overview|truncatewords:30 }}
 {% endblock %}
 
-
 {% block og_image %}
-{% if visa_details.image %}
-    {{ request.build_absolute_uri(visa_details.image.url) }}
-{% else %}
-    {{ request.build_absolute_uri(static('assets/img/tour/card/1.png')) }}
-{% endif %}
+    {{ image_url }}
 {% endblock %}
-
-
 
 {% block content %}
 <section data-anim="fade" class="hero -type-10 pt-0">
