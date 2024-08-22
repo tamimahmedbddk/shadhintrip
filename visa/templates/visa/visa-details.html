@@ -16,13 +16,11 @@ ShadhinTrip: Tours And Packages, all in one.
 
 
 {% block og_image %}
-<meta property="og:image" content="
 {% if visa_details.image %}
     {{ request.build_absolute_uri(visa_details.image.url) }}
 {% else %}
     {{ request.build_absolute_uri(static('assets/img/tour/card/1.png')) }}
 {% endif %}
-"/>
 {% endblock %}
 
 
