@@ -5,6 +5,16 @@
 {% block title %}
 ShadhinTrip: Tours And Packages, all in one.
 {% endblock %}
+
+{% block head %}
+    <meta property="og:title" content="{{ visa_details.title }}" />
+    <meta property="og:description" content="{{ visa_details.overview|truncatewords:30 }}" />
+    <meta property="og:image" content="{{ visa_details.image.url }}" />
+    <meta property="og:url" content="{{ request.build_absolute_uri }}" />
+    <meta property="og:type" content="article" />
+    <meta property="og:site_name" content="ShadhinTrip" />
+{% endblock %}
+
 {% block content %}
 <section data-anim="fade" class="hero -type-10 pt-0">
     <div class="hero__bg bg-accent-2"></div>
