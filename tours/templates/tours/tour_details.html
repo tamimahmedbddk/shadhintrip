@@ -5,24 +5,14 @@
 {% block title %}
 ShadhinTrip: Tours And Packages, all in one.
 {% endblock %}
-
-{% block og_title %}
-{{ tour_details.title }} - ShadhinTrip
+{% block head %}
+    <meta property="og:title" content="{{ tour_details.title }}" />
+    <meta property="og:description" content="{{ tour_details.overview|truncatewords:30 }}" />
+    <meta property="og:image" content="{{ tour_details.images.first.image.file.url }}" />
+    <meta property="og:url" content="{{ request.build_absolute_uri }}" />
+    <meta property="og:type" content="article" />
+    <meta property="og:site_name" content="ShadhinTrip" />
 {% endblock %}
-
-{% block og_description %}
-{{ tour_details.description|truncatewords:30 }}
-{% endblock %}
-
-{% block og_image %}
-{% if tour_details.image %}
-    {{ tour_details.image.url }}
-{% else %}
-    {% static 'images/default-tour-image.jpg' %}
-{% endif %}
-{% endblock %}
-
-
 
 {% block content %}
 <section data-anim="fade" class="hero -type-10 pt-0">

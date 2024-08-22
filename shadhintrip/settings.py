@@ -165,7 +165,7 @@ CKEDITOR_CONFIGS = {
 
 
 # ====maintenance_mode====
-MAINTENANCE_MODE = True
+MAINTENANCE_MODE = False
 MAINTENANCE_MODE_IGNORE_ADMIN_SITE = True
 MAINTENANCE_MODE_IGNORE_STAFF = True
 # ====maintenance_mode====
